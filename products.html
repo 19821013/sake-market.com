@@ -744,6 +744,16 @@
             <div class="address-auto" id="addressAuto">（郵便番号を入力すると自動入力されます）</div>
             <input type="hidden" id="orderPrefecture">
             <input type="hidden" id="orderCity">
+            <!-- エリア外エラー -->
+            <div id="areaError" style="display:none;background:#fff0f0;border:1px solid #f5a0a0;border-left:4px solid #e74c3c;padding:12px 14px;margin-top:8px;font-size:0.83rem;color:#8b0000;line-height:1.8;">
+              <strong>⛔ 配達エリア外です</strong><br>
+              申し訳ございません。当店の配達エリアは<strong>大阪府内全域</strong>および<strong>近隣京都府（大山崎町・八幡市・京田辺市）</strong>に限定しております。<br>
+              上記エリア外へのご注文はお受けできません。詳しくは<a href="delivery.html" target="_blank" style="color:#c0392b;">配達範囲ページ</a>をご確認ください。
+            </div>
+            <!-- エリア内確認 -->
+            <div id="areaOk" style="display:none;background:#f0fff0;border:1px solid #a8d5a8;border-left:4px solid #27ae60;padding:10px 14px;margin-top:8px;font-size:0.83rem;color:#1a5c1a;">
+              ✅ 配達エリア内です
+            </div>
           </div>
 
           <div class="modal-form-group">
@@ -1286,6 +1296,8 @@ async function lookupPostalCode() {
       document.getElementById('orderCity').value = city;
       autoEl.textContent = `${pref}${city}`;
       autoEl.style.color = 'var(--color-primary)';
+      // エリア判定
+      checkDeliveryArea(pref, city);
     } else {
       autoEl.textContent = '（住所が見つかりませんでした）';
       errEl.textContent = '該当する住所が見つかりませんでした。手動でご入力ください。';
@@ -1296,6 +1308,31 @@ async function lookupPostalCode() {
     errEl.textContent = '住所の取得に失敗しました。手動でご記入ください。';
     errEl.style.display = 'block';
   }
+}
+
+// ===============================
+// 配達エリア判定
+// ===============================
+// 許可エリア：大阪府全域 ＋ 京都府（大山崎町・八幡市・京田辺市）
+const ALLOWED_KYOTO_CITIES = ['大山崎町', '八幡市', '京田辺市'];
+
+function checkDeliveryArea(pref, city) {
+  const okEl  = document.getElementById('areaOk');
+  const ngEl  = document.getElementById('areaError');
+  okEl.style.display = 'none';
+  ngEl.style.display = 'none';
+
+  if (pref === '大阪府') {
+    okEl.style.display = 'block';
+    return true;
+  }
+  if (pref === '京都府') {
+    const allowed = ALLOWED_KYOTO_CITIES.some(c => city.includes(c));
+    if (allowed) { okEl.style.display = 'block'; return true; }
+  }
+  // エリア外
+  ngEl.style.display = 'block';
+  return false;
 }
 
 // Enterキーで郵便番号検索
@@ -1325,6 +1362,22 @@ async function submitOrder(e) {
 
   // エラーリセット
   document.getElementById('orderErrorMsg').classList.remove('show');
+
+  // 配達の場合はエリアチェック
+  const deliveryMethod = document.querySelector('input[name="delivery"]:checked')?.value;
+  if (deliveryMethod === '配達') {
+    const pref = document.getElementById('orderPrefecture').value;
+    const city = document.getElementById('orderCity').value;
+    if (!pref) {
+      alert('郵便番号を検索して配達先住所を入力してください。');
+      return;
+    }
+    if (!checkDeliveryArea(pref, city)) {
+      document.getElementById('areaError').style.display = 'block';
+      document.getElementById('areaError').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+  }
 
   // カート注文 or 単品注文
   const p = isCartOrder ? null : PRODUCTS[currentProductKey];
