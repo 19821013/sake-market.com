@@ -301,56 +301,83 @@
       <h2 class="section-title">メールでのお問い合わせ</h2>
       <p class="section-title-en">Contact Form</p>
 
-      <div class="form-wrap">
-        <form action="mailto:sake@kashi-market.com" method="post" enctype="text/plain" onsubmit="return validateForm()">
+      <div class="form-wrap" style="position:relative;">
 
-          <div class="form-group">
-            <label class="form-label">お名前 <span class="required">必須</span></label>
-            <input type="text" name="name" class="form-input" placeholder="例：山田 太郎" required>
+        <!-- 送信中オーバーレイ -->
+        <div id="contactSending" style="display:none;position:absolute;inset:0;background:rgba(255,255,255,0.92);z-index:10;flex-direction:column;align-items:center;justify-content:center;gap:16px;">
+          <div style="width:48px;height:48px;border:4px solid #d4c5a9;border-top-color:#c9a84c;border-radius:50%;animation:spin 0.8s linear infinite;"></div>
+          <p style="font-family:'Noto Serif JP',serif;color:#1a0a00;">送信中です。しばらくお待ちください…</p>
+        </div>
+
+        <!-- 送信完了画面 -->
+        <div id="contactSuccess" style="display:none;padding:60px 30px;text-align:center;">
+          <div style="font-size:4rem;margin-bottom:20px;">✅</div>
+          <h3 style="font-family:'Noto Serif JP',serif;font-size:1.4rem;color:#1a0a00;margin-bottom:14px;">お問い合わせを受け付けました</h3>
+          <p style="font-size:0.9rem;color:#6b5440;line-height:1.9;margin-bottom:30px;">
+            お問い合わせいただきありがとうございます。<br>
+            担当者より折り返しご連絡いたします。<br><br>
+            <strong>営業時間：11:00〜20:00（毎週火曜日定休）</strong><br>
+            お急ぎの場合はお電話ください：072-848-0289
+          </p>
+          <a href="index.html" class="btn btn-primary">トップページへ戻る</a>
+        </div>
+
+        <div id="contactFormBody">
+          <!-- エラーメッセージ -->
+          <div id="contactError" style="display:none;background:#fff0f0;border:1px solid #f5a0a0;border-left:4px solid #e74c3c;padding:14px 16px;font-size:0.85rem;color:#8b0000;line-height:1.8;margin-bottom:20px;">
+            ⚠️ 送信に失敗しました。お手数ですが、お電話（072-848-0289）にてご連絡ください。
           </div>
 
-          <div class="form-group">
-            <label class="form-label">メールアドレス <span class="required">必須</span></label>
-            <input type="email" name="email" class="form-input" placeholder="例：example@email.com" required>
-          </div>
+          <form id="contactForm" onsubmit="submitContact(event)">
 
-          <div class="form-group">
-            <label class="form-label">電話番号 <span class="optional">任意</span></label>
-            <input type="tel" name="phone" class="form-input" placeholder="例：06-0000-0000">
-          </div>
+            <div class="form-group">
+              <label class="form-label">お名前 <span class="required">必須</span></label>
+              <input type="text" id="contactName" class="form-input" placeholder="例：山田 太郎" required>
+            </div>
 
-          <div class="form-group">
-            <label class="form-label">お問い合わせ種別 <span class="required">必須</span></label>
-            <select name="category" class="form-select" required>
-              <option value="">選択してください</option>
-              <option value="order">商品のご注文・配達について</option>
-              <option value="product">商品についてのご質問</option>
-              <option value="business">法人・業務用のご相談</option>
-              <option value="other">その他</option>
-            </select>
-          </div>
+            <div class="form-group">
+              <label class="form-label">メールアドレス <span class="required">必須</span></label>
+              <input type="email" id="contactEmail" class="form-input" placeholder="例：example@email.com" required>
+            </div>
 
-          <div class="form-group">
-            <label class="form-label">お問い合わせ内容 <span class="required">必須</span></label>
-            <textarea name="message" class="form-textarea" placeholder="お問い合わせ内容をご記入ください。&#10;&#10;例：〇〇のビールを10ケース配達希望です。" required></textarea>
-          </div>
+            <div class="form-group">
+              <label class="form-label">電話番号 <span class="optional">任意</span></label>
+              <input type="tel" id="contactPhone" class="form-input" placeholder="例：06-0000-0000">
+            </div>
 
-          <div class="form-privacy">
-            <strong>個人情報の取り扱いについて</strong><br>
-            ご入力いただいた個人情報は、お問い合わせへの回答のみに使用し、第三者への提供は行いません。
-          </div>
+            <div class="form-group">
+              <label class="form-label">お問い合わせ種別 <span class="required">必須</span></label>
+              <select id="contactCategory" class="form-select" required>
+                <option value="">選択してください</option>
+                <option value="商品のご注文・配達について">商品のご注文・配達について</option>
+                <option value="商品についてのご質問">商品についてのご質問</option>
+                <option value="法人・業務用のご相談">法人・業務用のご相談</option>
+                <option value="その他">その他</option>
+              </select>
+            </div>
 
-          <div class="form-check">
-            <input type="checkbox" id="privacy" required>
-            <label for="privacy">個人情報の取り扱いに同意する</label>
-          </div>
+            <div class="form-group">
+              <label class="form-label">お問い合わせ内容 <span class="required">必須</span></label>
+              <textarea id="contactMessage" class="form-textarea" placeholder="お問い合わせ内容をご記入ください。&#10;&#10;例：〇〇のビールを10ケース配達希望です。" required></textarea>
+            </div>
 
-          <div class="form-submit">
-            <button type="submit" class="btn-submit">送　信</button>
-            <p class="form-note">※ 送信後、メールアプリが起動します。内容をご確認の上お送りください。</p>
-          </div>
+            <div class="form-privacy">
+              <strong>個人情報の取り扱いについて</strong><br>
+              ご入力いただいた個人情報は、お問い合わせへの回答のみに使用し、第三者への提供は行いません。
+            </div>
 
-        </form>
+            <div class="form-check">
+              <input type="checkbox" id="privacy" required>
+              <label for="privacy">個人情報の取り扱いに同意する</label>
+            </div>
+
+            <div class="form-submit">
+              <button type="submit" id="contactSubmitBtn" class="btn-submit">送　信</button>
+              <p class="form-note">※ 担当者より折り返しご連絡いたします（営業時間：11:00〜20:00 火曜定休）</p>
+            </div>
+
+          </form>
+        </div>
       </div>
     </div>
   </section>
@@ -387,17 +414,66 @@
     </div>
   </footer>
 
+  <style>
+    @keyframes spin { to { transform:rotate(360deg); } }
+    #contactSending { display:none; }
+    #contactSending.show { display:flex !important; }
+  </style>
   <script>
     function toggleNav() {
       document.getElementById('main-nav').classList.toggle('open');
     }
-    function validateForm() {
-      const checkbox = document.getElementById('privacy');
-      if (!checkbox.checked) {
+
+    async function submitContact(e) {
+      e.preventDefault();
+
+      // プライバシーチェック
+      if (!document.getElementById('privacy').checked) {
         alert('個人情報の取り扱いへの同意が必要です。');
-        return false;
+        return;
       }
-      return true;
+
+      const name     = document.getElementById('contactName').value;
+      const email    = document.getElementById('contactEmail').value;
+      const phone    = document.getElementById('contactPhone').value;
+      const category = document.getElementById('contactCategory').value;
+      const message  = document.getElementById('contactMessage').value;
+
+      const data = {
+        _subject: `【お問い合わせ】${category} / ${name} 様`,
+        お名前: name,
+        メールアドレス: email,
+        電話番号: phone || 'なし',
+        お問い合わせ種別: category,
+        お問い合わせ内容: message,
+      };
+
+      // 送信中表示
+      document.getElementById('contactSending').classList.add('show');
+      document.getElementById('contactSubmitBtn').disabled = true;
+      document.getElementById('contactError').style.display = 'none';
+
+      try {
+        const res = await fetch('https://formspree.io/f/xlgkdwkd', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(data)
+        });
+
+        document.getElementById('contactSending').classList.remove('show');
+
+        if (res.ok) {
+          document.getElementById('contactFormBody').style.display = 'none';
+          document.getElementById('contactSuccess').style.display = 'block';
+        } else {
+          document.getElementById('contactSubmitBtn').disabled = false;
+          document.getElementById('contactError').style.display = 'block';
+        }
+      } catch (err) {
+        document.getElementById('contactSending').classList.remove('show');
+        document.getElementById('contactSubmitBtn').disabled = false;
+        document.getElementById('contactError').style.display = 'block';
+      }
     }
   </script>
 
