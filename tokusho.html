@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>特定商取引法に基づく表記 | かしはら酒店</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .page-hero {
+      background: linear-gradient(135deg,#0d0500 0%,#1a0a00 60%,#2d1500 100%);
+      padding:100px 20px 60px; text-align:center;
+    }
+    .page-hero h1 { font-family:'Noto Serif JP',serif;font-size:clamp(1.5rem,4vw,2.5rem);color:#fff;letter-spacing:0.1em;margin-bottom:10px; }
+    .page-hero p { font-size:0.78rem;color:#c9a84c;letter-spacing:0.4em;text-transform:uppercase; }
+    .page-hero-line { width:50px;height:1px;background:#c9a84c;margin:16px auto; }
+
+    .tokusho-section { background:var(--color-bg);padding:60px 20px; }
+    .tokusho-wrap { max-width:800px;margin:0 auto; }
+
+    .tokusho-table { width:100%;border-collapse:collapse;background:#fff;box-shadow:0 3px 15px rgba(0,0,0,.07); }
+    .tokusho-table th {
+      font-family:'Noto Serif JP',serif;font-size:0.88rem;color:var(--color-primary);
+      background:var(--color-bg-dark);padding:16px 20px;text-align:left;
+      border-bottom:1px solid var(--color-border);border-right:3px solid var(--color-accent);
+      width:30%;vertical-align:top;white-space:nowrap;
+    }
+    .tokusho-table td { padding:16px 20px;font-size:0.9rem;color:var(--color-text);line-height:1.9;border-bottom:1px solid var(--color-border);vertical-align:top; }
+    .tokusho-table tr:last-child th,
+    .tokusho-table tr:last-child td { border-bottom:none; }
+
+    .alcohol-notice {
+      background:#fff3f3;border:1px solid #ffb3b3;border-left:4px solid #e74c3c;
+      padding:16px 20px;margin-bottom:30px;border-radius:2px;
+    }
+    .alcohol-notice p { font-size:0.88rem;color:#8b0000;line-height:1.9;margin:0; }
+    .alcohol-notice strong { display:block;font-family:'Noto Serif JP',serif;font-size:0.95rem;margin-bottom:6px; }
+
+    @media(max-width:600px){
+      .tokusho-table th { width:35%;font-size:0.82rem;padding:12px 10px; }
+      .tokusho-table td { padding:12px 10px;font-size:0.85rem; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-jp">かしはら酒店</span>
+      <span class="logo-en">Kashihara Sake Shop</span>
+    </a>
+    <div class="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></div>
+    <nav id="main-nav">
+      <ul>
+        <li><a href="index.html">トップ</a></li>
+        <li><a href="products.html">商品一覧</a></li>
+        <li><a href="delivery.html">配達範囲</a></li>
+        <li><a href="about.html">会社案内</a></li>
+        <li><a href="contact.html">お問い合わせ</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="page-hero">
+  <h1>特定商取引法に基づく表記</h1>
+  <div class="page-hero-line"></div>
+  <p>Specified Commercial Transaction Act</p>
+</div>
+
+<section class="tokusho-section">
+  <div class="tokusho-wrap">
+
+    <div class="alcohol-notice">
+      <strong>⚠️ 酒類の販売について（未成年者飲酒防止）</strong>
+      <p>
+        20歳未満の者の飲酒は法律で禁止されています。<br>
+        当店では20歳未満の方への酒類の販売は固くお断りしております。<br>
+        ご注文時および商品お渡し時に年齢確認を実施いたします。<br>
+        配送は大阪府内および近隣京都府内（店舗より10km以内）限定となります。
+      </p>
+    </div>
+
+    <table class="tokusho-table">
+      <tr>
+        <th>販売業者</th>
+        <td>Kashi Market合同会社</td>
+      </tr>
+      <tr>
+        <th>屋号・店名</th>
+        <td>かしはら酒店</td>
+      </tr>
+      <tr>
+        <th>代表責任者</th>
+        <td>樫原　辰徳</td>
+      </tr>
+      <tr>
+        <th>所在地</th>
+        <td>〒573-1178<br>大阪府枚方市渚西1丁目21-12</td>
+      </tr>
+      <tr>
+        <th>電話番号</th>
+        <td>
+          <a href="tel:0728480289" style="color:var(--color-primary);">072-848-0289</a><br>
+          <small style="color:var(--color-text-light);">受付時間：11:00〜20:00（毎週火曜日定休）</small>
+        </td>
+      </tr>
+      <tr>
+        <th>FAX番号</th>
+        <td>072-840-0339</td>
+      </tr>
+      <tr>
+        <th>メールアドレス</th>
+        <td><a href="mailto:sake@kashi-market.com" style="color:var(--color-primary);">sake@kashi-market.com</a></td>
+      </tr>
+      <tr>
+        <th>販売URL</th>
+        <td><a href="https://kashi-market.com" style="color:var(--color-primary);">https://kashi-market.com</a></td>
+      </tr>
+      <tr>
+        <th>販売商品</th>
+        <td>酒類（ビール・リキュール・ウイスキー等）、ノンアルコール飲料、ミネラルウォーター</td>
+      </tr>
+      <tr>
+        <th>商品代金</th>
+        <td>各商品ページに記載の価格（税込）</td>
+      </tr>
+      <tr>
+        <th>商品代金以外の<br>必要料金</th>
+        <td>
+          配達料（距離により異なります）<br>
+          ・近距離（3km以内）：¥300 ／ ¥2,000以上のご注文で無料<br>
+          ・中距離（3〜6km）：¥500 ／ ¥4,000以上のご注文で無料<br>
+          ・遠距離（6〜10km）：¥800 ／ ¥8,000以上のご注文で無料<br>
+          ・特別対応（10km超）：¥1,200 ／ ¥12,000以上のご注文で無料<br>
+          ※詳細は<a href="delivery.html" style="color:var(--color-accent);">配達範囲・料金ページ</a>をご覧ください。
+        </td>
+      </tr>
+      <tr>
+        <th>支払い方法</th>
+        <td>現金・銀行振込<br>
+          <small style="color:var(--color-text-light);">※銀行振込の場合、振込手数料はお客様負担となります。</small>
+        </td>
+      </tr>
+      <tr>
+        <th>支払い時期</th>
+        <td>
+          現金：商品お渡し時<br>
+          銀行振込：ご注文確認後、当店よりご連絡する期日までにお支払いください。
+        </td>
+      </tr>
+      <tr>
+        <th>商品の引渡し時期</th>
+        <td>ご注文確認後、担当者よりご連絡の上、ご希望の日時に配達または店舗にてお渡しいたします。</td>
+      </tr>
+      <tr>
+        <th>配達範囲</th>
+        <td>
+          大阪府内および近隣京都府内（店舗より10km以内）<br>
+          ※京都府内への配達は店舗から10km以内のみ対応いたします。
+        </td>
+      </tr>
+      <tr>
+        <th>返品・交換について</th>
+        <td>
+          商品に不良・破損があった場合は、商品到着後7日以内にご連絡ください。<br>
+          お客様都合による返品・交換はお受けできません。<br>
+          酒類の性質上、開封後の返品はお断りしております。
+        </td>
+      </tr>
+      <tr>
+        <th>酒類販売について</th>
+        <td>
+          20歳未満の方への酒類の販売は法律により禁止されています。<br>
+          ご注文時に生年月日の入力をお願いしており、20歳未満と確認された場合はご注文をお断りします。<br>
+          商品お渡し時にも年齢確認書類（免許証等）の提示をお願いする場合がございます。
+        </td>
+      </tr>
+      <tr>
+        <th>個人情報の取扱い</th>
+        <td>ご注文時にいただいた個人情報は、ご注文の処理・配達のみに使用し、第三者への提供は行いません。</td>
+      </tr>
+    </table>
+
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <a href="index.html" class="logo"><span class="logo-jp">かしはら酒店</span></a>
+      <p style="margin-top:12px;">Kashi Market合同会社<br>〒573-1178<br>大阪府枚方市渚西1丁目21-12</p>
+    </div>
+    <div class="footer-nav">
+      <h4>Navigation</h4>
+      <ul>
+        <li><a href="index.html">トップページ</a></li>
+        <li><a href="products.html">商品一覧</a></li>
+        <li><a href="delivery.html">配達範囲</a></li>
+        <li><a href="about.html">会社案内</a></li>
+        <li><a href="contact.html">お問い合わせ</a></li>
+        <li><a href="tokusho.html">特定商取引法に基づく表記</a></li>
+      </ul>
+    </div>
+    <div class="footer-info">
+      <h4>Shop Info</h4>
+      <p>📞 072-848-0289</p>
+      <p>📠 072-840-0339</p>
+      <p>✉️ sake@kashi-market.com</p>
+      <p>🕐 11:00〜20:00（火曜定休）</p>
+      <p>🚉 京阪御殿山駅 徒歩5分</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2025 Kashi Market合同会社 かしはら酒店. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+function toggleNav() {
+  document.getElementById('main-nav').classList.toggle('open');
+}
+</script>
+</body>
+</html>

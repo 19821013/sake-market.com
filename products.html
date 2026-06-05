@@ -223,6 +223,13 @@
     .btn-order-now { padding:10px 4px;background:var(--color-primary);color:var(--color-accent);font-family:'Noto Serif JP',serif;font-size:0.78rem;letter-spacing:0.05em;border:none;cursor:pointer;transition:all 0.3s;text-align:center; }
     .btn-order-now:hover { background:var(--color-accent);color:var(--color-primary); }
 
+    /* 注文フォーム法的表記 */
+    .order-legal-notice { margin-top:16px;border-top:1px solid var(--color-border);padding-top:14px; }
+    .legal-alcohol { background:#fff3f3;border-left:3px solid #e74c3c;padding:8px 12px;font-size:0.78rem;color:#8b0000;font-weight:600;margin-bottom:8px;text-align:center; }
+    .legal-tokusho { text-align:center;font-size:0.75rem; }
+    .legal-tokusho a { color:var(--color-accent);text-decoration:underline; }
+    .legal-tokusho a:hover { color:var(--color-primary); }
+
     /* カートアイコン（ヘッダー） */
     .cart-icon-btn { background:none;border:1px solid rgba(201,168,76,0.5);color:var(--color-accent);padding:7px 14px;cursor:pointer;font-size:0.85rem;position:relative;transition:all 0.2s;white-space:nowrap; }
     .cart-icon-btn:hover { background:var(--color-accent);color:var(--color-primary); }
@@ -539,7 +546,7 @@
         <li><a href="products.html">商品一覧</a></li>
         <li><a href="about.html">会社案内</a></li>
         <li><a href="contact.html">お問い合わせ</a></li>
-        <li><a href="特定商取引の表記.pdf" target="_blank">特定商取引に関する表記</a></li>
+        <li><a href="tokusho.html" target="_blank">特定商取引に関する表記</a></li>
       </ul>
     </div>
     <div class="footer-info">
@@ -833,6 +840,18 @@
           ※ 送信後、担当者より折り返しご連絡いたします。<br>
           ※ 営業時間：11:00〜20:00（毎週火曜日定休）
         </p>
+
+        <!-- 法的表記 -->
+        <div class="order-legal-notice">
+          <div class="legal-alcohol">
+            ⚠️ お酒は20歳になってから &nbsp;|&nbsp; 配送は大阪府内・近隣京都府内限定
+          </div>
+          <div class="legal-tokusho">
+            <a href="tokusho.html" target="_blank">特定商取引法に基づく表記</a>
+            &nbsp;|&nbsp;
+            <a href="tokusho.html" target="_blank">販売業者・支払方法・返品交換について</a>
+          </div>
+        </div>
       </form>
     </div>
   </div>
