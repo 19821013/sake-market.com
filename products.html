@@ -146,6 +146,24 @@
     .modal-submit:hover { background:var(--color-accent-light);transform:translateY(-1px); }
     .modal-note { font-size:0.76rem;color:var(--color-text-light);text-align:center;margin-top:10px;line-height:1.9; }
 
+    /* 受取方法・支払い方法 選択 */
+    .radio-group { display:flex;gap:16px;flex-wrap:wrap; }
+    .radio-label { display:flex;align-items:center;gap:8px;cursor:pointer;font-size:0.9rem;color:var(--color-text);padding:10px 16px;border:1px solid var(--color-border);background:var(--color-bg);transition:all 0.2s;flex:1;min-width:130px; }
+    .radio-label input[type="radio"] { accent-color:var(--color-accent);width:16px;height:16px; }
+    .radio-label:has(input:checked) { border-color:var(--color-accent);background:#fffbf0; }
+
+    /* 郵便番号 */
+    .postal-row { display:flex;gap:10px;align-items:center; }
+    .postal-row .modal-input { max-width:160px; }
+    .btn-postal { padding:10px 16px;background:var(--color-primary);color:var(--color-accent);font-size:0.82rem;border:none;cursor:pointer;white-space:nowrap;transition:all 0.2s;font-family:'Noto Serif JP',serif; }
+    .btn-postal:hover { background:var(--color-accent);color:var(--color-primary); }
+    .postal-error { font-size:0.78rem;color:#c0392b;margin-top:5px;display:none; }
+    .address-auto { background:var(--color-bg-dark);padding:10px 14px;font-size:0.88rem;color:var(--color-text);border:1px solid var(--color-border);margin-top:8px;min-height:40px; }
+    .address-note { font-size:0.75rem;color:var(--color-text-light);margin-top:4px; }
+
+    /* 区切り線 */
+    .form-divider { border:none;border-top:1px dashed var(--color-border);margin:20px 0; }
+
     @media(max-width:900px){ .products-grid{grid-template-columns:repeat(3,1fr);} }
     @media(max-width:600px){
       .products-grid{grid-template-columns:repeat(2,1fr);gap:15px;}
@@ -409,27 +427,33 @@
       </div>
 
       <form onsubmit="submitOrder(event)">
+
+        <!-- お名前 -->
         <div class="modal-form-group">
           <label class="modal-label">お名前 <span class="req">必須</span></label>
           <input type="text" id="orderName" class="modal-input" placeholder="例：山田 太郎" required>
         </div>
 
+        <!-- 電話番号 -->
         <div class="modal-form-group">
           <label class="modal-label">電話番号 <span class="req">必須</span></label>
           <input type="tel" id="orderPhone" class="modal-input" placeholder="例：06-0000-0000" required>
         </div>
 
+        <!-- メールアドレス -->
         <div class="modal-form-group">
           <label class="modal-label">メールアドレス <span class="req">必須</span></label>
           <input type="email" id="orderEmail" class="modal-input" placeholder="例：example@email.com" required>
         </div>
 
-        <!-- 生年月日（酒類のみ表示） -->
+        <!-- 生年月日（酒類のみ） -->
         <div class="modal-form-group" id="birthdayGroup" style="display:none">
           <label class="modal-label">生年月日 <span class="req">必須（酒類ご注文の方）</span></label>
           <input type="date" id="orderBirthday" class="modal-input" max="">
           <div class="age-error" id="ageError">⛔ 申し訳ございません。20歳未満の方への酒類の販売はお断りしております。</div>
         </div>
+
+        <hr class="form-divider">
 
         <!-- 数量（ビール） -->
         <div class="modal-form-group" id="beerQtyGroup" style="display:none">
@@ -443,7 +467,7 @@
             </label>
           </div>
           <div class="modal-qty-row">
-            <input type="number" id="beerQty" class="modal-input" value="1" min="1" required>
+            <input type="number" id="beerQty" class="modal-input" value="1" min="1">
             <span class="qty-unit-label-text" id="beerQtyUnit">本</span>
           </div>
         </div>
@@ -452,19 +476,96 @@
         <div class="modal-form-group" id="normalQtyGroup" style="display:none">
           <label class="modal-label">数量（本） <span class="req">必須</span></label>
           <div class="modal-qty-row">
-            <input type="number" id="normalQty" class="modal-input" value="1" min="1" required>
+            <input type="number" id="normalQty" class="modal-input" value="1" min="1">
             <span class="qty-unit-label-text">本</span>
           </div>
         </div>
 
+        <hr class="form-divider">
+
+        <!-- 受取方法 -->
         <div class="modal-form-group">
-          <label class="modal-label">配達希望日</label>
-          <input type="date" id="orderDate" class="modal-input">
+          <label class="modal-label">受取方法 <span class="req">必須</span></label>
+          <div class="radio-group">
+            <label class="radio-label">
+              <input type="radio" name="delivery" value="配達" checked onchange="toggleDelivery()">
+              🚚 配達（基本）
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="delivery" value="店舗受取" onchange="toggleDelivery()">
+              🏪 店舗受取
+            </label>
+          </div>
         </div>
 
+        <!-- 配達先住所（配達選択時のみ表示） -->
+        <div id="deliveryAddressGroup">
+          <div class="modal-form-group">
+            <label class="modal-label">配達希望日 <span class="req">必須</span></label>
+            <input type="date" id="orderDate" class="modal-input" required>
+          </div>
+
+          <div class="modal-form-group">
+            <label class="modal-label">郵便番号 <span class="req">必須</span></label>
+            <div class="postal-row">
+              <input type="text" id="orderPostalCode" class="modal-input"
+                placeholder="例：5731178（ハイフンなし）" maxlength="8"
+                oninput="this.value=this.value.replace(/[^0-9\-]/g,'')">
+              <button type="button" class="btn-postal" onclick="lookupPostalCode()">住所を検索</button>
+            </div>
+            <div class="postal-error" id="postalError">郵便番号が見つかりませんでした。手動でご入力ください。</div>
+          </div>
+
+          <div class="modal-form-group">
+            <label class="modal-label">都道府県・市区町村</label>
+            <div class="address-auto" id="addressAuto">（郵便番号を入力すると自動入力されます）</div>
+            <input type="hidden" id="orderPrefecture">
+            <input type="hidden" id="orderCity">
+          </div>
+
+          <div class="modal-form-group">
+            <label class="modal-label">番地・建物名 <span class="req">必須</span></label>
+            <input type="text" id="orderStreet" class="modal-input" placeholder="例：渚西1丁目21-12 ○○マンション101号">
+            <p class="address-note">※ 郵便番号検索後に番地・建物名をご入力ください</p>
+          </div>
+        </div>
+
+        <!-- 店舗受取の場合のメッセージ -->
+        <div id="pickupInfo" style="display:none;">
+          <div class="modal-form-group">
+            <label class="modal-label">受取希望日 <span class="req">必須</span></label>
+            <input type="date" id="orderPickupDate" class="modal-input">
+          </div>
+          <div style="background:#f0f8f0;border:1px solid #a8d5a8;border-left:4px solid #4caf50;padding:14px 16px;font-size:0.85rem;color:#2e5c2e;line-height:1.8;margin-bottom:16px;">
+            <strong>🏪 店舗受取について</strong><br>
+            所在地：大阪府枚方市渚西1丁目21-12<br>
+            営業時間：11:00〜19:00（毎週火曜日定休）<br>
+            ご来店前にお電話でご確認いただけますと確実です。<br>
+            TEL：072-848-0289
+          </div>
+        </div>
+
+        <hr class="form-divider">
+
+        <!-- 支払い方法 -->
         <div class="modal-form-group">
-          <label class="modal-label">配達先住所・備考</label>
-          <textarea id="orderNote" class="modal-textarea" placeholder="配達ご希望の場合は住所をご記入ください。&#10;その他ご要望があればお書きください。"></textarea>
+          <label class="modal-label">お支払い方法 <span class="req">必須</span></label>
+          <div class="radio-group">
+            <label class="radio-label">
+              <input type="radio" name="payment" value="現金" checked>
+              💴 現金
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="payment" value="銀行振込">
+              🏦 銀行振込
+            </label>
+          </div>
+        </div>
+
+        <!-- 備考 -->
+        <div class="modal-form-group">
+          <label class="modal-label">備考・ご要望</label>
+          <textarea id="orderNote" class="modal-textarea" placeholder="その他ご要望があればお書きください。"></textarea>
         </div>
 
         <button type="submit" class="modal-submit">注文内容をメールで送信する</button>
@@ -677,6 +778,57 @@ function updateQtyLabel() {
   document.getElementById('beerQtyUnit').textContent = unit;
 }
 
+// 受取方法の切替
+function toggleDelivery() {
+  const isDelivery = document.querySelector('input[name="delivery"]:checked').value === '配達';
+  document.getElementById('deliveryAddressGroup').style.display = isDelivery ? 'block' : 'none';
+  document.getElementById('pickupInfo').style.display = isDelivery ? 'none' : 'block';
+  document.getElementById('orderDate').required = isDelivery;
+  document.getElementById('orderStreet').required = isDelivery;
+}
+
+// 郵便番号→住所自動入力
+async function lookupPostalCode() {
+  const raw = document.getElementById('orderPostalCode').value.replace(/-/g, '').trim();
+  const errEl = document.getElementById('postalError');
+  const autoEl = document.getElementById('addressAuto');
+  errEl.style.display = 'none';
+
+  if (raw.length !== 7 || isNaN(raw)) {
+    errEl.textContent = '郵便番号は7桁の数字で入力してください（例：5731178）';
+    errEl.style.display = 'block';
+    return;
+  }
+  autoEl.textContent = '検索中...';
+  try {
+    const res = await fetch(`https://zipcloud.ibsnet.co.jp/api/search?zipcode=${raw}`);
+    const data = await res.json();
+    if (data.results && data.results.length > 0) {
+      const r = data.results[0];
+      const pref = r.address1;
+      const city = r.address2 + r.address3;
+      document.getElementById('orderPrefecture').value = pref;
+      document.getElementById('orderCity').value = city;
+      autoEl.textContent = `${pref}${city}`;
+      autoEl.style.color = 'var(--color-primary)';
+    } else {
+      autoEl.textContent = '（住所が見つかりませんでした）';
+      errEl.textContent = '該当する住所が見つかりませんでした。手動でご入力ください。';
+      errEl.style.display = 'block';
+    }
+  } catch (err) {
+    autoEl.textContent = '（通信エラー）';
+    errEl.textContent = '住所の取得に失敗しました。手動でご記入ください。';
+    errEl.style.display = 'block';
+  }
+}
+
+// Enterキーで郵便番号検索
+document.getElementById('orderPostalCode') && document.addEventListener('DOMContentLoaded', () => {
+  const pc = document.getElementById('orderPostalCode');
+  if (pc) pc.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); lookupPostalCode(); } });
+});
+
 // 年齢計算
 function calcAge(birthDateStr) {
   const today = new Date();
@@ -700,8 +852,7 @@ function submitOrder(e) {
       document.getElementById('ageError').textContent = '⛔ 生年月日をご入力ください。';
       return;
     }
-    const age = calcAge(birthday);
-    if (age < 20) {
+    if (calcAge(birthday) < 20) {
       document.getElementById('ageError').classList.add('show');
       document.getElementById('ageError').textContent = '⛔ 申し訳ございません。20歳未満の方への酒類の販売はお断りしております。';
       return;
@@ -709,22 +860,38 @@ function submitOrder(e) {
     document.getElementById('ageError').classList.remove('show');
   }
 
-  // 数量取得
+  // 数量
   let qtyText = '';
   if (p.isBeer) {
     const unit = document.querySelector('input[name="qtyUnit"]:checked').value;
-    const qty  = document.getElementById('beerQty').value;
-    qtyText = `${qty} ${unit}`;
+    qtyText = `${document.getElementById('beerQty').value} ${unit}`;
   } else {
-    const qty = document.getElementById('normalQty').value;
-    qtyText = `${qty} 本`;
+    qtyText = `${document.getElementById('normalQty').value} 本`;
   }
 
-  const name    = document.getElementById('orderName').value;
-  const phone   = document.getElementById('orderPhone').value;
-  const email   = document.getElementById('orderEmail').value;
-  const date    = document.getElementById('orderDate').value;
-  const note    = document.getElementById('orderNote').value;
+  // 受取方法・住所
+  const deliveryMethod = document.querySelector('input[name="delivery"]:checked').value;
+  const isDelivery = deliveryMethod === '配達';
+  let addressText = '';
+  let dateText = '';
+  if (isDelivery) {
+    const pref   = document.getElementById('orderPrefecture').value;
+    const city   = document.getElementById('orderCity').value;
+    const street = document.getElementById('orderStreet').value;
+    addressText = pref && city ? `〒${document.getElementById('orderPostalCode').value} ${pref}${city}${street}` : street;
+    dateText = document.getElementById('orderDate').value || '未定';
+  } else {
+    dateText = document.getElementById('orderPickupDate').value || '未定';
+    addressText = '店舗受取';
+  }
+
+  // 支払い方法
+  const payment = document.querySelector('input[name="payment"]:checked').value;
+
+  const name     = document.getElementById('orderName').value;
+  const phone    = document.getElementById('orderPhone').value;
+  const email    = document.getElementById('orderEmail').value;
+  const note     = document.getElementById('orderNote').value;
   const birthday = p.isAlcohol ? document.getElementById('orderBirthday').value : '対象外';
 
   const subject = encodeURIComponent(`【ご注文】${p.formalName} / ${name} 様`);
@@ -739,10 +906,15 @@ function submitOrder(e) {
     `【電　話】${phone}\n` +
     `【メール】${email}\n` +
     (p.isAlcohol ? `【生年月日】${birthday}（年齢確認済）\n` : '') +
-    `【配達希望日】${date || '未定'}\n` +
-    `【備　考】\n${note || 'なし'}\n` +
     `━━━━━━━━━━━━━━━━\n` +
-    (p.isAlcohol ? `※本注文は20歳以上であることを確認の上送信しています。\n` : '')
+    `【受取方法】${deliveryMethod}\n` +
+    `【${isDelivery ? '配達' : '受取'}希望日】${dateText}\n` +
+    `【${isDelivery ? '配達先住所' : '受取場所'}】${addressText}\n` +
+    `━━━━━━━━━━━━━━━━\n` +
+    `【お支払い方法】${payment}\n` +
+    `━━━━━━━━━━━━━━━━\n` +
+    `【備　考】\n${note || 'なし'}\n` +
+    (p.isAlcohol ? `\n※本注文は20歳以上であることを確認の上送信しています。\n` : '')
   );
 
   window.location.href = `mailto:sake@kashi-market.com?subject=${subject}&body=${body}`;
