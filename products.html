@@ -661,7 +661,7 @@
             </label>
           </div>
           <div class="modal-qty-row">
-            <input type="number" id="beerQty" class="modal-input" value="1" min="1">
+            <input type="number" id="beerQty" class="modal-input" value="1" min="1" oninput="onOrderQtyChange()">
             <span class="qty-unit-label-text" id="beerQtyUnit">本</span>
           </div>
         </div>
@@ -670,7 +670,7 @@
         <div class="modal-form-group" id="normalQtyGroup" style="display:none">
           <label class="modal-label">数量（本） <span class="req">必須</span></label>
           <div class="modal-qty-row">
-            <input type="number" id="normalQty" class="modal-input" value="1" min="1">
+            <input type="number" id="normalQty" class="modal-input" value="1" min="1" oninput="onOrderQtyChange()">
             <span class="qty-unit-label-text">本</span>
           </div>
         </div>
@@ -1220,6 +1220,67 @@ function closeOrderOnOverlay(e) {
   if (e.target === document.getElementById('orderModal')) closeOrder();
 }
 
+// ===============================
+// 注文合計金額の取得
+// ===============================
+function getOrderTotal() {
+  if (isCartOrder) {
+    return Object.keys(cart).filter(k => cart[k].qty > 0)
+      .reduce((s, k) => s + (PRODUCTS[k].price ? PRODUCTS[k].price * cart[k].qty : 0), 0);
+  }
+  const p = currentProductKey ? PRODUCTS[currentProductKey] : null;
+  if (!p || !p.price) return 0;
+  if (p.isBeer) {
+    const unit = document.querySelector('input[name="qtyUnit"]:checked')?.value || '本';
+    const qty  = parseInt(document.getElementById('beerQty').value) || 1;
+    return p.price * qty * (unit === 'ケース' ? 24 : 1);
+  }
+  return p.price * (parseInt(document.getElementById('normalQty').value) || 1);
+}
+
+// 配達料表示を注文合計に合わせて更新
+function updateFeeDisplay() {
+  if (!cachedDeliveryFee) return;
+  const zone  = cachedDeliveryFee.zone;
+  const km    = cachedDeliveryFee.km;
+  const total = getOrderTotal();
+  const isFree = total > 0 && total >= zone.freeAt;
+
+  const setFeeBox = (prefix) => {
+    const amtEl  = document.getElementById(`feeAmount${prefix}`);
+    const freeEl = document.getElementById(`feeFreeInfo${prefix}`);
+    if (!amtEl) return;
+    if (isFree) {
+      amtEl.textContent  = '🎉 配達料：無料！';
+      amtEl.style.color  = '#27ae60';
+      freeEl.textContent = `✅ ご注文金額（¥${total.toLocaleString()}）が無料条件を満たしています`;
+      freeEl.style.color = '#27ae60';
+    } else {
+      amtEl.textContent  = `配達料：¥${zone.fee.toLocaleString()}`;
+      amtEl.style.color  = 'var(--color-primary)';
+      const rem = zone.freeAt - total;
+      freeEl.textContent = total > 0
+        ? `✅ あと ¥${rem.toLocaleString()} で配達料無料（¥${zone.freeAt.toLocaleString()}以上）${zone.note||''}`
+        : `✅ ¥${zone.freeAt.toLocaleString()}以上のご注文で配達料無料${zone.note||''}`;
+      freeEl.style.color = '';
+    }
+  };
+
+  setFeeBox('');   // 自動計算ボックス
+  setFeeBox('M'); // 手動選択ボックス
+
+  // ゾーン・距離行も更新
+  const zoneEl = document.getElementById('feeZone');
+  if (zoneEl) zoneEl.textContent = `📍 配達ゾーン：${zone.label}`;
+  const distEl = document.getElementById('feeDistance');
+  if (distEl && km) distEl.textContent = `　 店舗からの距離：約${km.toFixed(1)}km`;
+}
+
+// 注文モーダル内での数量変更時
+function onOrderQtyChange() {
+  updateFeeDisplay();
+}
+
 // ビール数量単位更新
 function updateQtyLabel() {
   const unit = document.querySelector('input[name="qtyUnit"]:checked').value;
@@ -1389,9 +1450,16 @@ async function submitOrder(e) {
     希望日: dateText,
     配達先住所: addressText,
     お支払い方法: payment,
-    配達料: cachedDeliveryFee
-      ? `¥${cachedDeliveryFee.zone.fee}（${cachedDeliveryFee.zone.label}・約${cachedDeliveryFee.km.toFixed(1)}km）`
-      : '未確認（担当者より連絡）',
+    配達料: (() => {
+      if (!cachedDeliveryFee) return '未確認（担当者より連絡）';
+      const zone = cachedDeliveryFee.zone;
+      const total = getOrderTotal();
+      const isFree = total > 0 && total >= zone.freeAt;
+      const kmStr = cachedDeliveryFee.km ? `・約${cachedDeliveryFee.km.toFixed(1)}km` : '';
+      return isFree
+        ? `無料（¥${total.toLocaleString()}のご注文のため / ${zone.label}${kmStr}）`
+        : `¥${zone.fee.toLocaleString()}（${zone.label}${kmStr}）`;
+    })(),
     備考: note || 'なし',
     年齢確認: isAlcohol ? '20歳以上であることを確認済み' : '対象外',
   };
@@ -1519,6 +1587,7 @@ async function checkDeliveryFee() {
   const km   = haversineKm(STORE_LAT, STORE_LNG, geo.lat, geo.lng);
   const zone = getZone(km);
   cachedDeliveryFee = { km, zone };
+  updateFeeDisplay();
 
   const box = document.getElementById('deliveryFeeBox');
   box.className = 'delivery-fee-box' + (zone.color==='orange'?' far':zone.color==='red'?' special':'');
@@ -1541,6 +1610,7 @@ function applyManualZone() {
   if (!val) { document.getElementById('deliveryFeeBoxManual').style.display='none'; return; }
   const zone = MANUAL_ZONES[val];
   cachedDeliveryFee = { km: null, zone };
+  updateFeeDisplay();
   const box = document.getElementById('deliveryFeeBoxManual');
   box.className = 'delivery-fee-box' + (zone.color==='orange'?' far':zone.color==='red'?' special':'');
   document.getElementById('feeZoneM').textContent    = `📍 配達ゾーン：${zone.label}`;
