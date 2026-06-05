@@ -164,6 +164,33 @@
     /* 区切り線 */
     .form-divider { border:none;border-top:1px dashed var(--color-border);margin:20px 0; }
 
+    /* 送信中・完了画面 */
+    .order-sending {
+      display:none;position:absolute;inset:0;background:rgba(255,255,255,0.92);
+      z-index:10;flex-direction:column;align-items:center;justify-content:center;gap:16px;
+    }
+    .order-sending.show { display:flex; }
+    .spinner {
+      width:48px;height:48px;border:4px solid var(--color-border);
+      border-top-color:var(--color-accent);border-radius:50%;
+      animation:spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform:rotate(360deg); } }
+    .order-sending p { font-family:'Noto Serif JP',serif;color:var(--color-primary);font-size:1rem; }
+
+    .order-success {
+      display:none;padding:50px 30px;text-align:center;
+    }
+    .order-success.show { display:block; }
+    .success-icon { font-size:4rem;margin-bottom:20px; }
+    .order-success h3 { font-family:'Noto Serif JP',serif;font-size:1.4rem;color:var(--color-primary);margin-bottom:12px; }
+    .order-success p { font-size:0.9rem;color:var(--color-text-light);line-height:1.9;margin-bottom:30px; }
+    .order-success .btn-close-success { padding:14px 50px;background:var(--color-primary);color:var(--color-accent);font-family:'Noto Serif JP',serif;font-size:0.95rem;letter-spacing:0.15em;border:none;cursor:pointer;transition:all 0.3s; }
+    .order-success .btn-close-success:hover { background:var(--color-accent);color:var(--color-primary); }
+
+    .order-error-msg { background:#fff0f0;border:1px solid #f5a0a0;border-left:4px solid #e74c3c;padding:14px 16px;font-size:0.85rem;color:#8b0000;line-height:1.8;margin-bottom:16px;display:none; }
+    .order-error-msg.show { display:block; }
+
     @media(max-width:900px){ .products-grid{grid-template-columns:repeat(3,1fr);} }
     @media(max-width:600px){
       .products-grid{grid-template-columns:repeat(2,1fr);gap:15px;}
@@ -405,16 +432,36 @@
      注文モーダル
      ============================= -->
 <div class="modal-overlay" id="orderModal" onclick="closeOrderOnOverlay(event)">
-  <div class="modal">
+  <div class="modal" style="position:relative;">
     <div class="modal-header">
       <h3>📦 ご注文フォーム</h3>
       <button class="modal-close" onclick="closeOrder()">✕</button>
     </div>
-    <div class="modal-product-info">
+
+    <!-- 送信中オーバーレイ -->
+    <div class="order-sending" id="orderSending">
+      <div class="spinner"></div>
+      <p>送信中です。しばらくお待ちください…</p>
+    </div>
+
+    <!-- 送信完了画面 -->
+    <div class="order-success" id="orderSuccessScreen">
+      <div class="success-icon">✅</div>
+      <h3>ご注文を受け付けました</h3>
+      <p>
+        この度はご注文いただきありがとうございます。<br>
+        担当者より折り返しご連絡いたします。<br><br>
+        <strong>営業時間：11:00〜19:00（毎週火曜日定休）</strong><br>
+        お急ぎの場合はお電話ください：072-848-0289
+      </p>
+      <button class="btn-close-success" onclick="closeOrder()">閉じる</button>
+    </div>
+
+    <div class="modal-product-info" id="orderProductInfoBar">
       <div class="modal-product-name" id="orderProductName"></div>
       <div class="modal-product-price" id="orderProductPrice"></div>
     </div>
-    <div class="modal-body">
+    <div class="modal-body" id="orderFormBody">
 
       <!-- 酒類警告 -->
       <div class="alcohol-warning" id="alcoholWarning">
@@ -568,10 +615,15 @@
           <textarea id="orderNote" class="modal-textarea" placeholder="その他ご要望があればお書きください。"></textarea>
         </div>
 
-        <button type="submit" class="modal-submit">注文内容をメールで送信する</button>
+        <!-- エラーメッセージ -->
+        <div class="order-error-msg" id="orderErrorMsg">
+          ⚠️ 送信に失敗しました。お手数ですが、お電話（072-848-0289）にてご連絡ください。
+        </div>
+
+        <button type="submit" class="modal-submit" id="orderSubmitBtn">注文を送信する</button>
         <p class="modal-note">
-          ※ 送信後、メールアプリが起動します。内容をご確認の上お送りください。<br>
-          ※ 担当者より折り返しご連絡いたします（営業時間：11:00〜19:00 火曜定休）
+          ※ 送信後、担当者より折り返しご連絡いたします。<br>
+          ※ 営業時間：11:00〜19:00（毎週火曜日定休）
         </p>
       </form>
     </div>
@@ -767,6 +819,14 @@ function openOrder(key) {
 function closeOrder() {
   document.getElementById('orderModal').classList.remove('open');
   document.body.style.overflow = '';
+  // 表示をリセット
+  setTimeout(() => {
+    document.getElementById('orderSuccessScreen').classList.remove('show');
+    document.getElementById('orderProductInfoBar').style.display = '';
+    document.getElementById('orderFormBody').style.display = '';
+    document.getElementById('orderSubmitBtn').disabled = false;
+    document.getElementById('orderErrorMsg').classList.remove('show');
+  }, 300);
 }
 function closeOrderOnOverlay(e) {
   if (e.target === document.getElementById('orderModal')) closeOrder();
@@ -839,10 +899,18 @@ function calcAge(birthDateStr) {
   return age;
 }
 
+// ====================================
+// Formspree の Form ID をここに設定
+// ====================================
+const FORMSPREE_ID = 'YOUR_FORM_ID'; // ← Formspreeで取得したIDに変更
+
 // 注文送信
-function submitOrder(e) {
+async function submitOrder(e) {
   e.preventDefault();
   const p = PRODUCTS[currentProductKey];
+
+  // エラーリセット
+  document.getElementById('orderErrorMsg').classList.remove('show');
 
   // 年齢チェック
   if (p.isAlcohol) {
@@ -878,7 +946,9 @@ function submitOrder(e) {
     const pref   = document.getElementById('orderPrefecture').value;
     const city   = document.getElementById('orderCity').value;
     const street = document.getElementById('orderStreet').value;
-    addressText = pref && city ? `〒${document.getElementById('orderPostalCode').value} ${pref}${city}${street}` : street;
+    addressText = pref && city
+      ? `〒${document.getElementById('orderPostalCode').value} ${pref}${city} ${street}`
+      : street;
     dateText = document.getElementById('orderDate').value || '未定';
   } else {
     dateText = document.getElementById('orderPickupDate').value || '未定';
@@ -887,37 +957,59 @@ function submitOrder(e) {
 
   // 支払い方法
   const payment = document.querySelector('input[name="payment"]:checked').value;
-
   const name     = document.getElementById('orderName').value;
   const phone    = document.getElementById('orderPhone').value;
   const email    = document.getElementById('orderEmail').value;
   const note     = document.getElementById('orderNote').value;
   const birthday = p.isAlcohol ? document.getElementById('orderBirthday').value : '対象外';
 
-  const subject = encodeURIComponent(`【ご注文】${p.formalName} / ${name} 様`);
-  const body = encodeURIComponent(
-    `かしはら酒店 ご注文\n` +
-    `━━━━━━━━━━━━━━━━\n` +
-    `【商品名】${p.formalName}\n` +
-    `【数　量】${qtyText}\n` +
-    `【単　価】${p.price}\n` +
-    `━━━━━━━━━━━━━━━━\n` +
-    `【お名前】${name}\n` +
-    `【電　話】${phone}\n` +
-    `【メール】${email}\n` +
-    (p.isAlcohol ? `【生年月日】${birthday}（年齢確認済）\n` : '') +
-    `━━━━━━━━━━━━━━━━\n` +
-    `【受取方法】${deliveryMethod}\n` +
-    `【${isDelivery ? '配達' : '受取'}希望日】${dateText}\n` +
-    `【${isDelivery ? '配達先住所' : '受取場所'}】${addressText}\n` +
-    `━━━━━━━━━━━━━━━━\n` +
-    `【お支払い方法】${payment}\n` +
-    `━━━━━━━━━━━━━━━━\n` +
-    `【備　考】\n${note || 'なし'}\n` +
-    (p.isAlcohol ? `\n※本注文は20歳以上であることを確認の上送信しています。\n` : '')
-  );
+  // 送信データ
+  const orderData = {
+    _subject: `【ご注文】${p.formalName} / ${name} 様`,
+    お名前: name,
+    電話番号: phone,
+    メールアドレス: email,
+    生年月日: p.isAlcohol ? `${birthday}（年齢確認済）` : '対象外',
+    商品名: p.formalName,
+    数量: qtyText,
+    単価: p.price,
+    受取方法: deliveryMethod,
+    希望日: dateText,
+    配達先住所: addressText,
+    お支払い方法: payment,
+    備考: note || 'なし',
+    年齢確認: p.isAlcohol ? '20歳以上であることを確認済み' : '対象外',
+  };
 
-  window.location.href = `mailto:sake@kashi-market.com?subject=${subject}&body=${body}`;
+  // 送信中表示
+  document.getElementById('orderSending').classList.add('show');
+  document.getElementById('orderSubmitBtn').disabled = true;
+
+  try {
+    const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(orderData)
+    });
+
+    document.getElementById('orderSending').classList.remove('show');
+
+    if (res.ok) {
+      // 成功
+      document.getElementById('orderProductInfoBar').style.display = 'none';
+      document.getElementById('orderFormBody').style.display = 'none';
+      document.getElementById('orderSuccessScreen').classList.add('show');
+    } else {
+      // サーバーエラー
+      document.getElementById('orderSubmitBtn').disabled = false;
+      document.getElementById('orderErrorMsg').classList.add('show');
+    }
+  } catch (err) {
+    // 通信エラー
+    document.getElementById('orderSending').classList.remove('show');
+    document.getElementById('orderSubmitBtn').disabled = false;
+    document.getElementById('orderErrorMsg').classList.add('show');
+  }
 }
 
 // Escキー
