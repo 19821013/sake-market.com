@@ -222,10 +222,13 @@
     .card-subtotal-row { display:flex;justify-content:flex-end;align-items:center;margin-bottom:10px; }
     .card-subtotal { font-family:'Noto Serif JP',serif;font-size:1rem;font-weight:700;color:#c0392b; }
     .card-actions { display:grid;grid-template-columns:1fr 1fr;gap:6px; }
-    .btn-cart { padding:10px 4px;background:var(--color-bg-dark);color:var(--color-primary);font-family:'Noto Serif JP',serif;font-size:0.78rem;letter-spacing:0.05em;border:1px solid var(--color-border);cursor:pointer;transition:all 0.3s;text-align:center; }
+    .btn-cart { padding:10px 4px;background:var(--color-bg-dark);color:var(--color-primary);font-family:'Noto Serif JP',serif;font-size:0.78rem;letter-spacing:0.05em;border:1px solid var(--color-border);cursor:pointer;transition:all 0.3s;text-align:center;white-space:nowrap;overflow:hidden; }
     .btn-cart:hover { background:var(--color-accent);border-color:var(--color-accent); }
-    .btn-order-now { padding:10px 4px;background:var(--color-primary);color:var(--color-accent);font-family:'Noto Serif JP',serif;font-size:0.78rem;letter-spacing:0.05em;border:none;cursor:pointer;transition:all 0.3s;text-align:center; }
+    .btn-order-now { padding:10px 4px;background:var(--color-primary);color:var(--color-accent);font-family:'Noto Serif JP',serif;font-size:0.78rem;letter-spacing:0.05em;border:none;cursor:pointer;transition:all 0.3s;text-align:center;white-space:nowrap;overflow:hidden; }
     .btn-order-now:hover { background:var(--color-accent);color:var(--color-primary); }
+    @media(max-width:480px){
+      .btn-cart,.btn-order-now { font-size:0.72rem;letter-spacing:0; }
+    }
 
     /* 注文フォーム法的表記 */
     .order-legal-notice { margin-top:16px;border-top:1px solid var(--color-border);padding-top:14px; }
@@ -235,9 +238,19 @@
     .legal-tokusho a:hover { color:var(--color-primary); }
 
     /* カートアイコン（ヘッダー） */
-    .cart-icon-btn { background:none;border:1px solid rgba(201,168,76,0.5);color:var(--color-accent);padding:7px 14px;cursor:pointer;font-size:0.85rem;position:relative;transition:all 0.2s;white-space:nowrap; }
-    .cart-icon-btn:hover { background:var(--color-accent);color:var(--color-primary); }
-    .cart-badge { position:absolute;top:-7px;right:-7px;background:#e74c3c;color:#fff;border-radius:50%;width:18px;height:18px;font-size:0.68rem;display:flex;align-items:center;justify-content:center;font-weight:700; }
+    .cart-icon-btn { background:var(--color-accent);border:none;color:var(--color-primary-deep);padding:8px 16px;cursor:pointer;font-size:0.85rem;font-weight:700;position:relative;transition:all 0.2s;white-space:nowrap;border-radius:4px;font-family:'Noto Serif JP',serif; }
+    .cart-icon-btn:hover { background:var(--color-accent-light);transform:translateY(-1px); }
+    /* カートに商品がある時はアニメーション */
+    .cart-icon-btn.has-items { animation:cartPulse 2s ease-in-out infinite; }
+    @keyframes cartPulse {
+      0%,100% { box-shadow:0 0 0 0 rgba(201,168,76,0.5); }
+      50% { box-shadow:0 0 0 6px rgba(201,168,76,0); }
+    }
+    .cart-badge { position:absolute;top:-8px;right:-8px;background:#e74c3c;color:#fff;border-radius:50%;width:20px;height:20px;font-size:0.7rem;display:flex;align-items:center;justify-content:center;font-weight:700;border:2px solid #fff; }
+    /* カートガイド（商品追加後に表示） */
+    .cart-guide { display:none;font-size:0.7rem;color:var(--color-accent);text-align:center;margin-top:3px;letter-spacing:0.05em;animation:fadeIn 0.5s; }
+    .cart-guide.show { display:block; }
+    @keyframes fadeIn { from{opacity:0;transform:translateY(-4px)} to{opacity:1;transform:translateY(0)} }
 
     /* カートモーダル */
     #cartModal .modal { max-width:680px; }
@@ -286,9 +299,12 @@
       <span class="logo-en">Kashihara Sake Shop</span>
     </a>
     <div style="display:flex;align-items:center;gap:10px;">
-      <button class="cart-icon-btn" onclick="openCart()">
-        🛒 カート<span class="cart-badge" id="cartBadge" style="display:none;">0</span>
-      </button>
+      <div style="text-align:center;">
+        <button class="cart-icon-btn" id="cartBtn" onclick="openCart()">
+          🛒 カート<span class="cart-badge" id="cartBadge" style="display:none;">0</span>
+        </button>
+        <div class="cart-guide" id="cartGuide">▲ ここから最終注文</div>
+      </div>
       <div class="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></div>
     </div>
     <nav id="main-nav">
@@ -1031,9 +1047,19 @@ function addToCart(key) {
 // カートバッジ更新
 function updateCartBadge() {
   const total = Object.values(cart).reduce((s, i) => s + i.qty, 0);
-  const b = document.getElementById('cartBadge');
-  if (total > 0) { b.textContent = total; b.style.display = 'flex'; }
-  else b.style.display = 'none';
+  const b     = document.getElementById('cartBadge');
+  const btn   = document.getElementById('cartBtn');
+  const guide = document.getElementById('cartGuide');
+  if (total > 0) {
+    b.textContent = total;
+    b.style.display = 'flex';
+    btn?.classList.add('has-items');
+    guide?.classList.add('show');
+  } else {
+    b.style.display = 'none';
+    btn?.classList.remove('has-items');
+    guide?.classList.remove('show');
+  }
 }
 
 // トースト通知
