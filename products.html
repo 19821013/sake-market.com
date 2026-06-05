@@ -731,7 +731,7 @@
               <input type="radio" name="qtyUnit" value="本" checked onchange="updateQtyLabel()"> 1本単位
             </label>
             <label class="qty-unit-label">
-              <input type="radio" name="qtyUnit" value="ケース" onchange="updateQtyLabel()"> 1ケース単位（24本/ケース）
+              <input type="radio" name="qtyUnit" value="ケース" onchange="updateQtyLabel()"> 1ケース単位
             </label>
           </div>
           <div class="modal-qty-row">
@@ -1306,7 +1306,7 @@ function getOrderTotal() {
   if (p.isBeer) {
     const unit = document.querySelector('input[name="qtyUnit"]:checked')?.value || '本';
     const qty  = parseInt(document.getElementById('beerQty').value) || 1;
-    return p.price * qty * (unit === 'ケース' ? 24 : 1);
+    return p.price * qty; // ケースの本数は商品により異なるため固定換算なし
   }
   return p.price * (parseInt(document.getElementById('normalQty').value) || 1);
 }
