@@ -145,6 +145,78 @@
       50% { transform: translateX(-50%) translateY(8px); }
     }
 
+    /* ===== 店舗外観・ビジョンセクション ===== */
+    .store-intro {
+      background: linear-gradient(160deg, #1c1a18 0%, #2e2b26 50%, #1c1a18 100%);
+      padding: 80px 20px;
+    }
+    .store-intro-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .store-photo-wrap {
+      position: relative;
+    }
+    .store-photo {
+      width: 100%;
+      border-radius: 2px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+      border: 2px solid rgba(201,168,76,0.3);
+    }
+    .store-photo-caption {
+      text-align: center;
+      font-size: 0.78rem;
+      color: rgba(201,168,76,0.7);
+      margin-top: 10px;
+      letter-spacing: 0.15em;
+    }
+    .store-vision {
+      color: #fff;
+    }
+    .vision-badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      letter-spacing: 0.35em;
+      color: var(--color-accent);
+      border: 1px solid var(--color-accent);
+      padding: 5px 16px;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+    .vision-title {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      color: #fff;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      letter-spacing: 0.05em;
+    }
+    .vision-text {
+      font-size: 0.92rem;
+      color: rgba(255,255,255,0.75);
+      line-height: 2;
+      margin-bottom: 28px;
+    }
+    .vision-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .vtag {
+      display: inline-block;
+      padding: 6px 14px;
+      background: rgba(201,168,76,0.15);
+      border: 1px solid rgba(201,168,76,0.4);
+      color: var(--color-accent);
+      font-size: 0.82rem;
+      border-radius: 2px;
+      letter-spacing: 0.05em;
+    }
+
     /* ===== コンセプトセクション ===== */
     .concept {
       background-color: var(--color-bg);
@@ -356,6 +428,7 @@
 
     /* レスポンシブ */
     @media (max-width: 768px) {
+      .store-intro-inner { grid-template-columns:1fr; gap:30px; }
       .concept-grid {
         grid-template-columns: 1fr;
       }
@@ -436,6 +509,35 @@
       <a href="products.html" class="btn btn-primary">商品を見る</a>
     </div>
     <div class="hero-scroll">SCROLL</div>
+  </section>
+
+  <!-- 店舗外観 & ビジョン -->
+  <section class="store-intro">
+    <div class="store-intro-inner">
+
+      <!-- 外観写真 -->
+      <div class="store-photo-wrap">
+        <img src="かしはら酒店 外観画像.png" alt="かしはら酒店 外観" class="store-photo">
+        <div class="store-photo-caption">大阪府枚方市渚西　かしはら酒店</div>
+      </div>
+
+      <!-- ビジョンテキスト -->
+      <div class="store-vision">
+        <div class="vision-badge">Our Vision</div>
+        <h2 class="vision-title">地域とともに、<br>新しい酒屋のかたちへ。</h2>
+        <p class="vision-text">
+          かしはら酒店は、地域に根ざした酒屋として長年にわたり枚方市の皆様に支えられてきました。
+          これからはお酒の販売にとどまらず、デジタルの力を活かして地域の皆様の暮らしをサポートする新しい取り組みにも挑戦していきます。
+        </p>
+        <div class="vision-tags">
+          <span class="vtag">🍶 地酒・地ビール</span>
+          <span class="vtag">🚚 配達サービス</span>
+          <span class="vtag">💻 デジタル活用</span>
+          <span class="vtag">🏘️ 地域密着</span>
+        </div>
+      </div>
+
+    </div>
   </section>
 
   <!-- コンセプト -->

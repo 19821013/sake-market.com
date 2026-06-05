@@ -11,18 +11,35 @@
   padding: 0;
 }
 
-/* カラー変数 */
+/* カラー変数
+   ─ コンセプト：外観の濃チャコール × 内観のウォームウッド × ゴールドアクセント ─
+   外観写真：ダークグレー／チャコール基調
+   内観アニメ：木の温もり・アンバー照明・クリーム壁
+   テーマ：「地域密着の酒屋 × デジタル」伝統と革新の融合
+*/
 :root {
-  --color-primary:    #1a0a00;
-  --color-secondary:  #3d1f00;
-  --color-accent:     #c9a84c;
+  /* ダークエリア（ヘッダー・フッター）= 外観のチャコールグレーから着想 */
+  --color-primary:      #1c1a18;
+  --color-secondary:    #2e2b26;
+
+  /* アクセント = 「酒」看板の温かみ・内観アンバー照明 */
+  --color-accent:       #c9a84c;
   --color-accent-light: #e8d08a;
-  --color-bg:         #faf7f2;
-  --color-bg-dark:    #f0ebe0;
-  --color-text:       #2a1a0a;
-  --color-text-light: #6b5440;
-  --color-white:      #ffffff;
-  --color-border:     #d4c5a9;
+  --color-accent-warm:  #d4a843;
+
+  /* 背景 = 内観の漆喰・クリーム壁 */
+  --color-bg:           #faf8f3;
+  --color-bg-dark:      #f0ebe0;
+  --color-bg-wood:      #f5ede0;
+
+  /* テキスト */
+  --color-text:         #2a2018;
+  --color-text-light:   #7a6850;
+
+  /* その他 */
+  --color-white:        #ffffff;
+  --color-border:       #ddd0b8;
+  --color-wood:         #8b6830;  /* 木棚・デジタル机の色味 */
 }
 
 html {
@@ -41,11 +58,12 @@ body {
    ヘッダー・ナビゲーション
    =========================== */
 header {
-  background-color: var(--color-primary);
+  background-color: #1c1a18;
+  border-bottom: 1px solid rgba(201,168,76,0.2);
   position: sticky;
   top: 0;
   z-index: 1000;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.4);
 }
 
 .header-inner {
