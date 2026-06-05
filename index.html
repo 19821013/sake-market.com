@@ -446,7 +446,7 @@
 
     /* レスポンシブ */
     @media (max-width: 768px) {
-      /* スマホ：イラスト全体を表示 */
+      /* スマホ：イラスト全体をそのまま表示 */
       .hero {
         background-size: contain;
         background-position: top center;
@@ -454,9 +454,13 @@
         min-height: auto;
         padding-bottom: 50px;
       }
+      /* オーバーレイを完全に消してイラストをくっきり表示 */
+      .hero::before {
+        background: transparent;
+      }
       .hero-content {
-        margin-top: max(52vw, 160px); /* イラストの下にコンテンツを配置 */
-        background: rgba(250,246,238,0.92);
+        margin-top: max(52vw, 160px);
+        background: rgba(250,246,238,0.93);
         padding: 24px 16px 36px;
         border-radius: 8px;
         box-shadow: 0 4px 20px rgba(0,0,0,0.08);
