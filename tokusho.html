@@ -35,9 +35,70 @@
     .alcohol-notice p { font-size:0.88rem;color:#8b0000;line-height:1.9;margin:0; }
     .alcohol-notice strong { display:block;font-family:'Noto Serif JP',serif;font-size:0.95rem;margin-bottom:6px; }
 
+    /* 酒類販売管理者標識 */
+    .kanri-badge {
+      border:2px solid #333;
+      max-width:600px;
+      margin:0 auto;
+      background:#fff;
+    }
+    .kanri-title {
+      background:#1c1a18;
+      color:#fff;
+      font-family:'Noto Serif JP',serif;
+      font-size:clamp(0.9rem,2.5vw,1.1rem);
+      letter-spacing:0.25em;
+      text-align:center;
+      padding:14px 10px;
+      border-bottom:2px solid #333;
+    }
+    .kanri-table {
+      width:100%;
+      border-collapse:collapse;
+    }
+    .kanri-table tr {
+      border-bottom:1px solid #ccc;
+    }
+    .kanri-table tr:last-child {
+      border-bottom:none;
+    }
+    .kanri-table th {
+      background:#f5f0e8;
+      font-family:'Noto Serif JP',serif;
+      font-size:clamp(0.78rem,2vw,0.88rem);
+      color:#333;
+      font-weight:500;
+      padding:14px 16px;
+      border-right:1px solid #ccc;
+      width:38%;
+      vertical-align:middle;
+      line-height:1.7;
+    }
+    .kanri-table td {
+      font-size:clamp(0.85rem,2.2vw,0.95rem);
+      color:#222;
+      padding:14px 18px;
+      line-height:1.8;
+    }
+    .kanri-table td strong {
+      font-family:'Noto Serif JP',serif;
+      font-size:1em;
+    }
+    .kanri-note {
+      font-size:0.75rem;
+      color:#888;
+      text-align:center;
+      padding:10px;
+      border-top:1px solid #eee;
+      margin:0;
+    }
+
     @media(max-width:600px){
       .tokusho-table th { width:35%;font-size:0.82rem;padding:12px 10px; }
       .tokusho-table td { padding:12px 10px;font-size:0.85rem; }
+      .kanri-title { letter-spacing:0.1em; }
+      .kanri-table th { padding:12px 10px;width:40%; }
+      .kanri-table td { padding:12px 10px; }
     }
   </style>
 </head>
@@ -179,6 +240,42 @@
         <td>ご注文時にいただいた個人情報は、ご注文の処理・配達のみに使用し、第三者への提供は行いません。</td>
       </tr>
     </table>
+
+    <!-- 酒類販売管理者標識 -->
+    <div style="margin-top:50px;">
+      <h3 style="font-family:'Noto Serif JP',serif;font-size:1rem;color:var(--color-primary);margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid var(--color-accent);">
+        酒類販売管理者標識
+      </h3>
+      <div class="kanri-badge">
+        <div class="kanri-title">酒　類　販　売　管　理　者　標　識</div>
+        <table class="kanri-table">
+          <tr>
+            <th>販売場の名称<br>及び所在地</th>
+            <td>
+              <strong>かしはら酒店</strong><br>
+              枚方市渚西1丁目21-12
+            </td>
+          </tr>
+          <tr>
+            <th>酒類販売管理者の<br>氏　　名</th>
+            <td><strong>樫原　辰徳</strong></td>
+          </tr>
+          <tr>
+            <th>酒類販売管理研修<br>受講年月日</th>
+            <td>2026年4月13日</td>
+          </tr>
+          <tr>
+            <th>次回研修の<br>受講期限</th>
+            <td>2029年4月12日</td>
+          </tr>
+          <tr>
+            <th>研修実施団体名</th>
+            <td>枚方小売酒販組合</td>
+          </tr>
+        </table>
+        <p class="kanri-note">※ 酒類販売管理者は、法令に基づき定期的に研修を受講しています。</p>
+      </div>
+    </div>
 
   </div>
 </section>
