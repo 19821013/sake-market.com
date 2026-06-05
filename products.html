@@ -1127,6 +1127,7 @@ function orderFromCart() {
 
   document.getElementById('orderModal').classList.add('open');
   document.body.style.overflow = 'hidden';
+  setTimeout(updateFeeDisplay, 50);
 }
 
 // 「すぐ注文」ボタン（カード上の数量で直接注文）
@@ -1162,6 +1163,8 @@ function openOrderWithQty(key) {
   toggleDelivery();
   document.getElementById('orderModal').classList.add('open');
   document.body.style.overflow = 'hidden';
+  // モーダルを開いたタイミングで配達料を即表示
+  setTimeout(updateFeeDisplay, 50);
 }
 
 // ===============================
@@ -1571,23 +1574,40 @@ function updateFeeDisplay() {
   const box   = document.getElementById('deliveryFeeBox');
   if (!box) return;
 
-  if (total <= 0) {
+  // 価格不明（ビールのみ）の場合は固定メッセージ表示
+  const p = !isCartOrder && currentProductKey ? PRODUCTS[currentProductKey] : null;
+  const beerOnly = p && p.isBeer && !p.price;
+
+  if (total <= 0 && !beerOnly) {
     box.style.display = 'none';
     return;
   }
 
-  const isFree = total >= 2000;
-  box.className = 'delivery-fee-box' + (isFree ? '' : ' far');
   box.style.display = 'block';
 
+  if (beerOnly) {
+    // ビールは価格未定なので金額ベース判定不可
+    box.className = 'delivery-fee-box';
+    document.getElementById('feeAmount').textContent = '¥2,000以上で配達料無料';
+    document.getElementById('feeAmount').style.color = 'var(--color-primary)';
+    document.getElementById('feeFreeInfo').textContent = '※ ビールの価格はお問い合わせください。¥2,000以上で配達料無料になります。';
+    document.getElementById('feeFreeInfo').style.color = '';
+    return;
+  }
+
+  const isFree = total >= 2000;
+  const rem    = 2000 - total;
+  box.className = 'delivery-fee-box' + (isFree ? '' : ' far');
+
   document.getElementById('feeAmount').textContent = isFree
-    ? '🎉 配達料：無料'
-    : '配達料：¥300';
-  document.getElementById('feeAmount').style.color = isFree ? '#27ae60' : 'var(--color-primary)';
+    ? '🎉 配達料：無料！'
+    : `配達料：¥300（あと ¥${rem.toLocaleString()} で無料）`;
+  document.getElementById('feeAmount').style.color = isFree ? '#27ae60' : '#c0392b';
+
   document.getElementById('feeFreeInfo').textContent = isFree
     ? `✅ ¥${total.toLocaleString()}のご注文のため配達料無料です`
-    : `✅ ¥2,000以上のご注文で配達料無料`;
-  document.getElementById('feeFreeInfo').style.color = isFree ? '#27ae60' : '';
+    : `✅ ¥2,000以上のご注文で配達料が無料になります`;
+  document.getElementById('feeFreeInfo').style.color = isFree ? '#27ae60' : 'var(--color-text-light)';
 }
 
 function resetDeliveryFee() {

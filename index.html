@@ -15,17 +15,17 @@
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      /* ウォームホワイトグラデーション - 親しみやすく明るく */
-      background: linear-gradient(135deg, #FAF6EE 0%, #F5EDD8 50%, #E8DCC0 100%);
+      /* アニメイラスト背景 - 配達と店内デジタル接客のビジョン */
+      background: url('hero-illust.jpg') center center / cover no-repeat;
+      background-color: #F5EDD8; /* 画像ロード前フォールバック */
     }
 
+    /* 画像上に白い半透明オーバーレイ - テキスト可読性確保 */
     .hero::before {
       content: '';
       position: absolute;
       inset: 0;
-      background-image:
-        radial-gradient(circle at 20% 30%, rgba(201,168,76,0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 70%, rgba(37,99,235,0.06) 0%, transparent 50%);
+      background: rgba(250, 246, 238, 0.72);
       pointer-events: none;
     }
 
