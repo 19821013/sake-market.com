@@ -551,7 +551,7 @@
   <div class="footer-inner">
     <div class="footer-logo">
       <a href="index.html" class="logo"><span class="logo-jp">かしはら酒店</span></a>
-      <p style="margin-top:12px;">Kashi Market合同会社<br>〒573-1178<br>大阪府枚方市渚西1丁目21-12</p>
+      <p style="margin-top:12px;"><span style="font-size:0.72rem;color:rgba(255,255,255,0.45);letter-spacing:0.05em;">運営会社</span><br>Kashi Market合同会社<br>〒573-1178<br>大阪府枚方市渚西1丁目21-12</p>
     </div>
     <div class="footer-nav">
       <h4>Navigation</h4>
@@ -1071,7 +1071,7 @@ function renderCart() {
     const rem = 2000 - subtotal;
     deliveryHtml = `
       <div class="free-delivery-bar" style="background:#fff8e1;border-color:#f0c040;border-left-color:#c9a84c;color:#5a4000;">
-        あと <strong>¥${rem.toLocaleString()}</strong> で配達料無料（¥2,000以上で無料）
+        配達料 <strong>¥300</strong>（¥2,000以上で無料 あと¥${rem.toLocaleString()}）
       </div>`;
   } else {
     deliveryHtml = `<p class="cart-note">※ ¥2,000以上のご注文で配達料無料です。</p>`;
@@ -1516,7 +1516,7 @@ async function submitOrder(e) {
       const total = getOrderTotal();
       return total >= 2000
         ? `無料（¥${total.toLocaleString()}のご注文のため）`
-        : '要相談（¥2,000以上で無料・担当者よりご連絡）';
+        : '¥300（¥2,000以上で無料）';
     })(),
     備考: note || 'なし',
     年齢確認: isAlcohol ? '20歳以上であることを確認済み' : '対象外',
@@ -1582,7 +1582,7 @@ function updateFeeDisplay() {
 
   document.getElementById('feeAmount').textContent = isFree
     ? '🎉 配達料：無料'
-    : `あと ¥${(2000 - total).toLocaleString()} で配達料無料`;
+    : '配達料：¥300';
   document.getElementById('feeAmount').style.color = isFree ? '#27ae60' : 'var(--color-primary)';
   document.getElementById('feeFreeInfo').textContent = isFree
     ? `✅ ¥${total.toLocaleString()}のご注文のため配達料無料です`
