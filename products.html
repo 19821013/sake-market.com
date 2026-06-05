@@ -826,7 +826,7 @@ const PRODUCTS = {
     name: 'アサヒスーパードライ 大瓶',
     formalName: 'アサヒスーパードライ 大瓶',
     tag: 'ビール',
-    price: '価格はお問い合わせください',
+    price: null,
     img: 'アサヒスーパードライ大瓶ビール画像.png',
     isAlcohol: true,
     isBeer: true,
@@ -838,7 +838,7 @@ const PRODUCTS = {
     name: 'キリンラガービール 大瓶',
     formalName: 'キリンラガービール 大瓶',
     tag: 'ビール',
-    price: '価格はお問い合わせください',
+    price: null,
     img: 'キリンラガー大瓶ビール画像.png',
     isAlcohol: true,
     isBeer: true,
@@ -850,7 +850,7 @@ const PRODUCTS = {
     name: 'サッポロ黒ラベル 大瓶',
     formalName: 'サッポロ黒ラベル 大瓶',
     tag: 'ビール',
-    price: '価格はお問い合わせください',
+    price: null,
     img: 'サッポロ黒ラベル大瓶ビール画像.png',
     isAlcohol: true,
     isBeer: true,
@@ -862,7 +862,7 @@ const PRODUCTS = {
     name: '愛知クラフトジンカクテル 馬路村ゆず酒 300ml',
     formalName: '愛知クラフトジンカクテル 馬路村ゆず酒 300ml',
     tag: 'リキュール',
-    price: '¥600 / 本（税込）',
+    price: 600,
     img: 'ゆず酒 画像.png',
     isAlcohol: true,
     isBeer: false,
@@ -874,7 +874,7 @@ const PRODUCTS = {
     name: 'ホワイトオーク 地ウイスキーあかし 40度 500ml',
     formalName: 'ホワイトオーク 地ウイスキーあかし 40度 500ml',
     tag: 'ウイスキー',
-    price: '¥1,300 / 本（税込）',
+    price: 1300,
     img: 'あか八 画像.png',
     isAlcohol: true,
     isBeer: false,
@@ -886,7 +886,7 @@ const PRODUCTS = {
     name: '国菊 甘酒（あまざけ）900ml',
     formalName: '国菊 甘酒（あまざけ）900ml',
     tag: 'ノンアルコール',
-    price: '¥790 / 本（税込）',
+    price: 790,
     img: '甘酒 画像.png',
     isAlcohol: false,
     isBeer: false,
@@ -898,7 +898,7 @@ const PRODUCTS = {
     name: '日田天領水 20ℓ バッグインボックス',
     formalName: '日田天領水 20ℓ バッグインボックス',
     tag: '天然水',
-    price: '¥2,950 / 本（税込）',
+    price: 2950,
     img: '日田天領水 画像.png',
     isAlcohol: false,
     isBeer: false,
@@ -1137,7 +1137,7 @@ function openDetail(key) {
   document.getElementById('detailImg').alt = p.name;
   document.getElementById('detailTag').textContent = p.tag;
   document.getElementById('detailName').textContent = p.formalName;
-  document.getElementById('detailPrice').textContent = p.price;
+  document.getElementById('detailPrice').textContent = p.price ? `¥${p.price.toLocaleString()} / 本（税込）` : '価格はお問い合わせください';
   document.getElementById('detailDesc').innerHTML = p.desc.replace(/\n/g, '<br>');
 
   const specialEl = document.getElementById('detailSpecial');
@@ -1172,7 +1172,7 @@ function openOrder(key) {
   currentProductKey = key;
 
   document.getElementById('orderProductName').textContent = p.formalName;
-  document.getElementById('orderProductPrice').textContent = p.price;
+  document.getElementById('orderProductPrice').textContent = p.price ? `¥${p.price.toLocaleString()} / 本（税込）` : '価格はお問い合わせください';
 
   // 酒類警告・生年月日
   const isAlcohol = p.isAlcohol;
