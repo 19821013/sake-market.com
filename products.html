@@ -204,11 +204,12 @@
     .fee-free-text { font-size:0.82rem;color:#27ae60;font-weight:600; }
 
     /* カート・数量・アクション */
-    .card-qty-row { display:flex;align-items:center;gap:6px;margin-bottom:10px; }
-    .qty-btn { width:28px;height:28px;border:1px solid var(--color-border);background:var(--color-bg);cursor:pointer;font-size:1rem;border-radius:2px;transition:all 0.2s;flex-shrink:0; }
+    .card-qty-row { display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-bottom:6px; }
+    .qty-btn { width:30px;height:30px;border:1px solid var(--color-border);background:var(--color-bg);cursor:pointer;font-size:1rem;border-radius:2px;transition:all 0.2s;flex-shrink:0; }
     .qty-btn:hover { background:var(--color-accent);border-color:var(--color-accent);color:var(--color-primary); }
     .qty-num { min-width:28px;text-align:center;font-family:'Noto Serif JP',serif;font-size:1rem;font-weight:700;color:var(--color-primary); }
-    .card-subtotal { margin-left:auto;font-family:'Noto Serif JP',serif;font-size:0.95rem;font-weight:700;color:#c0392b; }
+    .card-subtotal-row { display:flex;justify-content:flex-end;align-items:center;margin-bottom:10px; }
+    .card-subtotal { font-family:'Noto Serif JP',serif;font-size:1rem;font-weight:700;color:#c0392b; }
     .card-actions { display:grid;grid-template-columns:1fr 1fr;gap:6px; }
     .btn-cart { padding:10px 4px;background:var(--color-bg-dark);color:var(--color-primary);font-family:'Noto Serif JP',serif;font-size:0.78rem;letter-spacing:0.05em;border:1px solid var(--color-border);cursor:pointer;transition:all 0.3s;text-align:center; }
     .btn-cart:hover { background:var(--color-accent);border-color:var(--color-accent); }
@@ -404,6 +405,8 @@
               <span class="qty-num" id="card-qty-yuzu">1</span>
               <button type="button" class="qty-btn" onclick="changeCardQty('yuzu',1)">＋</button>
               <span style="font-size:0.78rem;color:var(--color-text-light);">本</span>
+            </div>
+            <div class="card-subtotal-row">
               <span class="card-subtotal" id="card-sub-yuzu">¥600</span>
             </div>
             <div class="card-actions">
@@ -427,6 +430,8 @@
               <span class="qty-num" id="card-qty-akashi">1</span>
               <button type="button" class="qty-btn" onclick="changeCardQty('akashi',1)">＋</button>
               <span style="font-size:0.78rem;color:var(--color-text-light);">本</span>
+            </div>
+            <div class="card-subtotal-row">
               <span class="card-subtotal" id="card-sub-akashi">¥1,300</span>
             </div>
             <div class="card-actions">
@@ -458,6 +463,8 @@
               <span class="qty-num" id="card-qty-amazake">1</span>
               <button type="button" class="qty-btn" onclick="changeCardQty('amazake',1)">＋</button>
               <span style="font-size:0.78rem;color:var(--color-text-light);">本</span>
+            </div>
+            <div class="card-subtotal-row">
               <span class="card-subtotal" id="card-sub-amazake">¥790</span>
             </div>
             <div class="card-actions">
@@ -481,6 +488,8 @@
               <span class="qty-num" id="card-qty-hita">1</span>
               <button type="button" class="qty-btn" onclick="changeCardQty('hita',1)">＋</button>
               <span style="font-size:0.78rem;color:var(--color-text-light);">本</span>
+            </div>
+            <div class="card-subtotal-row">
               <span class="card-subtotal" id="card-sub-hita">¥2,950</span>
             </div>
             <div class="card-actions">
