@@ -1,5 +1,8 @@
 /* ===========================
    かしはら酒店 - 共通スタイル
+   コンセプト：
+   「伝統的な酒屋の信頼感」×「温かみのある親しみやすさ」×「デジタル時代の先進性」
+   外観のチャコールグレー × ウォームホワイト × デジタルブルー × 和ゴールド
    =========================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap');
@@ -11,40 +14,40 @@
   padding: 0;
 }
 
-/* カラー変数
-   ─ コンセプト：外観の濃チャコール × 内観のウォームウッド × ゴールドアクセント ─
-   外観写真：ダークグレー／チャコール基調
-   内観アニメ：木の温もり・アンバー照明・クリーム壁
-   テーマ：「地域密着の酒屋 × デジタル」伝統と革新の融合
-*/
+/* カラー変数 */
 :root {
-  /* ダークエリア（ヘッダー・フッター）= 外観のチャコールグレーから着想 */
-  --color-primary:      #1c1a18;
-  --color-secondary:    #2e2b26;
+  /* ダーク：外観の看板グレー → ヘッダー・フッター */
+  --color-primary:      #4B5563;
+  --color-primary-deep: #1c1a18;
 
-  /* アクセント = 「酒」看板の温かみ・内観アンバー照明 */
+  /* デジタルブルー：ボタン・リンク・アクション */
+  --color-blue:         #2563EB;
+  --color-blue-dark:    #1d4ed8;
+  --color-blue-light:   #EFF6FF;
+
+  /* 和ゴールド：見出し装飾・アクセント */
   --color-accent:       #c9a84c;
   --color-accent-light: #e8d08a;
-  --color-accent-warm:  #d4a843;
 
-  /* 背景 = 内観の漆喰・クリーム壁 */
-  --color-bg:           #faf8f3;
-  --color-bg-dark:      #f0ebe0;
-  --color-bg-wood:      #f5ede0;
+  /* ウッドブラウン：ボーダー・区切り */
+  --color-wood:         #8B5E3C;
+
+  /* 背景：温かみのあるウォームホワイト */
+  --color-bg:           #FAF6EE;
+  --color-bg-dark:      #F5EDD8;
+  --color-bg-alt:       #E8DCC0;
 
   /* テキスト */
-  --color-text:         #2a2018;
-  --color-text-light:   #7a6850;
+  --color-text:         #333333;
+  --color-text-light:   #6B7280;
 
   /* その他 */
   --color-white:        #ffffff;
-  --color-border:       #ddd0b8;
-  --color-wood:         #8b6830;  /* 木棚・デジタル机の色味 */
+  --color-border:       #E5E7EB;
+  --color-border-warm:  #D4C5A9;
 }
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
   font-family: 'Noto Sans JP', sans-serif;
@@ -58,12 +61,12 @@ body {
    ヘッダー・ナビゲーション
    =========================== */
 header {
-  background-color: #1c1a18;
-  border-bottom: 1px solid rgba(201,168,76,0.2);
+  background-color: var(--color-primary-deep);
+  border-bottom: 2px solid rgba(201,168,76,0.25);
   position: sticky;
   top: 0;
   z-index: 1000;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+  box-shadow: 0 2px 16px rgba(0,0,0,0.3);
 }
 
 .header-inner {
@@ -76,9 +79,7 @@ header {
   height: 70px;
 }
 
-.logo {
-  text-decoration: none;
-}
+.logo { text-decoration: none; }
 
 .logo-jp {
   display: block;
@@ -97,56 +98,33 @@ header {
   opacity: 0.8;
 }
 
-nav ul {
-  list-style: none;
-  display: flex;
-  gap: 30px;
-}
+nav ul { list-style: none; display: flex; gap: 28px; }
 
 nav a {
   text-decoration: none;
-  color: var(--color-white);
-  font-size: 0.88rem;
-  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.85);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
   padding: 5px 0;
   border-bottom: 2px solid transparent;
   transition: color 0.3s, border-color 0.3s;
   font-family: 'Noto Serif JP', serif;
 }
 
-nav a:hover,
-nav a.active {
+nav a:hover, nav a.active {
   color: var(--color-accent);
   border-bottom-color: var(--color-accent);
 }
 
-/* ハンバーガーメニュー */
-.hamburger {
-  display: none;
-  flex-direction: column;
-  cursor: pointer;
-  gap: 5px;
-}
-
-.hamburger span {
-  display: block;
-  width: 25px;
-  height: 2px;
-  background: var(--color-white);
-  transition: 0.3s;
-}
+/* ハンバーガー */
+.hamburger { display: none; flex-direction: column; cursor: pointer; gap: 5px; }
+.hamburger span { display: block; width: 25px; height: 2px; background: var(--color-white); transition: 0.3s; }
 
 /* ===========================
    共通セクション
    =========================== */
-section {
-  padding: 80px 20px;
-}
-
-.section-inner {
-  max-width: 1100px;
-  margin: 0 auto;
-}
+section { padding: 80px 20px; }
+.section-inner { max-width: 1100px; margin: 0 auto; }
 
 .section-title {
   font-family: 'Noto Serif JP', serif;
@@ -180,7 +158,7 @@ section {
    フッター
    =========================== */
 footer {
-  background-color: var(--color-primary);
+  background-color: var(--color-primary-deep);
   color: var(--color-white);
   padding: 60px 20px 30px;
 }
@@ -195,16 +173,8 @@ footer {
   border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
-.footer-logo .logo-jp {
-  font-size: 1.5rem;
-  margin-bottom: 10px;
-}
-
-.footer-logo p {
-  font-size: 0.85rem;
-  color: rgba(255,255,255,0.6);
-  line-height: 1.9;
-}
+.footer-logo .logo-jp { font-size: 1.5rem; margin-bottom: 10px; }
+.footer-logo p { font-size: 0.85rem; color: rgba(255,255,255,0.6); line-height: 1.9; }
 
 .footer-nav h4,
 .footer-info h4 {
@@ -216,13 +186,8 @@ footer {
   text-transform: uppercase;
 }
 
-.footer-nav ul {
-  list-style: none;
-}
-
-.footer-nav li {
-  margin-bottom: 8px;
-}
+.footer-nav ul { list-style: none; }
+.footer-nav li { margin-bottom: 8px; }
 
 .footer-nav a {
   text-decoration: none;
@@ -230,16 +195,8 @@ footer {
   font-size: 0.88rem;
   transition: color 0.3s;
 }
-
-.footer-nav a:hover {
-  color: var(--color-accent);
-}
-
-.footer-info p {
-  font-size: 0.85rem;
-  color: rgba(255,255,255,0.7);
-  margin-bottom: 6px;
-}
+.footer-nav a:hover { color: var(--color-accent); }
+.footer-info p { font-size: 0.85rem; color: rgba(255,255,255,0.7); margin-bottom: 6px; }
 
 .footer-bottom {
   max-width: 1100px;
@@ -259,34 +216,47 @@ footer {
   font-size: 0.9rem;
   letter-spacing: 0.15em;
   text-decoration: none;
-  border-radius: 2px;
+  border-radius: 6px;
   transition: all 0.3s;
   cursor: pointer;
   border: none;
 }
 
+/* メインボタン：デジタルブルー */
 .btn-primary {
-  background-color: var(--color-accent);
-  color: var(--color-primary);
+  background-color: var(--color-blue);
+  color: var(--color-white);
   font-weight: 700;
 }
-
 .btn-primary:hover {
-  background-color: var(--color-accent-light);
+  background-color: var(--color-blue-dark);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(201,168,76,0.4);
+  box-shadow: 0 6px 20px rgba(37,99,235,0.35);
+  color: var(--color-white);
 }
 
+/* アウトラインボタン：ゴールド */
 .btn-outline {
   background-color: transparent;
   color: var(--color-accent);
-  border: 1px solid var(--color-accent);
+  border: 1.5px solid var(--color-accent);
 }
-
 .btn-outline:hover {
   background-color: var(--color-accent);
-  color: var(--color-primary);
+  color: var(--color-primary-deep);
   transform: translateY(-2px);
+}
+
+/* ゴールドボタン（ダーク背景上で使用） */
+.btn-gold {
+  background-color: var(--color-accent);
+  color: var(--color-primary-deep);
+  font-weight: 700;
+}
+.btn-gold:hover {
+  background-color: var(--color-accent-light);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(201,168,76,0.4);
 }
 
 /* ===========================
@@ -305,9 +275,7 @@ footer {
    レスポンシブ
    =========================== */
 @media (max-width: 768px) {
-  .hamburger {
-    display: flex;
-  }
+  .hamburger { display: flex; }
 
   nav {
     display: none;
@@ -315,29 +283,14 @@ footer {
     top: 70px;
     left: 0;
     right: 0;
-    background: var(--color-primary);
+    background: var(--color-primary-deep);
     padding: 20px;
   }
 
-  nav.open {
-    display: block;
-  }
+  nav.open { display: block; }
+  nav ul { flex-direction: column; gap: 15px; }
 
-  nav ul {
-    flex-direction: column;
-    gap: 15px;
-  }
-
-  .footer-inner {
-    grid-template-columns: 1fr;
-    gap: 30px;
-  }
-
-  section {
-    padding: 60px 20px;
-  }
-
-  .section-title {
-    font-size: 1.5rem;
-  }
+  .footer-inner { grid-template-columns: 1fr; gap: 30px; }
+  section { padding: 60px 20px; }
+  .section-title { font-size: 1.5rem; }
 }
