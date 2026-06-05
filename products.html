@@ -203,6 +203,51 @@
     .fee-amount-text { font-family:'Noto Serif JP',serif;font-size:1.15rem;font-weight:700;color:var(--color-primary);margin-bottom:4px; }
     .fee-free-text { font-size:0.82rem;color:#27ae60;font-weight:600; }
 
+    /* カート・数量・アクション */
+    .card-qty-row { display:flex;align-items:center;gap:6px;margin-bottom:10px; }
+    .qty-btn { width:28px;height:28px;border:1px solid var(--color-border);background:var(--color-bg);cursor:pointer;font-size:1rem;border-radius:2px;transition:all 0.2s;flex-shrink:0; }
+    .qty-btn:hover { background:var(--color-accent);border-color:var(--color-accent);color:var(--color-primary); }
+    .qty-num { min-width:28px;text-align:center;font-family:'Noto Serif JP',serif;font-size:1rem;font-weight:700;color:var(--color-primary); }
+    .card-subtotal { margin-left:auto;font-family:'Noto Serif JP',serif;font-size:0.95rem;font-weight:700;color:#c0392b; }
+    .card-actions { display:grid;grid-template-columns:1fr 1fr;gap:6px; }
+    .btn-cart { padding:10px 4px;background:var(--color-bg-dark);color:var(--color-primary);font-family:'Noto Serif JP',serif;font-size:0.78rem;letter-spacing:0.05em;border:1px solid var(--color-border);cursor:pointer;transition:all 0.3s;text-align:center; }
+    .btn-cart:hover { background:var(--color-accent);border-color:var(--color-accent); }
+    .btn-order-now { padding:10px 4px;background:var(--color-primary);color:var(--color-accent);font-family:'Noto Serif JP',serif;font-size:0.78rem;letter-spacing:0.05em;border:none;cursor:pointer;transition:all 0.3s;text-align:center; }
+    .btn-order-now:hover { background:var(--color-accent);color:var(--color-primary); }
+
+    /* カートアイコン（ヘッダー） */
+    .cart-icon-btn { background:none;border:1px solid rgba(201,168,76,0.5);color:var(--color-accent);padding:7px 14px;cursor:pointer;font-size:0.85rem;position:relative;transition:all 0.2s;white-space:nowrap; }
+    .cart-icon-btn:hover { background:var(--color-accent);color:var(--color-primary); }
+    .cart-badge { position:absolute;top:-7px;right:-7px;background:#e74c3c;color:#fff;border-radius:50%;width:18px;height:18px;font-size:0.68rem;display:flex;align-items:center;justify-content:center;font-weight:700; }
+
+    /* カートモーダル */
+    #cartModal .modal { max-width:680px; }
+    .cart-item { display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid var(--color-border); }
+    .cart-item-img { width:56px;height:56px;object-fit:cover;flex-shrink:0;background:var(--color-bg-dark); }
+    .cart-item-info { flex:1;min-width:0; }
+    .cart-item-name { font-family:'Noto Serif JP',serif;font-size:0.85rem;color:var(--color-primary);line-height:1.4;margin-bottom:3px; }
+    .cart-item-unit-price { font-size:0.78rem;color:var(--color-text-light); }
+    .cart-item-qty-ctrl { display:flex;align-items:center;gap:6px;flex-shrink:0; }
+    .cart-item-qty-ctrl button { width:26px;height:26px;border:1px solid var(--color-border);background:var(--color-bg);cursor:pointer;font-size:0.9rem;border-radius:2px; }
+    .cart-item-qty-ctrl span { min-width:30px;text-align:center;font-weight:700;font-size:0.9rem; }
+    .cart-item-subtotal { font-family:'Noto Serif JP',serif;font-weight:700;font-size:0.95rem;color:var(--color-primary);min-width:70px;text-align:right;flex-shrink:0; }
+    .cart-item-remove { background:none;border:none;color:#ccc;cursor:pointer;font-size:1.1rem;flex-shrink:0;padding:4px; }
+    .cart-item-remove:hover { color:#e74c3c; }
+    .cart-empty { text-align:center;padding:50px 20px;color:var(--color-text-light); }
+    .cart-summary { padding:20px 0 0;border-top:2px solid var(--color-border);margin-top:10px; }
+    .cart-summary-row { display:flex;justify-content:space-between;align-items:center;font-size:0.9rem;padding:5px 0; }
+    .cart-summary-total { font-family:'Noto Serif JP',serif;font-size:1.2rem;font-weight:700;color:var(--color-primary); }
+    .free-delivery-bar { background:#f0fff0;border:1px solid #a8d5a8;border-left:4px solid #27ae60;padding:10px 14px;margin:12px 0;font-size:0.83rem;color:#27ae60;font-weight:600; }
+    .cart-note { font-size:0.78rem;color:var(--color-text-light);margin:8px 0;line-height:1.7; }
+    .btn-cart-order { width:100%;padding:16px;background:var(--color-accent);color:var(--color-primary);font-family:'Noto Serif JP',serif;font-size:1rem;font-weight:700;letter-spacing:0.15em;border:none;cursor:pointer;transition:all 0.3s;margin-top:16px; }
+    .btn-cart-order:hover { background:var(--color-accent-light); }
+    .btn-continue-shopping { width:100%;padding:12px;background:none;color:var(--color-text-light);font-family:'Noto Serif JP',serif;font-size:0.88rem;border:1px solid var(--color-border);cursor:pointer;margin-top:8px;transition:all 0.2s; }
+    .btn-continue-shopping:hover { border-color:var(--color-accent);color:var(--color-primary); }
+
+    /* カートに追加したトースト通知 */
+    .cart-toast { position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:var(--color-primary);color:var(--color-accent);padding:12px 28px;font-family:'Noto Serif JP',serif;font-size:0.9rem;box-shadow:0 4px 20px rgba(0,0,0,0.3);z-index:99999;opacity:0;transition:opacity 0.3s;pointer-events:none;white-space:nowrap; }
+    .cart-toast.show { opacity:1; }
+
     @media(max-width:900px){ .products-grid{grid-template-columns:repeat(3,1fr);} }
     @media(max-width:600px){
       .products-grid{grid-template-columns:repeat(2,1fr);gap:15px;}
@@ -221,11 +266,17 @@
       <span class="logo-jp">かしはら酒店</span>
       <span class="logo-en">Kashihara Sake Shop</span>
     </a>
-    <div class="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></div>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <button class="cart-icon-btn" onclick="openCart()">
+        🛒 カート<span class="cart-badge" id="cartBadge" style="display:none;">0</span>
+      </button>
+      <div class="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></div>
+    </div>
     <nav id="main-nav">
       <ul>
         <li><a href="index.html">トップ</a></li>
         <li><a href="products.html" class="active">商品一覧</a></li>
+        <li><a href="delivery.html">配達範囲</a></li>
         <li><a href="about.html">会社案内</a></li>
         <li><a href="contact.html">お問い合わせ</a></li>
       </ul>
@@ -274,7 +325,16 @@
             <h3 class="product-name">アサヒスーパードライ 大瓶</h3>
             <p class="product-desc-short">日本を代表するドライビール。キレのある辛口で料理を引き立てます。</p>
             <div class="product-price">価格はお問い合わせください</div>
-            <button class="btn-order" onclick="openOrder('asahi')">🛒 注文する</button>
+            <div class="card-qty-row">
+              <button type="button" class="qty-btn" onclick="changeCardQty('asahi',-1)">−</button>
+              <span class="qty-num" id="card-qty-asahi">1</span>
+              <button type="button" class="qty-btn" onclick="changeCardQty('asahi',1)">＋</button>
+              <span style="font-size:0.78rem;color:var(--color-text-light);margin-left:4px;">本</span>
+            </div>
+            <div class="card-actions">
+              <button class="btn-cart" onclick="addToCart('asahi')">🛒 カートへ</button>
+              <button class="btn-order-now" onclick="openOrderWithQty('asahi')">⚡ すぐ注文</button>
+            </div>
           </div>
         </div>
 
@@ -287,7 +347,16 @@
             <h3 class="product-name">キリンラガービール 大瓶</h3>
             <p class="product-desc-short">100年以上の歴史を誇る、コクと旨味の伝統的なラガービール。</p>
             <div class="product-price">価格はお問い合わせください</div>
-            <button class="btn-order" onclick="openOrder('kirin')">🛒 注文する</button>
+            <div class="card-qty-row">
+              <button type="button" class="qty-btn" onclick="changeCardQty('kirin',-1)">−</button>
+              <span class="qty-num" id="card-qty-kirin">1</span>
+              <button type="button" class="qty-btn" onclick="changeCardQty('kirin',1)">＋</button>
+              <span style="font-size:0.78rem;color:var(--color-text-light);margin-left:4px;">本</span>
+            </div>
+            <div class="card-actions">
+              <button class="btn-cart" onclick="addToCart('kirin')">🛒 カートへ</button>
+              <button class="btn-order-now" onclick="openOrderWithQty('kirin')">⚡ すぐ注文</button>
+            </div>
           </div>
         </div>
 
@@ -300,7 +369,16 @@
             <h3 class="product-name">サッポロ黒ラベル 大瓶</h3>
             <p class="product-desc-short">生ビールのおいしさを追求した、すっきりした飲みごたえが特徴。</p>
             <div class="product-price">価格はお問い合わせください</div>
-            <button class="btn-order" onclick="openOrder('sapporo')">🛒 注文する</button>
+            <div class="card-qty-row">
+              <button type="button" class="qty-btn" onclick="changeCardQty('sapporo',-1)">−</button>
+              <span class="qty-num" id="card-qty-sapporo">1</span>
+              <button type="button" class="qty-btn" onclick="changeCardQty('sapporo',1)">＋</button>
+              <span style="font-size:0.78rem;color:var(--color-text-light);margin-left:4px;">本</span>
+            </div>
+            <div class="card-actions">
+              <button class="btn-cart" onclick="addToCart('sapporo')">🛒 カートへ</button>
+              <button class="btn-order-now" onclick="openOrderWithQty('sapporo')">⚡ すぐ注文</button>
+            </div>
           </div>
         </div>
 
@@ -321,7 +399,17 @@
             <h3 class="product-name">愛知クラフトジンカクテル<br>馬路村ゆず酒 300ml</h3>
             <p class="product-desc-short">高知県馬路村産ゆず果汁とジャパニーズクラフトジンが生み出す絶品の味わい。</p>
             <div class="product-price">¥600 <small>/本（税込）</small></div>
-            <button class="btn-order" onclick="openOrder('yuzu')">🛒 注文する</button>
+            <div class="card-qty-row">
+              <button type="button" class="qty-btn" onclick="changeCardQty('yuzu',-1)">−</button>
+              <span class="qty-num" id="card-qty-yuzu">1</span>
+              <button type="button" class="qty-btn" onclick="changeCardQty('yuzu',1)">＋</button>
+              <span style="font-size:0.78rem;color:var(--color-text-light);">本</span>
+              <span class="card-subtotal" id="card-sub-yuzu">¥600</span>
+            </div>
+            <div class="card-actions">
+              <button class="btn-cart" onclick="addToCart('yuzu')">🛒 カートへ</button>
+              <button class="btn-order-now" onclick="openOrderWithQty('yuzu')">⚡ すぐ注文</button>
+            </div>
           </div>
         </div>
 
@@ -334,7 +422,17 @@
             <h3 class="product-name">ホワイトオーク<br>地ウイスキーあかし 500ml</h3>
             <p class="product-desc-short">兵庫県明石市・江井ヶ嶋酒造が贈る、シェリー樽熟成の本格地ウイスキー。</p>
             <div class="product-price">¥1,300 <small>/本（税込）</small></div>
-            <button class="btn-order" onclick="openOrder('akashi')">🛒 注文する</button>
+            <div class="card-qty-row">
+              <button type="button" class="qty-btn" onclick="changeCardQty('akashi',-1)">−</button>
+              <span class="qty-num" id="card-qty-akashi">1</span>
+              <button type="button" class="qty-btn" onclick="changeCardQty('akashi',1)">＋</button>
+              <span style="font-size:0.78rem;color:var(--color-text-light);">本</span>
+              <span class="card-subtotal" id="card-sub-akashi">¥1,300</span>
+            </div>
+            <div class="card-actions">
+              <button class="btn-cart" onclick="addToCart('akashi')">🛒 カートへ</button>
+              <button class="btn-order-now" onclick="openOrderWithQty('akashi')">⚡ すぐ注文</button>
+            </div>
           </div>
         </div>
 
@@ -355,7 +453,17 @@
             <h3 class="product-name">国菊 甘酒（あまざけ）900ml</h3>
             <p class="product-desc-short">福岡県の篠崎が40年以上改良を重ねた米麹甘酒。防腐剤・糖類無添加。</p>
             <div class="product-price">¥790 <small>/本（税込）</small></div>
-            <button class="btn-order" onclick="openOrder('amazake')">🛒 注文する</button>
+            <div class="card-qty-row">
+              <button type="button" class="qty-btn" onclick="changeCardQty('amazake',-1)">−</button>
+              <span class="qty-num" id="card-qty-amazake">1</span>
+              <button type="button" class="qty-btn" onclick="changeCardQty('amazake',1)">＋</button>
+              <span style="font-size:0.78rem;color:var(--color-text-light);">本</span>
+              <span class="card-subtotal" id="card-sub-amazake">¥790</span>
+            </div>
+            <div class="card-actions">
+              <button class="btn-cart" onclick="addToCart('amazake')">🛒 カートへ</button>
+              <button class="btn-order-now" onclick="openOrderWithQty('amazake')">⚡ すぐ注文</button>
+            </div>
           </div>
         </div>
 
@@ -368,7 +476,17 @@
             <h3 class="product-name">日田天領水<br>20ℓ バッグインボックス</h3>
             <p class="product-desc-short">大分県日田市から湧き出る天然活性水素水。重い20kgをご自宅まで配達！</p>
             <div class="product-price">¥2,950 <small>/本（税込）</small></div>
-            <button class="btn-order" onclick="openOrder('hita')">🛒 注文する</button>
+            <div class="card-qty-row">
+              <button type="button" class="qty-btn" onclick="changeCardQty('hita',-1)">−</button>
+              <span class="qty-num" id="card-qty-hita">1</span>
+              <button type="button" class="qty-btn" onclick="changeCardQty('hita',1)">＋</button>
+              <span style="font-size:0.78rem;color:var(--color-text-light);">本</span>
+              <span class="card-subtotal" id="card-sub-hita">¥2,950</span>
+            </div>
+            <div class="card-actions">
+              <button class="btn-cart" onclick="addToCart('hita')">🛒 カートへ</button>
+              <button class="btn-order-now" onclick="openOrderWithQty('hita')">⚡ すぐ注文</button>
+            </div>
           </div>
         </div>
 
@@ -415,6 +533,24 @@
     <p>&copy; 2025 Kashi Market合同会社 かしはら酒店. All rights reserved.</p>
   </div>
 </footer>
+
+<!-- =============================
+     カートモーダル
+     ============================= -->
+<div class="modal-overlay" id="cartModal" onclick="closeCartOnOverlay(event)">
+  <div class="modal" style="max-width:680px;">
+    <div class="modal-header">
+      <h3>🛒 カート</h3>
+      <button class="modal-close" onclick="closeCart()">✕</button>
+    </div>
+    <div class="modal-body" id="cartBody">
+      <!-- JSで描画 -->
+    </div>
+  </div>
+</div>
+
+<!-- トースト通知 -->
+<div class="cart-toast" id="cartToast"></div>
 
 <!-- =============================
      商品詳細モーダル
@@ -775,6 +911,208 @@ const PRODUCTS = {
 let currentProductKey = null;
 
 // ===============================
+// カート状態
+// ===============================
+let cart = {};       // { key: { qty, unit } }
+let cardQty = {};    // カード上の数量 { key: qty }
+let isCartOrder = false; // カート注文フラグ
+
+// カード数量変更
+function changeCardQty(key, delta) {
+  if (!cardQty[key]) cardQty[key] = 1;
+  cardQty[key] = Math.max(1, cardQty[key] + delta);
+  const el = document.getElementById(`card-qty-${key}`);
+  if (el) el.textContent = cardQty[key];
+  const p = PRODUCTS[key];
+  if (p.price) {
+    const sub = document.getElementById(`card-sub-${key}`);
+    if (sub) sub.textContent = `¥${(p.price * cardQty[key]).toLocaleString()}`;
+  }
+}
+
+// カートに追加
+function addToCart(key) {
+  const qty = cardQty[key] || 1;
+  if (!cart[key]) cart[key] = { qty: 0, unit: '本' };
+  cart[key].qty += qty;
+  updateCartBadge();
+  showToast(`${PRODUCTS[key].name} を${qty}本カートに追加しました`);
+  cardQty[key] = 1;
+  changeCardQty(key, 0); // 表示リセット
+}
+
+// カートバッジ更新
+function updateCartBadge() {
+  const total = Object.values(cart).reduce((s, i) => s + i.qty, 0);
+  const b = document.getElementById('cartBadge');
+  if (total > 0) { b.textContent = total; b.style.display = 'flex'; }
+  else b.style.display = 'none';
+}
+
+// トースト通知
+function showToast(msg) {
+  const el = document.getElementById('cartToast');
+  el.textContent = msg;
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 2500);
+}
+
+// カートモーダル開閉
+function openCart() {
+  renderCart();
+  document.getElementById('cartModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeCart() {
+  document.getElementById('cartModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function closeCartOnOverlay(e) {
+  if (e.target === document.getElementById('cartModal')) closeCart();
+}
+
+// カートレンダリング
+function renderCart() {
+  const keys = Object.keys(cart).filter(k => cart[k].qty > 0);
+  const body = document.getElementById('cartBody');
+  if (keys.length === 0) {
+    body.innerHTML = '<div class="cart-empty">🛒<br>カートは空です<br><br><button class="btn-continue-shopping" onclick="closeCart()">商品を選ぶ</button></div>';
+    return;
+  }
+
+  let subtotal = 0;
+  let hasUnknown = false;
+  let itemsHtml = '';
+
+  keys.forEach(key => {
+    const p = PRODUCTS[key];
+    const { qty } = cart[key];
+    const lineTotal = p.price ? p.price * qty : null;
+    if (lineTotal) subtotal += lineTotal;
+    else hasUnknown = true;
+    itemsHtml += `
+      <div class="cart-item">
+        <img src="${p.img}" alt="${p.name}" class="cart-item-img">
+        <div class="cart-item-info">
+          <div class="cart-item-name">${p.formalName}</div>
+          <div class="cart-item-unit-price">${p.price ? '¥'+p.price.toLocaleString()+'/本' : '価格はお問い合わせください'}</div>
+        </div>
+        <div class="cart-item-qty-ctrl">
+          <button onclick="changeCartQty('${key}',-1)">−</button>
+          <span>${qty}本</span>
+          <button onclick="changeCartQty('${key}',1)">＋</button>
+        </div>
+        <div class="cart-item-subtotal">${lineTotal ? '¥'+lineTotal.toLocaleString() : '—'}</div>
+        <button class="cart-item-remove" onclick="removeFromCart('${key}')">✕</button>
+      </div>`;
+  });
+
+  // 配達料チェック
+  let deliveryHtml = '';
+  if (cachedDeliveryFee && subtotal > 0) {
+    const zone = cachedDeliveryFee.zone;
+    const isFree = subtotal >= zone.freeAt;
+    if (isFree) {
+      deliveryHtml = `<div class="free-delivery-bar">🎉 配達料無料！（¥${zone.freeAt.toLocaleString()}以上のため）</div>`;
+    } else {
+      const rem = zone.freeAt - subtotal;
+      deliveryHtml = `
+        <div class="free-delivery-bar" style="background:#fff8e1;border-color:#f0c040;border-left-color:#c9a84c;color:#5a4000;">
+          あと <strong>¥${rem.toLocaleString()}</strong> で配達料（¥${zone.fee.toLocaleString()}）が無料になります
+        </div>`;
+    }
+  } else if (!cachedDeliveryFee) {
+    deliveryHtml = `<p class="cart-note">※ 配達料は注文フォーム内の「配達料を自動計算する」で確認できます。</p>`;
+  }
+
+  const unknownNote = hasUnknown ? '<p class="cart-note">※ ビールの価格はお問い合わせください。合計には含まれていません。</p>' : '';
+
+  body.innerHTML = `
+    ${itemsHtml}
+    <div class="cart-summary">
+      <div class="cart-summary-row"><span>小計（価格確定分）</span><span class="cart-summary-total">¥${subtotal.toLocaleString()}</span></div>
+      ${unknownNote}
+      ${deliveryHtml}
+    </div>
+    <button class="btn-cart-order" onclick="orderFromCart()">この内容で注文する →</button>
+    <button class="btn-continue-shopping" onclick="closeCart()">← 買い物を続ける</button>`;
+}
+
+// カート内数量変更
+function changeCartQty(key, delta) {
+  if (!cart[key]) return;
+  cart[key].qty = Math.max(0, cart[key].qty + delta);
+  if (cart[key].qty === 0) delete cart[key];
+  updateCartBadge();
+  renderCart();
+}
+function removeFromCart(key) {
+  delete cart[key];
+  updateCartBadge();
+  renderCart();
+}
+
+// カートから注文
+function orderFromCart() {
+  isCartOrder = true;
+  closeCart();
+  // カート内容をまとめて注文モーダルへ
+  const keys = Object.keys(cart).filter(k => cart[k].qty > 0);
+  const names = keys.map(k => `${PRODUCTS[k].formalName} ×${cart[k].qty}本`).join('、');
+  const subtotal = keys.reduce((s,k) => s + (PRODUCTS[k].price ? PRODUCTS[k].price * cart[k].qty : 0), 0);
+  document.getElementById('orderProductName').textContent = `カート (${keys.length}種類)`;
+  document.getElementById('orderProductPrice').textContent = subtotal > 0 ? `小計 ¥${subtotal.toLocaleString()}（+ 価格未定商品あり）` : '価格はお問い合わせください';
+
+  // アルコール商品が含まれる場合は年齢確認表示
+  const hasAlcohol = keys.some(k => PRODUCTS[k].isAlcohol);
+  document.getElementById('alcoholWarning').classList.toggle('show', hasAlcohol);
+  document.getElementById('birthdayGroup').style.display = hasAlcohol ? 'block' : 'none';
+  document.getElementById('birthdayGroup').querySelector('input').required = hasAlcohol;
+
+  // 数量グループは非表示（カートで管理済み）
+  document.getElementById('beerQtyGroup').style.display = 'none';
+  document.getElementById('normalQtyGroup').style.display = 'none';
+
+  document.getElementById('orderModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+// 「すぐ注文」ボタン（カード上の数量で直接注文）
+function openOrderWithQty(key) {
+  isCartOrder = false;
+  currentProductKey = key;
+  const p = PRODUCTS[key];
+  const qty = cardQty[key] || 1;
+
+  document.getElementById('orderProductName').textContent = p.formalName;
+  document.getElementById('orderProductPrice').textContent =
+    p.price ? `¥${p.price.toLocaleString()} × ${qty}本 ＝ ¥${(p.price * qty).toLocaleString()}` : p.price === null ? '価格はお問い合わせください' : '';
+
+  document.getElementById('alcoholWarning').classList.toggle('show', p.isAlcohol);
+  document.getElementById('birthdayGroup').style.display = p.isAlcohol ? 'block' : 'none';
+  document.getElementById('birthdayGroup').querySelector('input').required = p.isAlcohol;
+  document.getElementById('ageError').classList.remove('show');
+
+  document.getElementById('beerQtyGroup').style.display = p.isBeer ? 'block' : 'none';
+  document.getElementById('normalQtyGroup').style.display = !p.isBeer ? 'block' : 'none';
+  if (p.isBeer) {
+    document.querySelector('input[name="qtyUnit"][value="本"]').checked = true;
+    document.getElementById('beerQtyUnit').textContent = '本';
+    document.getElementById('beerQty').value = qty;
+    document.getElementById('beerQty').required = true;
+    document.getElementById('normalQty').required = false;
+  } else {
+    document.getElementById('normalQty').value = qty;
+    document.getElementById('normalQty').required = true;
+    document.getElementById('beerQty').required = false;
+  }
+
+  toggleDelivery();
+  document.getElementById('orderModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+// ===============================
 // ナビゲーション
 // ===============================
 function toggleNav() {
@@ -957,13 +1295,18 @@ const FORMSPREE_ID = 'xlgkdwkd';
 // 注文送信
 async function submitOrder(e) {
   e.preventDefault();
-  const p = PRODUCTS[currentProductKey];
 
   // エラーリセット
   document.getElementById('orderErrorMsg').classList.remove('show');
 
+  // カート注文 or 単品注文
+  const p = isCartOrder ? null : PRODUCTS[currentProductKey];
+  const isAlcohol = isCartOrder
+    ? Object.keys(cart).filter(k=>cart[k].qty>0).some(k=>PRODUCTS[k].isAlcohol)
+    : p.isAlcohol;
+
   // 年齢チェック
-  if (p.isAlcohol) {
+  if (isAlcohol) {
     const birthday = document.getElementById('orderBirthday').value;
     if (!birthday) {
       document.getElementById('ageError').classList.add('show');
@@ -978,13 +1321,21 @@ async function submitOrder(e) {
     document.getElementById('ageError').classList.remove('show');
   }
 
-  // 数量
+  // 数量・商品名
   let qtyText = '';
-  if (p.isBeer) {
-    const unit = document.querySelector('input[name="qtyUnit"]:checked').value;
-    qtyText = `${document.getElementById('beerQty').value} ${unit}`;
+  let productName = '';
+  if (isCartOrder) {
+    const keys = Object.keys(cart).filter(k => cart[k].qty > 0);
+    productName = keys.map(k => `${PRODUCTS[k].formalName} ×${cart[k].qty}本`).join('\n');
+    qtyText = `${keys.reduce((s,k)=>s+cart[k].qty,0)}本（複数商品）`;
   } else {
-    qtyText = `${document.getElementById('normalQty').value} 本`;
+    productName = p.formalName;
+    if (p.isBeer) {
+      const unit = document.querySelector('input[name="qtyUnit"]:checked').value;
+      qtyText = `${document.getElementById('beerQty').value} ${unit}`;
+    } else {
+      qtyText = `${document.getElementById('normalQty').value} 本`;
+    }
   }
 
   // 受取方法・住所
@@ -1011,18 +1362,29 @@ async function submitOrder(e) {
   const phone    = document.getElementById('orderPhone').value;
   const email    = document.getElementById('orderEmail').value;
   const note     = document.getElementById('orderNote').value;
-  const birthday = p.isAlcohol ? document.getElementById('orderBirthday').value : '対象外';
+  const birthday = isAlcohol ? document.getElementById('orderBirthday').value : '対象外';
+
+  // 小計
+  let subtotalText = '';
+  if (isCartOrder) {
+    const keys = Object.keys(cart).filter(k=>cart[k].qty>0);
+    const tot = keys.reduce((s,k)=> s+(PRODUCTS[k].price?PRODUCTS[k].price*cart[k].qty:0),0);
+    subtotalText = tot>0 ? `¥${tot.toLocaleString()}（価格未定商品含まず）` : 'お問い合わせください';
+  } else {
+    const qty2 = parseInt(document.getElementById(p.isBeer?'beerQty':'normalQty').value)||1;
+    subtotalText = p.price ? `¥${(p.price*qty2).toLocaleString()}` : 'お問い合わせください';
+  }
 
   // 送信データ
   const orderData = {
-    _subject: `【ご注文】${p.formalName} / ${name} 様`,
+    _subject: `【ご注文】${isCartOrder?'カート注文':productName} / ${name} 様`,
     お名前: name,
     電話番号: phone,
     メールアドレス: email,
-    生年月日: p.isAlcohol ? `${birthday}（年齢確認済）` : '対象外',
-    商品名: p.formalName,
+    生年月日: isAlcohol ? `${birthday}（年齢確認済）` : '対象外',
+    商品名: productName,
     数量: qtyText,
-    単価: p.price,
+    小計: subtotalText,
     受取方法: deliveryMethod,
     希望日: dateText,
     配達先住所: addressText,
@@ -1031,7 +1393,7 @@ async function submitOrder(e) {
       ? `¥${cachedDeliveryFee.zone.fee}（${cachedDeliveryFee.zone.label}・約${cachedDeliveryFee.km.toFixed(1)}km）`
       : '未確認（担当者より連絡）',
     備考: note || 'なし',
-    年齢確認: p.isAlcohol ? '20歳以上であることを確認済み' : '対象外',
+    年齢確認: isAlcohol ? '20歳以上であることを確認済み' : '対象外',
   };
 
   // 送信中表示
