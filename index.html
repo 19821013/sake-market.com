@@ -446,6 +446,21 @@
 
     /* レスポンシブ */
     @media (max-width: 768px) {
+      /* スマホ：イラスト全体を表示 */
+      .hero {
+        background-size: contain;
+        background-position: top center;
+        background-color: #F5EDD8;
+        min-height: auto;
+        padding-bottom: 50px;
+      }
+      .hero-content {
+        margin-top: max(52vw, 160px); /* イラストの下にコンテンツを配置 */
+        background: rgba(250,246,238,0.92);
+        padding: 24px 16px 36px;
+        border-radius: 8px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      }
       .store-intro-inner { grid-template-columns:1fr; gap:30px; }
       .concept-grid {
         grid-template-columns: 1fr;
