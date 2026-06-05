@@ -698,7 +698,11 @@
         <!-- 生年月日（酒類のみ） -->
         <div class="modal-form-group" id="birthdayGroup" style="display:none">
           <label class="modal-label">生年月日 <span class="req">必須（酒類ご注文の方）</span></label>
-          <input type="date" id="orderBirthday" class="modal-input" max="">
+          <input type="text" id="orderBirthday" class="modal-input"
+            placeholder="例：1990/01/15（西暦/月/日）"
+            inputmode="numeric"
+            autocomplete="bday">
+          <p style="font-size:0.75rem;color:var(--color-text-light);margin-top:4px;">※ 西暦／月／日の順で入力（例：1990/01/15）</p>
           <div class="age-error" id="ageError">⛔ 申し訳ございません。20歳未満の方への酒類の販売はお断りしております。</div>
         </div>
 
@@ -1236,7 +1240,6 @@ function openOrder(key) {
   if (isAlcohol) {
     const maxDate = new Date();
     maxDate.setFullYear(maxDate.getFullYear());
-    document.getElementById('orderBirthday').max = maxDate.toISOString().split('T')[0];
     document.getElementById('orderBirthday').required = true;
   } else {
     document.getElementById('orderBirthday').required = false;
@@ -1389,12 +1392,22 @@ document.getElementById('orderPostalCode') && document.addEventListener('DOMCont
 });
 
 // 年齢計算
+function parseBirthDate(str) {
+  // 対応フォーマット: YYYY/MM/DD, YYYY-MM-DD, YYYY.MM.DD, YYYYMMDD
+  const s = str.replace(/[年月日\s]/g, '/').replace(/\/+/g, '/').trim();
+  const m = s.match(/^(\d{4})[\/\-\.](\d{1,2})[\/\-\.](\d{1,2})$/)
+          || s.match(/^(\d{4})(\d{2})(\d{2})$/);
+  if (!m) return null;
+  return new Date(parseInt(m[1]), parseInt(m[2]) - 1, parseInt(m[3]));
+}
+
 function calcAge(birthDateStr) {
   const today = new Date();
-  const birth = new Date(birthDateStr);
+  const birth = parseBirthDate(birthDateStr);
+  if (!birth || isNaN(birth)) return -1;
   let age = today.getFullYear() - birth.getFullYear();
-  const m = today.getMonth() - birth.getMonth();
-  if (m < 0 || (m === 0 && today.getDate() < birth.getDate())) age--;
+  const mo = today.getMonth() - birth.getMonth();
+  if (mo < 0 || (mo === 0 && today.getDate() < birth.getDate())) age--;
   return age;
 }
 
@@ -1434,13 +1447,19 @@ async function submitOrder(e) {
 
   // 年齢チェック
   if (isAlcohol) {
-    const birthday = document.getElementById('orderBirthday').value;
+    const birthday = document.getElementById('orderBirthday').value.trim();
     if (!birthday) {
       document.getElementById('ageError').classList.add('show');
-      document.getElementById('ageError').textContent = '⛔ 生年月日をご入力ください。';
+      document.getElementById('ageError').textContent = '⛔ 生年月日を入力してください（例：1990/01/15）';
       return;
     }
-    if (calcAge(birthday) < 20) {
+    const age = calcAge(birthday);
+    if (age === -1) {
+      document.getElementById('ageError').classList.add('show');
+      document.getElementById('ageError').textContent = '⛔ 生年月日の形式が正しくありません（例：1990/01/15）';
+      return;
+    }
+    if (age < 20) {
       document.getElementById('ageError').classList.add('show');
       document.getElementById('ageError').textContent = '⛔ 申し訳ございません。20歳未満の方への酒類の販売はお断りしております。';
       return;
