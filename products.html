@@ -191,6 +191,18 @@
     .order-error-msg { background:#fff0f0;border:1px solid #f5a0a0;border-left:4px solid #e74c3c;padding:14px 16px;font-size:0.85rem;color:#8b0000;line-height:1.8;margin-bottom:16px;display:none; }
     .order-error-msg.show { display:block; }
 
+    /* 配達料確認 */
+    .btn-check-fee { width:100%;padding:11px;background:#f0ebe0;color:var(--color-primary);font-family:'Noto Serif JP',serif;font-size:0.88rem;letter-spacing:0.1em;border:1px dashed var(--color-accent);cursor:pointer;transition:all 0.3s; }
+    .btn-check-fee:hover { background:var(--color-accent);color:var(--color-primary); }
+    .delivery-fee-box { background:#f8fff8;border:1px solid #a8d5a8;border-left:4px solid #27ae60;padding:16px 18px;margin-top:8px;border-radius:2px; }
+    .delivery-fee-box.far { border-left-color:#e67e22;background:#fff8f0; }
+    .delivery-fee-box.special { border-left-color:#e74c3c;background:#fff5f5; }
+    .fee-result-header { font-family:'Noto Serif JP',serif;font-size:0.85rem;color:#555;margin-bottom:8px;font-weight:500; }
+    .fee-zone-text { font-size:0.88rem;color:var(--color-text);margin-bottom:4px; }
+    .fee-dist-text { font-size:0.82rem;color:var(--color-text-light);margin-bottom:8px; }
+    .fee-amount-text { font-family:'Noto Serif JP',serif;font-size:1.15rem;font-weight:700;color:var(--color-primary);margin-bottom:4px; }
+    .fee-free-text { font-size:0.82rem;color:#27ae60;font-weight:600; }
+
     @media(max-width:900px){ .products-grid{grid-template-columns:repeat(3,1fr);} }
     @media(max-width:600px){
       .products-grid{grid-template-columns:repeat(2,1fr);gap:15px;}
@@ -571,9 +583,25 @@
 
           <div class="modal-form-group">
             <label class="modal-label">番地・建物名 <span class="req">必須</span></label>
-            <input type="text" id="orderStreet" class="modal-input" placeholder="例：渚西1丁目21-12 ○○マンション101号">
+            <input type="text" id="orderStreet" class="modal-input" placeholder="例：渚西1丁目21-12 ○○マンション101号" oninput="resetDeliveryFee()">
             <p class="address-note">※ 郵便番号検索後に番地・建物名をご入力ください</p>
           </div>
+
+          <!-- 配達料確認ボタン -->
+          <div class="modal-form-group">
+            <button type="button" class="btn-check-fee" onclick="checkDeliveryFee()">🚚 配達料を確認する</button>
+          </div>
+
+          <!-- 配達料表示ボックス -->
+          <div id="deliveryFeeBox" style="display:none;" class="delivery-fee-box">
+            <div class="fee-result-header">配達料のお見積もり</div>
+            <div id="feeZone" class="fee-zone-text"></div>
+            <div id="feeDistance" class="fee-dist-text"></div>
+            <div id="feeAmount" class="fee-amount-text"></div>
+            <div id="feeFreeInfo" class="fee-free-text"></div>
+          </div>
+          <div id="deliveryFeeLoading" style="display:none;font-size:0.82rem;color:var(--color-text-light);margin-top:8px;">📍 距離を計算中…</div>
+          <div id="deliveryFeeError" style="display:none;font-size:0.82rem;color:#c0392b;margin-top:8px;"></div>
         </div>
 
         <!-- 店舗受取の場合のメッセージ -->
@@ -976,6 +1004,9 @@ async function submitOrder(e) {
     希望日: dateText,
     配達先住所: addressText,
     お支払い方法: payment,
+    配達料: cachedDeliveryFee
+      ? `¥${cachedDeliveryFee.zone.fee}（${cachedDeliveryFee.zone.label}・約${cachedDeliveryFee.km.toFixed(1)}km）`
+      : '未確認（担当者より連絡）',
     備考: note || 'なし',
     年齢確認: p.isAlcohol ? '20歳以上であることを確認済み' : '対象外',
   };
@@ -1008,6 +1039,88 @@ async function submitOrder(e) {
     document.getElementById('orderSending').classList.remove('show');
     document.getElementById('orderSubmitBtn').disabled = false;
     document.getElementById('orderErrorMsg').classList.add('show');
+  }
+}
+
+// ===============================
+// 配達料計算
+// ===============================
+const STORE_LAT = 34.8295796;
+const STORE_LNG = 135.6522798;
+
+// ハversine距離計算
+function haversineKm(lat1, lon1, lat2, lon2) {
+  const R = 6371;
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLon = (lon2 - lon1) * Math.PI / 180;
+  const a = Math.sin(dLat/2)**2 +
+    Math.cos(lat1*Math.PI/180) * Math.cos(lat2*Math.PI/180) * Math.sin(dLon/2)**2;
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+}
+
+// 距離→料金ゾーン
+function getZone(km) {
+  if (km <= 3)  return { label:'近距離（3km以内）', fee:300,  freeAt:2000,  color:'green' };
+  if (km <= 6)  return { label:'中距離（3〜6km）',  fee:500,  freeAt:4000,  color:'yellow' };
+  if (km <= 10) return { label:'遠距離（6〜10km）', fee:800,  freeAt:8000,  color:'orange' };
+  return         { label:'特別対応（10km超）',       fee:1200, freeAt:12000, color:'red', note:'※大阪府内のみ対応。京都府内10km超は配達不可。' };
+}
+
+let cachedDeliveryFee = null;
+
+function resetDeliveryFee() {
+  cachedDeliveryFee = null;
+  document.getElementById('deliveryFeeBox').style.display = 'none';
+  document.getElementById('deliveryFeeError').style.display = 'none';
+}
+
+async function checkDeliveryFee() {
+  const pref   = document.getElementById('orderPrefecture').value;
+  const city   = document.getElementById('orderCity').value;
+  const street = document.getElementById('orderStreet').value;
+
+  if (!pref || !city) {
+    document.getElementById('deliveryFeeError').textContent = '⚠️ 先に郵便番号を検索してください。';
+    document.getElementById('deliveryFeeError').style.display = 'block';
+    return;
+  }
+
+  const fullAddr = `${pref}${city}${street}`;
+  document.getElementById('deliveryFeeLoading').style.display = 'block';
+  document.getElementById('deliveryFeeBox').style.display = 'none';
+  document.getElementById('deliveryFeeError').style.display = 'none';
+
+  try {
+    const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(fullAddr)}&limit=1&accept-language=ja`;
+    const res  = await fetch(url, { headers: { 'User-Agent': 'KashiharaShop/1.0' } });
+    const data = await res.json();
+
+    document.getElementById('deliveryFeeLoading').style.display = 'none';
+
+    if (!data.length) {
+      document.getElementById('deliveryFeeError').textContent = '⚠️ 住所から位置を特定できませんでした。お電話（072-848-0289）にてご確認ください。';
+      document.getElementById('deliveryFeeError').style.display = 'block';
+      return;
+    }
+
+    const lat = parseFloat(data[0].lat);
+    const lng = parseFloat(data[0].lon);
+    const km  = haversineKm(STORE_LAT, STORE_LNG, lat, lng);
+    const zone = getZone(km);
+    cachedDeliveryFee = { km, zone };
+
+    const box = document.getElementById('deliveryFeeBox');
+    box.className = 'delivery-fee-box' + (zone.color==='orange'?' far':zone.color==='red'?' special':'');
+    document.getElementById('feeZone').textContent     = `📍 配達ゾーン：${zone.label}`;
+    document.getElementById('feeDistance').textContent = `　 店舗からの距離：約${km.toFixed(1)}km`;
+    document.getElementById('feeAmount').textContent   = `配達料：¥${zone.fee.toLocaleString()}`;
+    document.getElementById('feeFreeInfo').textContent = `✅ ¥${zone.freeAt.toLocaleString()}以上のご注文で配達料無料${zone.note ? '　'+zone.note : ''}`;
+    box.style.display = 'block';
+
+  } catch (err) {
+    document.getElementById('deliveryFeeLoading').style.display = 'none';
+    document.getElementById('deliveryFeeError').textContent = '⚠️ 距離の取得に失敗しました。お電話にてご確認ください。';
+    document.getElementById('deliveryFeeError').style.display = 'block';
   }
 }
 
