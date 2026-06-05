@@ -1266,14 +1266,18 @@ function updateFeeDisplay() {
     }
   };
 
-  setFeeBox('');   // 自動計算ボックス
-  setFeeBox('M'); // 手動選択ボックス
-
-  // ゾーン・距離行も更新
+  // ゾーン・距離（自動計算ボックス用）
   const zoneEl = document.getElementById('feeZone');
   if (zoneEl) zoneEl.textContent = `📍 配達ゾーン：${zone.label}`;
   const distEl = document.getElementById('feeDistance');
-  if (distEl && km) distEl.textContent = `　 店舗からの距離：約${km.toFixed(1)}km`;
+  if (distEl) distEl.textContent = km ? `　 店舗からの距離：約${km.toFixed(1)}km` : '';
+
+  // ゾーン（手動選択ボックス用）
+  const zoneMEl = document.getElementById('feeZoneM');
+  if (zoneMEl) zoneMEl.textContent = `📍 配達ゾーン：${zone.label}`;
+
+  setFeeBox('');   // 自動計算ボックス
+  setFeeBox('M'); // 手動選択ボックス
 }
 
 // 注文モーダル内での数量変更時
@@ -1591,11 +1595,8 @@ async function checkDeliveryFee() {
 
   const box = document.getElementById('deliveryFeeBox');
   box.className = 'delivery-fee-box' + (zone.color==='orange'?' far':zone.color==='red'?' special':'');
-  document.getElementById('feeZone').textContent     = `📍 配達ゾーン：${zone.label}`;
-  document.getElementById('feeDistance').textContent = `　 店舗からの距離：約${km.toFixed(1)}km`;
-  document.getElementById('feeAmount').textContent   = `配達料：¥${zone.fee.toLocaleString()}`;
-  document.getElementById('feeFreeInfo').textContent = `✅ ¥${zone.freeAt.toLocaleString()}以上のご注文で配達料無料${zone.note||''}`;
   box.style.display = 'block';
+  // updateFeeDisplay()が表示内容を管理するのでここでは上書きしない
 }
 
 // 手動ゾーン選択
@@ -1613,10 +1614,8 @@ function applyManualZone() {
   updateFeeDisplay();
   const box = document.getElementById('deliveryFeeBoxManual');
   box.className = 'delivery-fee-box' + (zone.color==='orange'?' far':zone.color==='red'?' special':'');
-  document.getElementById('feeZoneM').textContent    = `📍 配達ゾーン：${zone.label}`;
-  document.getElementById('feeAmountM').textContent  = `配達料：¥${zone.fee.toLocaleString()}`;
-  document.getElementById('feeFreeInfoM').textContent= `✅ ¥${zone.freeAt.toLocaleString()}以上のご注文で配達料無料${zone.note||''}`;
   box.style.display = 'block';
+  // updateFeeDisplay()が表示内容を管理するのでここでは上書きしない
 }
 
 // Escキー
