@@ -4,16 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>商品一覧 | かしはら酒店</title>
-  <meta name="description" content="かしはら酒店の商品一覧。ビール・リキュール・ノンアルコール飲料など豊富に取り揃えています。">
+  <meta name="description" content="かしはら酒店の商品一覧。アサヒ・キリン・サッポロの瓶ビール、ゆず酒、あか八、甘酒、日田天領水など。大阪府枚方市・京阪御殿山駅徒歩5分。">
   <link rel="stylesheet" href="css/style.css">
   <style>
-    /* ページヘッダー */
     .page-hero {
       background: linear-gradient(135deg, #0d0500 0%, #1a0a00 60%, #2d1500 100%);
       padding: 120px 20px 80px;
       text-align: center;
     }
-
     .page-hero h1 {
       font-family: 'Noto Serif JP', serif;
       font-size: clamp(2rem, 5vw, 3.5rem);
@@ -21,17 +19,14 @@
       letter-spacing: 0.15em;
       margin-bottom: 10px;
     }
-
     .page-hero p {
       font-size: 0.8rem;
       color: var(--color-accent);
       letter-spacing: 0.4em;
       text-transform: uppercase;
     }
-
     .page-hero-line {
-      width: 60px;
-      height: 1px;
+      width: 60px; height: 1px;
       background: var(--color-accent);
       margin: 20px auto;
     }
@@ -40,214 +35,226 @@
     .category-tabs {
       background: var(--color-white);
       border-bottom: 1px solid var(--color-border);
-      position: sticky;
-      top: 70px;
-      z-index: 100;
+      position: sticky; top: 70px; z-index: 100;
     }
-
     .tabs-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 20px;
-      display: flex;
-      gap: 0;
-      overflow-x: auto;
+      max-width: 1100px; margin: 0 auto;
+      padding: 0 20px; display: flex; overflow-x: auto;
     }
-
     .tab-btn {
-      padding: 18px 30px;
-      border: none;
-      background: none;
-      cursor: pointer;
-      font-family: 'Noto Serif JP', serif;
-      font-size: 0.9rem;
-      color: var(--color-text-light);
+      padding: 18px 30px; border: none; background: none;
+      cursor: pointer; font-family: 'Noto Serif JP', serif;
+      font-size: 0.9rem; color: var(--color-text-light);
       border-bottom: 3px solid transparent;
-      transition: all 0.3s;
-      white-space: nowrap;
-      letter-spacing: 0.05em;
+      transition: all 0.3s; white-space: nowrap; letter-spacing: 0.05em;
     }
-
-    .tab-btn:hover,
-    .tab-btn.active {
-      color: var(--color-primary);
-      border-bottom-color: var(--color-accent);
-    }
-
-    /* 商品セクション */
-    .products-section {
-      background: var(--color-bg);
-    }
-
-    .category-section {
-      margin-bottom: 80px;
-    }
-
-    .category-section:last-child {
-      margin-bottom: 0;
-    }
-
-    .category-title {
-      font-family: 'Noto Serif JP', serif;
-      font-size: 1.5rem;
-      color: var(--color-primary);
-      padding-bottom: 15px;
-      border-bottom: 2px solid var(--color-border);
-      margin-bottom: 30px;
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-
-    .category-title::before {
-      content: '';
-      display: inline-block;
-      width: 4px;
-      height: 1.5rem;
-      background: var(--color-accent);
+    .tab-btn:hover, .tab-btn.active {
+      color: var(--color-primary); border-bottom-color: var(--color-accent);
     }
 
     /* 商品グリッド */
+    .products-section { background: var(--color-bg); }
+    .category-section { margin-bottom: 80px; }
+    .category-section:last-child { margin-bottom: 0; }
+    .category-title {
+      font-family: 'Noto Serif JP', serif; font-size: 1.5rem;
+      color: var(--color-primary); padding-bottom: 15px;
+      border-bottom: 2px solid var(--color-border); margin-bottom: 30px;
+      display: flex; align-items: center; gap: 15px;
+    }
+    .category-title::before {
+      content: ''; display: inline-block;
+      width: 4px; height: 1.5rem; background: var(--color-accent);
+    }
     .products-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 25px;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px;
     }
 
+    /* 商品カード */
     .product-card {
-      background: var(--color-white);
-      overflow: hidden;
+      background: var(--color-white); overflow: hidden;
       box-shadow: 0 3px 15px rgba(0,0,0,0.07);
       transition: transform 0.3s, box-shadow 0.3s;
+      display: flex; flex-direction: column;
     }
-
     .product-card:hover {
       transform: translateY(-6px);
       box-shadow: 0 12px 35px rgba(0,0,0,0.12);
     }
-
     .product-img-wrap {
-      width: 100%;
-      aspect-ratio: 1;
-      overflow: hidden;
+      width: 100%; aspect-ratio: 1; overflow: hidden;
       background: var(--color-bg-dark);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
     }
-
     .product-img-wrap img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.4s;
+      width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s;
     }
-
-    .product-card:hover .product-img-wrap img {
-      transform: scale(1.06);
-    }
-
+    .product-card:hover .product-img-wrap img { transform: scale(1.06); }
     .product-body {
-      padding: 18px 16px;
+      padding: 18px 16px; flex: 1; display: flex; flex-direction: column;
     }
-
     .product-tag {
-      display: inline-block;
-      font-size: 0.7rem;
-      padding: 2px 10px;
-      background: var(--color-accent);
-      color: var(--color-primary);
-      font-weight: 700;
-      margin-bottom: 8px;
-      letter-spacing: 0.05em;
+      display: inline-block; font-size: 0.7rem; padding: 2px 10px;
+      background: var(--color-accent); color: var(--color-primary);
+      font-weight: 700; margin-bottom: 8px; letter-spacing: 0.05em;
     }
-
     .product-name {
-      font-family: 'Noto Serif JP', serif;
-      font-size: 1rem;
-      color: var(--color-primary);
-      margin-bottom: 8px;
-      line-height: 1.5;
+      font-family: 'Noto Serif JP', serif; font-size: 1rem;
+      color: var(--color-primary); margin-bottom: 6px; line-height: 1.5;
     }
-
     .product-desc {
-      font-size: 0.82rem;
-      color: var(--color-text-light);
-      line-height: 1.8;
+      font-size: 0.82rem; color: var(--color-text-light);
+      line-height: 1.8; margin-bottom: 12px; flex: 1;
     }
-
-    /* マトリクス表セクション */
-    .matrix-section {
-      background: var(--color-bg-dark);
-      padding: 60px 20px;
-    }
-
-    .matrix-section .section-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    .matrix-title {
+    .product-price {
       font-family: 'Noto Serif JP', serif;
-      font-size: 1.5rem;
-      color: var(--color-primary);
-      margin-bottom: 30px;
-      display: flex;
-      align-items: center;
-      gap: 15px;
+      font-size: 1.1rem; color: var(--color-primary);
+      font-weight: 700; margin-bottom: 14px;
+    }
+    .product-price small {
+      font-size: 0.75rem; color: var(--color-text-light);
+      font-weight: 400; margin-left: 4px;
+    }
+    .btn-order {
+      display: block; width: 100%; padding: 12px;
+      background: var(--color-primary); color: var(--color-accent);
+      font-family: 'Noto Serif JP', serif; font-size: 0.88rem;
+      letter-spacing: 0.15em; border: none; cursor: pointer;
+      transition: all 0.3s; text-align: center;
+    }
+    .btn-order:hover {
+      background: var(--color-accent); color: var(--color-primary);
     }
 
+    /* マトリクス表 */
+    .matrix-section { background: var(--color-bg-dark); padding: 60px 20px; }
+    .matrix-section .section-inner { max-width: 1100px; margin: 0 auto; }
+    .matrix-title {
+      font-family: 'Noto Serif JP', serif; font-size: 1.5rem;
+      color: var(--color-primary); margin-bottom: 30px;
+      display: flex; align-items: center; gap: 15px;
+    }
     .matrix-title::before {
-      content: '';
-      display: inline-block;
-      width: 4px;
-      height: 1.5rem;
-      background: var(--color-accent);
+      content: ''; display: inline-block;
+      width: 4px; height: 1.5rem; background: var(--color-accent);
+    }
+    .matrix-img {
+      width: 100%; max-width: 800px; display: block;
+      margin: 0 auto; box-shadow: 0 5px 25px rgba(0,0,0,0.1);
     }
 
-    .matrix-img {
-      width: 100%;
-      max-width: 800px;
-      display: block;
-      margin: 0 auto;
-      box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+    /* ===============================
+       注文モーダル
+       =============================== */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.75); z-index: 9999;
+      align-items: center; justify-content: center;
+      padding: 20px;
+    }
+    .modal-overlay.open { display: flex; }
+
+    .modal {
+      background: var(--color-white); max-width: 520px; width: 100%;
+      max-height: 90vh; overflow-y: auto;
+      position: relative; animation: modalIn 0.3s ease;
+    }
+    @keyframes modalIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .modal-header {
+      background: var(--color-primary); padding: 25px 30px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .modal-header h3 {
+      font-family: 'Noto Serif JP', serif; font-size: 1.1rem;
+      color: var(--color-white); letter-spacing: 0.1em;
+    }
+    .modal-close {
+      background: none; border: none; color: rgba(255,255,255,0.6);
+      font-size: 1.5rem; cursor: pointer; line-height: 1;
+      transition: color 0.2s;
+    }
+    .modal-close:hover { color: var(--color-accent); }
+
+    .modal-product-info {
+      background: var(--color-bg-dark); padding: 20px 30px;
+      display: flex; align-items: center; gap: 15px;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .modal-product-name {
+      font-family: 'Noto Serif JP', serif; font-size: 1rem;
+      color: var(--color-primary); font-weight: 500;
+    }
+    .modal-product-price {
+      font-size: 0.9rem; color: var(--color-text-light); margin-top: 3px;
+    }
+
+    .modal-body { padding: 30px; }
+
+    .modal-form-group { margin-bottom: 20px; }
+    .modal-label {
+      display: block; font-family: 'Noto Serif JP', serif;
+      font-size: 0.85rem; color: var(--color-primary);
+      margin-bottom: 7px;
+    }
+    .modal-label .req {
+      display: inline-block; font-size: 0.65rem; padding: 1px 5px;
+      background: var(--color-accent); color: var(--color-primary);
+      font-weight: 700; margin-left: 6px;
+    }
+    .modal-input, .modal-select, .modal-textarea {
+      width: 100%; padding: 11px 14px;
+      border: 1px solid var(--color-border); background: var(--color-bg);
+      font-family: 'Noto Sans JP', sans-serif; font-size: 0.92rem;
+      color: var(--color-text); outline: none; border-radius: 0;
+      transition: border-color 0.3s;
+    }
+    .modal-input:focus, .modal-select:focus, .modal-textarea:focus {
+      border-color: var(--color-accent);
+      box-shadow: 0 0 0 3px rgba(201,168,76,0.15);
+    }
+    .modal-textarea { resize: vertical; min-height: 100px; }
+
+    .modal-qty-row {
+      display: flex; gap: 12px; align-items: center;
+    }
+    .modal-qty-row .modal-input { max-width: 100px; }
+
+    .modal-submit {
+      width: 100%; padding: 15px; margin-top: 10px;
+      background: var(--color-accent); color: var(--color-primary);
+      font-family: 'Noto Serif JP', serif; font-size: 1rem;
+      font-weight: 700; letter-spacing: 0.2em; border: none;
+      cursor: pointer; transition: all 0.3s;
+    }
+    .modal-submit:hover {
+      background: var(--color-accent-light); transform: translateY(-1px);
+    }
+    .modal-note {
+      font-size: 0.78rem; color: var(--color-text-light);
+      text-align: center; margin-top: 12px; line-height: 1.8;
     }
 
     /* お問い合わせ誘導 */
     .inquiry-banner {
-      background: var(--color-primary);
-      padding: 60px 20px;
-      text-align: center;
+      background: var(--color-primary); padding: 60px 20px; text-align: center;
     }
-
     .inquiry-banner h3 {
-      font-family: 'Noto Serif JP', serif;
-      font-size: 1.5rem;
-      color: var(--color-white);
-      margin-bottom: 12px;
+      font-family: 'Noto Serif JP', serif; font-size: 1.5rem;
+      color: var(--color-white); margin-bottom: 12px;
     }
-
     .inquiry-banner p {
-      color: rgba(255,255,255,0.65);
-      font-size: 0.9rem;
-      margin-bottom: 30px;
+      color: rgba(255,255,255,0.65); font-size: 0.9rem; margin-bottom: 30px;
     }
 
-    @media (max-width: 900px) {
-      .products-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-
+    @media (max-width: 900px) { .products-grid { grid-template-columns: repeat(3, 1fr); } }
     @media (max-width: 600px) {
-      .products-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-      }
-      .tab-btn {
-        padding: 15px 18px;
-        font-size: 0.82rem;
-      }
+      .products-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+      .tab-btn { padding: 15px 18px; font-size: 0.82rem; }
+      .modal-body { padding: 20px; }
     }
   </style>
 </head>
@@ -284,9 +291,9 @@
   <!-- カテゴリータブ -->
   <div class="category-tabs">
     <div class="tabs-inner">
-      <button class="tab-btn active" onclick="scrollToCategory('beer')">🍺 ビール</button>
-      <button class="tab-btn" onclick="scrollToCategory('liqueur')">🍊 リキュール</button>
-      <button class="tab-btn" onclick="scrollToCategory('nonalcohol')">💧 ノンアルコール</button>
+      <button class="tab-btn active" onclick="scrollToCategory('beer', this)">🍺 ビール</button>
+      <button class="tab-btn" onclick="scrollToCategory('liqueur', this)">🍊 リキュール・焼酎</button>
+      <button class="tab-btn" onclick="scrollToCategory('nonalcohol', this)">💧 ノンアルコール</button>
     </div>
   </div>
 
@@ -305,8 +312,10 @@
             </div>
             <div class="product-body">
               <span class="product-tag">ビール</span>
-              <h3 class="product-name">アサヒスーパードライ<br>大瓶</h3>
+              <h3 class="product-name">アサヒスーパードライ 大瓶</h3>
               <p class="product-desc">日本を代表するドライビール。キレのある辛口で、どんな料理にも合います。</p>
+              <div class="product-price">価格はお問い合わせください<small></small></div>
+              <button class="btn-order" onclick="openOrder('アサヒスーパードライ 大瓶', '')">🛒 注文する</button>
             </div>
           </div>
 
@@ -316,8 +325,10 @@
             </div>
             <div class="product-body">
               <span class="product-tag">ビール</span>
-              <h3 class="product-name">キリンラガービール<br>大瓶</h3>
+              <h3 class="product-name">キリンラガービール 大瓶</h3>
               <p class="product-desc">100年以上の歴史を誇る、コクと旨味の伝統的なラガービールです。</p>
+              <div class="product-price">価格はお問い合わせください<small></small></div>
+              <button class="btn-order" onclick="openOrder('キリンラガービール 大瓶', '')">🛒 注文する</button>
             </div>
           </div>
 
@@ -327,17 +338,19 @@
             </div>
             <div class="product-body">
               <span class="product-tag">ビール</span>
-              <h3 class="product-name">サッポロ黒ラベル<br>大瓶</h3>
+              <h3 class="product-name">サッポロ黒ラベル 大瓶</h3>
               <p class="product-desc">生ビールのおいしさを追求した、すっきりとした飲みごたえのビールです。</p>
+              <div class="product-price">価格はお問い合わせください<small></small></div>
+              <button class="btn-order" onclick="openOrder('サッポロ黒ラベル 大瓶', '')">🛒 注文する</button>
             </div>
           </div>
 
         </div>
       </div>
 
-      <!-- リキュール -->
+      <!-- リキュール・焼酎 -->
       <div class="category-section" id="liqueur">
-        <h2 class="category-title">リキュール・日本酒</h2>
+        <h2 class="category-title">リキュール・焼酎</h2>
         <div class="products-grid">
 
           <div class="product-card">
@@ -348,6 +361,8 @@
               <span class="product-tag">リキュール</span>
               <h3 class="product-name">ゆず酒</h3>
               <p class="product-desc">爽やかなゆずの香りと甘酸っぱい味わいが特徴。食前・食後酒としておすすめ。</p>
+              <div class="product-price">価格はお問い合わせください<small></small></div>
+              <button class="btn-order" onclick="openOrder('ゆず酒', '')">🛒 注文する</button>
             </div>
           </div>
 
@@ -359,6 +374,8 @@
               <span class="product-tag">焼酎</span>
               <h3 class="product-name">あか八</h3>
               <p class="product-desc">芳醇な香りとまろやかな口当たりが特徴の本格焼酎です。</p>
+              <div class="product-price">価格はお問い合わせください<small></small></div>
+              <button class="btn-order" onclick="openOrder('あか八', '')">🛒 注文する</button>
             </div>
           </div>
 
@@ -378,6 +395,8 @@
               <span class="product-tag">ノンアルコール</span>
               <h3 class="product-name">甘酒</h3>
               <p class="product-desc">栄養豊富な甘酒。お子様からご年配の方まで楽しめる「飲む点滴」です。</p>
+              <div class="product-price">価格はお問い合わせください<small></small></div>
+              <button class="btn-order" onclick="openOrder('甘酒', '')">🛒 注文する</button>
             </div>
           </div>
 
@@ -389,6 +408,8 @@
               <span class="product-tag">ミネラルウォーター</span>
               <h3 class="product-name">日田天領水</h3>
               <p class="product-desc">大分県日田市の豊かな自然が育んだ、まろやかで美味しい天然水です。</p>
+              <div class="product-price">価格はお問い合わせください<small></small></div>
+              <button class="btn-order" onclick="openOrder('日田天領水', '')">🛒 注文する</button>
             </div>
           </div>
 
@@ -445,18 +466,123 @@
     </div>
   </footer>
 
+  <!-- ===== 注文モーダル ===== -->
+  <div class="modal-overlay" id="orderModal" onclick="closeOnOverlay(event)">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>📦 ご注文フォーム</h3>
+        <button class="modal-close" onclick="closeOrder()">✕</button>
+      </div>
+      <div class="modal-product-info">
+        <div>
+          <div class="modal-product-name" id="modalProductName"></div>
+          <div class="modal-product-price" id="modalProductPrice"></div>
+        </div>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="submitOrder(event)">
+          <div class="modal-form-group">
+            <label class="modal-label">お名前 <span class="req">必須</span></label>
+            <input type="text" id="orderName" class="modal-input" placeholder="例：山田 太郎" required>
+          </div>
+          <div class="modal-form-group">
+            <label class="modal-label">電話番号 <span class="req">必須</span></label>
+            <input type="tel" id="orderPhone" class="modal-input" placeholder="例：06-0000-0000" required>
+          </div>
+          <div class="modal-form-group">
+            <label class="modal-label">メールアドレス <span class="req">必須</span></label>
+            <input type="email" id="orderEmail" class="modal-input" placeholder="例：example@email.com" required>
+          </div>
+          <div class="modal-form-group">
+            <label class="modal-label">数量 <span class="req">必須</span></label>
+            <div class="modal-qty-row">
+              <input type="number" id="orderQty" class="modal-input" value="1" min="1" required>
+              <span style="color:var(--color-text-light);font-size:0.9rem;">本 / ケース</span>
+            </div>
+          </div>
+          <div class="modal-form-group">
+            <label class="modal-label">配達希望日</label>
+            <input type="date" id="orderDate" class="modal-input">
+          </div>
+          <div class="modal-form-group">
+            <label class="modal-label">配達先住所・備考</label>
+            <textarea id="orderNote" class="modal-textarea" placeholder="配達ご希望の場合は住所をご記入ください。&#10;その他ご要望があればお書きください。"></textarea>
+          </div>
+          <button type="submit" class="modal-submit">注文内容をメールで送信する</button>
+          <p class="modal-note">
+            ※ 送信後、メールアプリが起動します。内容をご確認の上お送りください。<br>
+            ※ 担当者より折り返しご連絡いたします（営業時間：11:00〜19:00 火曜定休）
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+
   <script>
+    // ナビ
     function toggleNav() {
       document.getElementById('main-nav').classList.toggle('open');
     }
-    function scrollToCategory(id) {
+
+    // カテゴリースクロール
+    function scrollToCategory(id, btn) {
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-      event.target.classList.add('active');
+      btn.classList.add('active');
       const el = document.getElementById(id);
       const offset = 140;
       const top = el.getBoundingClientRect().top + window.pageYOffset - offset;
       window.scrollTo({ top, behavior: 'smooth' });
     }
+
+    // 注文モーダル
+    function openOrder(productName, productPrice) {
+      document.getElementById('modalProductName').textContent = productName;
+      document.getElementById('modalProductPrice').textContent = productPrice;
+      document.getElementById('orderModal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeOrder() {
+      document.getElementById('orderModal').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function closeOnOverlay(e) {
+      if (e.target === document.getElementById('orderModal')) closeOrder();
+    }
+
+    function submitOrder(e) {
+      e.preventDefault();
+      const product = document.getElementById('modalProductName').textContent;
+      const name    = document.getElementById('orderName').value;
+      const phone   = document.getElementById('orderPhone').value;
+      const email   = document.getElementById('orderEmail').value;
+      const qty     = document.getElementById('orderQty').value;
+      const date    = document.getElementById('orderDate').value;
+      const note    = document.getElementById('orderNote').value;
+
+      const subject = encodeURIComponent(`【ご注文】${product} / ${name} 様`);
+      const body = encodeURIComponent(
+        `かしはら酒店 ご注文\n` +
+        `━━━━━━━━━━━━━━━━\n` +
+        `【商品名】${product}\n` +
+        `【数　量】${qty} 本/ケース\n` +
+        `━━━━━━━━━━━━━━━━\n` +
+        `【お名前】${name}\n` +
+        `【電　話】${phone}\n` +
+        `【メール】${email}\n` +
+        `【配達希望日】${date || '未定'}\n` +
+        `【備　考】\n${note || 'なし'}\n` +
+        `━━━━━━━━━━━━━━━━`
+      );
+
+      window.location.href = `mailto:sake@kashi-market.com?subject=${subject}&body=${body}`;
+    }
+
+    // Escキーでモーダルを閉じる
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeOrder();
+    });
   </script>
 
 </body>
