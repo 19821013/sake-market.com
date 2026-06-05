@@ -752,43 +752,10 @@
             <p class="address-note">※ 郵便番号検索後に番地・建物名をご入力ください</p>
           </div>
 
-          <!-- 配達料確認 -->
-          <div class="modal-form-group">
-            <button type="button" class="btn-check-fee" onclick="checkDeliveryFee()">🚚 配達料を自動計算する</button>
-          </div>
-
-          <div id="deliveryFeeLoading" style="display:none;font-size:0.82rem;color:var(--color-text-light);margin:8px 0;">📍 距離を計算中…</div>
-
-          <!-- 配達料表示ボックス（自動計算成功） -->
-          <div id="deliveryFeeBox" style="display:none;" class="delivery-fee-box">
-            <div class="fee-result-header">🗺️ 配達料のお見積もり（自動計算）</div>
-            <div id="feeZone" class="fee-zone-text"></div>
-            <div id="feeDistance" class="fee-dist-text"></div>
+          <!-- 配達料表示（¥2,000自動判定） -->
+          <div id="deliveryFeeBox" class="delivery-fee-box" style="display:none;">
             <div id="feeAmount" class="fee-amount-text"></div>
             <div id="feeFreeInfo" class="fee-free-text"></div>
-          </div>
-
-          <!-- 手動選択フォールバック（自動計算失敗時） -->
-          <div id="deliveryZoneManual" style="display:none;">
-            <div style="font-size:0.8rem;color:#888;margin-bottom:8px;">
-              ⚠️ 自動計算できませんでした。
-              <a href="delivery.html" target="_blank" style="color:var(--color-accent);">配達範囲マップ</a>
-              を参考にお選びください。
-            </div>
-            <select id="deliveryZoneSelect" class="modal-select" onchange="applyManualZone()">
-              <option value="">エリアを選択してください</option>
-              <option value="near">🟢 近距離（3km以内）枚方市駅前・御殿山・牧野等</option>
-              <option value="mid">🟡 中距離（3〜6km）楠葉・香里園・津田・交野市私部等</option>
-              <option value="far">🟠 遠距離（6〜10km）高槻・寝屋川・八幡・京田辺等</option>
-              <option value="special">🔴 特別対応（10km超）大阪府内のみ</option>
-            </select>
-            <!-- 手動選択後の料金表示 -->
-            <div id="deliveryFeeBoxManual" style="display:none;margin-top:10px;" class="delivery-fee-box">
-              <div class="fee-result-header">配達料のお見積もり（手動選択）</div>
-              <div id="feeZoneM" class="fee-zone-text"></div>
-              <div id="feeAmountM" class="fee-amount-text"></div>
-              <div id="feeFreeInfoM" class="fee-free-text"></div>
-            </div>
           </div>
         </div>
 
@@ -1048,22 +1015,18 @@ function renderCart() {
       </div>`;
   });
 
-  // 配達料チェック
+  // 配達料チェック（¥2,000以上で無料）
   let deliveryHtml = '';
-  if (cachedDeliveryFee && subtotal > 0) {
-    const zone = cachedDeliveryFee.zone;
-    const isFree = subtotal >= zone.freeAt;
-    if (isFree) {
-      deliveryHtml = `<div class="free-delivery-bar">🎉 配達料無料！（¥${zone.freeAt.toLocaleString()}以上のため）</div>`;
-    } else {
-      const rem = zone.freeAt - subtotal;
-      deliveryHtml = `
-        <div class="free-delivery-bar" style="background:#fff8e1;border-color:#f0c040;border-left-color:#c9a84c;color:#5a4000;">
-          あと <strong>¥${rem.toLocaleString()}</strong> で配達料（¥${zone.fee.toLocaleString()}）が無料になります
-        </div>`;
-    }
-  } else if (!cachedDeliveryFee) {
-    deliveryHtml = `<p class="cart-note">※ 配達料は注文フォーム内の「配達料を自動計算する」で確認できます。</p>`;
+  if (subtotal >= 2000) {
+    deliveryHtml = `<div class="free-delivery-bar">🎉 配達料無料！（¥2,000以上のご注文）</div>`;
+  } else if (subtotal > 0) {
+    const rem = 2000 - subtotal;
+    deliveryHtml = `
+      <div class="free-delivery-bar" style="background:#fff8e1;border-color:#f0c040;border-left-color:#c9a84c;color:#5a4000;">
+        あと <strong>¥${rem.toLocaleString()}</strong> で配達料無料（¥2,000以上で無料）
+      </div>`;
+  } else {
+    deliveryHtml = `<p class="cart-note">※ ¥2,000以上のご注文で配達料無料です。</p>`;
   }
 
   const unknownNote = hasUnknown ? '<p class="cart-note">※ ビールの価格はお問い合わせください。合計には含まれていません。</p>' : '';
@@ -1279,48 +1242,6 @@ function getOrderTotal() {
   return p.price * (parseInt(document.getElementById('normalQty').value) || 1);
 }
 
-// 配達料表示を注文合計に合わせて更新
-function updateFeeDisplay() {
-  if (!cachedDeliveryFee) return;
-  const zone  = cachedDeliveryFee.zone;
-  const km    = cachedDeliveryFee.km;
-  const total = getOrderTotal();
-  const isFree = total > 0 && total >= zone.freeAt;
-
-  const setFeeBox = (prefix) => {
-    const amtEl  = document.getElementById(`feeAmount${prefix}`);
-    const freeEl = document.getElementById(`feeFreeInfo${prefix}`);
-    if (!amtEl) return;
-    if (isFree) {
-      amtEl.textContent  = '🎉 配達料：無料！';
-      amtEl.style.color  = '#27ae60';
-      freeEl.textContent = `✅ ご注文金額（¥${total.toLocaleString()}）が無料条件を満たしています`;
-      freeEl.style.color = '#27ae60';
-    } else {
-      amtEl.textContent  = `配達料：¥${zone.fee.toLocaleString()}`;
-      amtEl.style.color  = 'var(--color-primary)';
-      const rem = zone.freeAt - total;
-      freeEl.textContent = total > 0
-        ? `✅ あと ¥${rem.toLocaleString()} で配達料無料（¥${zone.freeAt.toLocaleString()}以上）${zone.note||''}`
-        : `✅ ¥${zone.freeAt.toLocaleString()}以上のご注文で配達料無料${zone.note||''}`;
-      freeEl.style.color = '';
-    }
-  };
-
-  // ゾーン・距離（自動計算ボックス用）
-  const zoneEl = document.getElementById('feeZone');
-  if (zoneEl) zoneEl.textContent = `📍 配達ゾーン：${zone.label}`;
-  const distEl = document.getElementById('feeDistance');
-  if (distEl) distEl.textContent = km ? `　 店舗からの距離：約${km.toFixed(1)}km` : '';
-
-  // ゾーン（手動選択ボックス用）
-  const zoneMEl = document.getElementById('feeZoneM');
-  if (zoneMEl) zoneMEl.textContent = `📍 配達ゾーン：${zone.label}`;
-
-  setFeeBox('');   // 自動計算ボックス
-  setFeeBox('M'); // 手動選択ボックス
-}
-
 // 注文モーダル内での数量変更時
 function onOrderQtyChange() {
   updateFeeDisplay();
@@ -1496,14 +1417,10 @@ async function submitOrder(e) {
     配達先住所: addressText,
     お支払い方法: payment,
     配達料: (() => {
-      if (!cachedDeliveryFee) return '未確認（担当者より連絡）';
-      const zone = cachedDeliveryFee.zone;
       const total = getOrderTotal();
-      const isFree = total > 0 && total >= zone.freeAt;
-      const kmStr = cachedDeliveryFee.km ? `・約${cachedDeliveryFee.km.toFixed(1)}km` : '';
-      return isFree
-        ? `無料（¥${total.toLocaleString()}のご注文のため / ${zone.label}${kmStr}）`
-        : `¥${zone.fee.toLocaleString()}（${zone.label}${kmStr}）`;
+      return total >= 2000
+        ? `無料（¥${total.toLocaleString()}のご注文のため）`
+        : '要相談（¥2,000以上で無料・担当者よりご連絡）';
     })(),
     備考: note || 'なし',
     年齢確認: isAlcohol ? '20歳以上であることを確認済み' : '対象外',
@@ -1546,117 +1463,36 @@ async function submitOrder(e) {
 const STORE_LAT = 34.8295796;
 const STORE_LNG = 135.6522798;
 
-// ハversine距離計算
-function haversineKm(lat1, lon1, lat2, lon2) {
-  const R = 6371;
-  const dLat = (lat2 - lat1) * Math.PI / 180;
-  const dLon = (lon2 - lon1) * Math.PI / 180;
-  const a = Math.sin(dLat/2)**2 +
-    Math.cos(lat1*Math.PI/180) * Math.cos(lat2*Math.PI/180) * Math.sin(dLon/2)**2;
-  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-}
 
-// 距離→料金ゾーン
-function getZone(km) {
-  if (km <= 3)  return { label:'近距離（3km以内）', fee:300,  freeAt:2000,  color:'green' };
-  if (km <= 6)  return { label:'中距離（3〜6km）',  fee:500,  freeAt:4000,  color:'yellow' };
-  if (km <= 10) return { label:'遠距離（6〜10km）', fee:800,  freeAt:8000,  color:'orange' };
-  return         { label:'特別対応（10km超）',       fee:1200, freeAt:12000, color:'red', note:'※大阪府内のみ対応。京都府内10km超は配達不可。' };
-}
+// ===============================
+// シンプル配達料判定（¥2,000以上で無料）
+// ===============================
+function updateFeeDisplay() {
+  const total = getOrderTotal();
+  const box   = document.getElementById('deliveryFeeBox');
+  if (!box) return;
 
-let cachedDeliveryFee = null;
+  if (total <= 0) {
+    box.style.display = 'none';
+    return;
+  }
+
+  const isFree = total >= 2000;
+  box.className = 'delivery-fee-box' + (isFree ? '' : ' far');
+  box.style.display = 'block';
+
+  document.getElementById('feeAmount').textContent = isFree
+    ? '🎉 配達料：無料'
+    : '配達料：要相談';
+  document.getElementById('feeAmount').style.color = isFree ? '#27ae60' : 'var(--color-primary)';
+  document.getElementById('feeFreeInfo').textContent = isFree
+    ? `✅ ¥${total.toLocaleString()}のご注文のため配達料無料です`
+    : `✅ ¥2,000以上のご注文で配達料無料（あと ¥${(2000 - total).toLocaleString()}）`;
+  document.getElementById('feeFreeInfo').style.color = isFree ? '#27ae60' : '';
+}
 
 function resetDeliveryFee() {
-  cachedDeliveryFee = null;
-  document.getElementById('deliveryFeeBox').style.display = 'none';
-  document.getElementById('deliveryZoneManual').style.display = 'none';
-  document.getElementById('deliveryFeeBoxManual').style.display = 'none';
-}
-
-// 住所→座標（国土地理院API → Nominatim の順でフォールバック）
-async function geocodeAddress(addr) {
-  // ① 国土地理院 住所検索API（日本公式・CORS対応）
-  try {
-    const url = `https://msearch.gsi.go.jp/address-search/AddressSearch?q=${encodeURIComponent(addr)}`;
-    const res  = await fetch(url);
-    const data = await res.json();
-    if (data && data.length > 0) {
-      const [lng, lat] = data[0].geometry.coordinates;
-      return { lat, lng, source: '国土地理院' };
-    }
-  } catch(e) {}
-
-  // ② Nominatim（OpenStreetMap）でフォールバック
-  try {
-    const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(addr)}&limit=1&accept-language=ja&countrycodes=jp`;
-    const res  = await fetch(url);
-    const data = await res.json();
-    if (data && data.length > 0) {
-      return { lat: parseFloat(data[0].lat), lng: parseFloat(data[0].lon), source: 'OSM' };
-    }
-  } catch(e) {}
-
-  return null;
-}
-
-async function checkDeliveryFee() {
-  const pref   = document.getElementById('orderPrefecture').value;
-  const city   = document.getElementById('orderCity').value;
-  const street = document.getElementById('orderStreet').value;
-
-  if (!pref || !city) {
-    document.getElementById('deliveryZoneManual').style.display = 'block';
-    document.getElementById('deliveryFeeBox').style.display = 'none';
-    return;
-  }
-
-  // 番地まで含めた住所 → 都道府県＋市区町村だけでも試行
-  const fullAddr  = `${pref}${city}${street}`;
-  const shortAddr = `${pref}${city}`;
-
-  document.getElementById('deliveryFeeLoading').style.display = 'block';
-  document.getElementById('deliveryFeeBox').style.display = 'none';
-  document.getElementById('deliveryZoneManual').style.display = 'none';
-
-  let geo = await geocodeAddress(fullAddr);
-  if (!geo) geo = await geocodeAddress(shortAddr); // 番地なしで再試行
-
-  document.getElementById('deliveryFeeLoading').style.display = 'none';
-
-  if (!geo) {
-    // 自動計算失敗 → 手動選択へ
-    document.getElementById('deliveryZoneManual').style.display = 'block';
-    return;
-  }
-
-  const km   = haversineKm(STORE_LAT, STORE_LNG, geo.lat, geo.lng);
-  const zone = getZone(km);
-  cachedDeliveryFee = { km, zone };
   updateFeeDisplay();
-
-  const box = document.getElementById('deliveryFeeBox');
-  box.className = 'delivery-fee-box' + (zone.color==='orange'?' far':zone.color==='red'?' special':'');
-  box.style.display = 'block';
-  // updateFeeDisplay()が表示内容を管理するのでここでは上書きしない
-}
-
-// 手動ゾーン選択
-function applyManualZone() {
-  const val = document.getElementById('deliveryZoneSelect').value;
-  const MANUAL_ZONES = {
-    near:    { label:'近距離（3km以内）',  fee:300,  freeAt:2000,  color:'green' },
-    mid:     { label:'中距離（3〜6km）',   fee:500,  freeAt:4000,  color:'yellow' },
-    far:     { label:'遠距離（6〜10km）',  fee:800,  freeAt:8000,  color:'orange' },
-    special: { label:'特別対応（10km超）', fee:1200, freeAt:12000, color:'red', note:'※大阪府内のみ。京都府内10km超は配達不可。' }
-  };
-  if (!val) { document.getElementById('deliveryFeeBoxManual').style.display='none'; return; }
-  const zone = MANUAL_ZONES[val];
-  cachedDeliveryFee = { km: null, zone };
-  updateFeeDisplay();
-  const box = document.getElementById('deliveryFeeBoxManual');
-  box.className = 'delivery-fee-box' + (zone.color==='orange'?' far':zone.color==='red'?' special':'');
-  box.style.display = 'block';
-  // updateFeeDisplay()が表示内容を管理するのでここでは上書きしない
 }
 
 // Escキー

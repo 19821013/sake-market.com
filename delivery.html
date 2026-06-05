@@ -4,88 +4,52 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>配達範囲・配達料金 | かしはら酒店</title>
-  <meta name="description" content="かしはら酒店の配達範囲と配達料金のご案内。枚方市を中心に最大10km以上の広範囲に対応。一定金額以上で配達料無料。">
+  <meta name="description" content="かしはら酒店の配達範囲と配達料金。大阪府内および近隣京都府エリア対応。¥2,000以上で配達料無料。">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <style>
-    .page-hero {
-      background: linear-gradient(135deg,#0d0500 0%,#1a0a00 60%,#2d1500 100%);
-      padding:120px 20px 80px; text-align:center;
-    }
-    .page-hero h1 { font-family:'Noto Serif JP',serif;font-size:clamp(2rem,5vw,3.5rem);color:var(--color-white);letter-spacing:0.15em;margin-bottom:10px; }
-    .page-hero p { font-size:0.8rem;color:var(--color-accent);letter-spacing:0.4em;text-transform:uppercase; }
-    .page-hero-line { width:60px;height:1px;background:var(--color-accent);margin:20px auto; }
+    .page-hero { background:linear-gradient(135deg,#0d0500 0%,#1a0a00 60%,#2d1500 100%);padding:120px 20px 80px;text-align:center; }
+    .page-hero h1 { font-family:'Noto Serif JP',serif;font-size:clamp(2rem,5vw,3.5rem);color:#fff;letter-spacing:0.15em;margin-bottom:10px; }
+    .page-hero p { font-size:0.8rem;color:#c9a84c;letter-spacing:0.4em;text-transform:uppercase; }
+    .page-hero-line { width:60px;height:1px;background:#c9a84c;margin:20px auto; }
 
-    /* マップセクション */
-    .map-section { background:var(--color-bg); }
+    /* 無料配達大バナー */
+    .free-banner { background:var(--color-accent);padding:50px 20px;text-align:center; }
+    .free-banner-title { font-family:'Noto Serif JP',serif;font-size:clamp(1.8rem,5vw,3rem);color:var(--color-primary);font-weight:700;margin-bottom:12px;letter-spacing:0.05em; }
+    .free-banner-sub { font-size:1rem;color:var(--color-primary);opacity:0.8; }
+
+    /* シンプル料金カード */
+    .fee-simple-section { background:var(--color-bg);padding:60px 20px; }
+    .fee-simple-cards { display:grid;grid-template-columns:repeat(2,1fr);gap:25px;max-width:800px;margin:0 auto 40px; }
+    .fee-simple-card { background:var(--color-white);padding:35px 25px;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,.07);border-top:4px solid var(--color-accent); }
+    .fee-simple-card h3 { font-family:'Noto Serif JP',serif;font-size:1.1rem;color:var(--color-primary);margin-bottom:15px; }
+    .fee-simple-price { font-family:'Noto Serif JP',serif;font-size:2.5rem;font-weight:700;color:var(--color-accent);margin-bottom:8px; }
+    .fee-simple-price small { font-size:1rem;font-weight:400; }
+    .fee-simple-note { font-size:0.85rem;color:var(--color-text-light);line-height:1.8; }
+
+    /* 配達エリア */
+    .area-section { background:var(--color-bg-dark);padding:60px 20px; }
     #deliveryMap { width:100%;height:500px;border:1px solid var(--color-border);box-shadow:0 4px 20px rgba(0,0,0,.1); }
-    .map-legend {
-      display:flex;flex-wrap:wrap;gap:12px;margin-top:16px;
-      padding:16px 20px;background:var(--color-white);border:1px solid var(--color-border);
-    }
-    .legend-item { display:flex;align-items:center;gap:8px;font-size:0.85rem;color:var(--color-text); }
-    .legend-dot { width:16px;height:16px;border-radius:50%;flex-shrink:0; }
-    .legend-store { background:#e74c3c; }
-    .legend-green  { background:rgba(46,204,113,0.7);border:2px solid #27ae60; }
-    .legend-yellow { background:rgba(241,196,15,0.5);border:2px solid #f39c12; }
-    .legend-orange { background:rgba(230,126,34,0.4);border:2px solid #e67e22; }
-    .legend-red    { background:rgba(231,76,60,0.3);border:2px solid #c0392b; }
-
-    /* 料金テーブル */
-    .fee-section { background:var(--color-bg-dark); }
-    .fee-table { width:100%;border-collapse:collapse;background:var(--color-white);box-shadow:0 4px 20px rgba(0,0,0,.07); }
-    .fee-table th {
-      background:var(--color-primary);color:var(--color-white);
-      font-family:'Noto Serif JP',serif;font-size:0.88rem;letter-spacing:0.08em;
-      padding:14px 18px;text-align:left;
-    }
-    .fee-table td { padding:16px 18px;border-bottom:1px solid var(--color-border);font-size:0.9rem;vertical-align:middle; }
-    .fee-table tr:last-child td { border-bottom:none; }
-    .fee-table tr:hover td { background:var(--color-bg); }
-    .zone-badge {
-      display:inline-flex;align-items:center;gap:8px;
-      font-family:'Noto Serif JP',serif;font-weight:500;
-    }
-    .zone-circle { width:14px;height:14px;border-radius:50%;display:inline-block; }
-    .zone-green  { background:#2ecc71; }
-    .zone-yellow { background:#f1c40f; }
-    .zone-orange { background:#e67e22; }
-    .zone-red    { background:#e74c3c; }
-    .fee-price { font-family:'Noto Serif JP',serif;font-size:1.1rem;font-weight:700;color:var(--color-primary); }
-    .fee-free  { font-size:0.82rem;color:#27ae60;font-weight:700;margin-top:3px; }
-    .fee-area  { font-size:0.83rem;color:var(--color-text-light);line-height:1.7; }
+    .area-list { display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:30px; }
+    .area-card { background:var(--color-white);padding:20px;border-left:3px solid var(--color-accent); }
+    .area-card h4 { font-family:'Noto Serif JP',serif;font-size:0.95rem;color:var(--color-primary);margin-bottom:8px; }
+    .area-card p { font-size:0.85rem;color:var(--color-text-light);line-height:1.8; }
 
     /* 注意事項 */
-    .notice-box {
-      background:var(--color-white);border-left:4px solid var(--color-accent);
-      padding:20px 24px;margin-top:30px;
-    }
+    .notice-box { background:var(--color-white);border-left:4px solid var(--color-accent);padding:20px 24px;margin-top:30px; }
     .notice-box h4 { font-family:'Noto Serif JP',serif;color:var(--color-primary);margin-bottom:10px; }
     .notice-box ul { padding-left:18px;font-size:0.88rem;color:var(--color-text-light);line-height:2; }
 
-    /* 無料配達まとめカード */
-    .free-cards { display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-bottom:40px; }
-    .free-card { background:var(--color-white);padding:24px 16px;text-align:center;box-shadow:0 3px 15px rgba(0,0,0,.07);border-top:4px solid; }
-    .free-card.c-green  { border-color:#2ecc71; }
-    .free-card.c-yellow { border-color:#f1c40f; }
-    .free-card.c-orange { border-color:#e67e22; }
-    .free-card.c-red    { border-color:#e74c3c; }
-    .free-card-zone { font-size:0.78rem;color:var(--color-text-light);margin-bottom:6px; }
-    .free-card-amount { font-family:'Noto Serif JP',serif;font-size:1.4rem;font-weight:700;color:var(--color-primary); }
-    .free-card-label { font-size:0.78rem;color:var(--color-text-light);margin-top:4px; }
-    .free-card-fee { font-size:0.82rem;color:#888;margin-top:8px; }
-
-    @media(max-width:768px){
-      #deliveryMap { height:350px; }
-      .free-cards { grid-template-columns:repeat(2,1fr); }
-      .fee-table th, .fee-table td { padding:12px 10px;font-size:0.82rem; }
+    @media(max-width:600px){
+      .fee-simple-cards { grid-template-columns:1fr; }
+      .area-list { grid-template-columns:1fr; }
+      #deliveryMap { height:320px; }
     }
   </style>
 </head>
 <body>
 
-<!-- ヘッダー -->
 <header>
   <div class="header-inner">
     <a href="index.html" class="logo">
@@ -105,145 +69,67 @@
   </div>
 </header>
 
-<!-- ページヘッダー -->
 <div class="page-hero">
   <h1>配達範囲・料金</h1>
   <div class="page-hero-line"></div>
   <p>Delivery Area &amp; Fee</p>
 </div>
 
-<!-- 無料配達まとめ -->
-<section style="background:var(--color-bg);padding:60px 20px;">
-  <div class="section-inner">
-    <h2 class="section-title">送料無料になる注文金額</h2>
-    <p class="section-title-en">Free Delivery Threshold</p>
-    <div class="free-cards">
-      <div class="free-card c-green">
-        <div class="free-card-zone">🟢 近距離（3km以内）</div>
-        <div class="free-card-amount">¥2,000<span style="font-size:0.8rem;font-weight:400;">以上</span></div>
-        <div class="free-card-label">で配達料無料</div>
-        <div class="free-card-fee">通常配達料：¥300</div>
-      </div>
-      <div class="free-card c-yellow">
-        <div class="free-card-zone">🟡 中距離（3〜6km）</div>
-        <div class="free-card-amount">¥4,000<span style="font-size:0.8rem;font-weight:400;">以上</span></div>
-        <div class="free-card-label">で配達料無料</div>
-        <div class="free-card-fee">通常配達料：¥500</div>
-      </div>
-      <div class="free-card c-orange">
-        <div class="free-card-zone">🟠 遠距離（6〜10km）</div>
-        <div class="free-card-amount">¥8,000<span style="font-size:0.8rem;font-weight:400;">以上</span></div>
-        <div class="free-card-label">で配達料無料</div>
-        <div class="free-card-fee">通常配達料：¥800</div>
-      </div>
-      <div class="free-card c-red">
-        <div class="free-card-zone">🔴 特別対応（10km超）</div>
-        <div class="free-card-amount">¥12,000<span style="font-size:0.8rem;font-weight:400;">以上</span></div>
-        <div class="free-card-label">で配達料無料</div>
-        <div class="free-card-fee">通常配達料：¥1,200</div>
-      </div>
-    </div>
-  </div>
-</section>
+<!-- 無料配達バナー -->
+<div class="free-banner">
+  <div class="free-banner-title">¥2,000以上のご注文で<br>配達料 <strong>無料</strong></div>
+  <p class="free-banner-sub">配達エリア内であれば、¥2,000以上のご注文はすべて配達料無料でお届けします</p>
+</div>
 
-<!-- 配達範囲マップ -->
-<section class="map-section">
+<!-- シンプル料金 -->
+<section class="fee-simple-section">
   <div class="section-inner">
-    <h2 class="section-title">配達範囲マップ</h2>
-    <p class="section-title-en">Delivery Area Map</p>
-    <div id="deliveryMap"></div>
-    <div class="map-legend">
-      <div class="legend-item"><div class="legend-dot legend-store"></div>かしはら酒店（拠点）</div>
-      <div class="legend-item"><div class="legend-dot legend-green"></div>近距離：3km以内（¥300）</div>
-      <div class="legend-item"><div class="legend-dot legend-yellow"></div>中距離：3〜6km（¥500）</div>
-      <div class="legend-item"><div class="legend-dot legend-orange"></div>遠距離：6〜10km（¥800）</div>
-      <div class="legend-item"><div class="legend-dot legend-red"></div>特別対応：10km超（¥1,200）※大阪府内のみ</div>
-    </div>
-  </div>
-</section>
-
-<!-- 料金テーブル -->
-<section class="fee-section">
-  <div class="section-inner">
-    <h2 class="section-title">配達料金一覧</h2>
+    <h2 class="section-title">配達料金</h2>
     <p class="section-title-en">Delivery Fee</p>
-    <table class="fee-table">
-      <thead>
-        <tr>
-          <th>距離帯</th>
-          <th>配達料</th>
-          <th>無料条件</th>
-          <th>対象エリア（主な地域）</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>
-            <span class="zone-badge">
-              <span class="zone-circle zone-green"></span>
-              近距離（3km以内）
-            </span>
-          </td>
-          <td>
-            <div class="fee-price">¥300</div>
-            <div class="fee-free">✅ ¥2,000以上で無料</div>
-          </td>
-          <td>¥2,000以上</td>
-          <td class="fee-area">枚方市駅前、枚方公園、渚西、御殿山、牧野 等</td>
-        </tr>
-        <tr>
-          <td>
-            <span class="zone-badge">
-              <span class="zone-circle zone-yellow"></span>
-              中距離（3〜6km）
-            </span>
-          </td>
-          <td>
-            <div class="fee-price">¥500</div>
-            <div class="fee-free">✅ ¥4,000以上で無料</div>
-          </td>
-          <td>¥4,000以上</td>
-          <td class="fee-area">楠葉、香里園、津田、交野市私部 等</td>
-        </tr>
-        <tr>
-          <td>
-            <span class="zone-badge">
-              <span class="zone-circle zone-orange"></span>
-              遠距離（6〜10km）
-            </span>
-          </td>
-          <td>
-            <div class="fee-price">¥800</div>
-            <div class="fee-free">✅ ¥8,000以上で無料</div>
-          </td>
-          <td>¥8,000以上</td>
-          <td class="fee-area">高槻市、寝屋川市、交野市星田、島本町、大山崎町、八幡市、京田辺市松井山手 等</td>
-        </tr>
-        <tr>
-          <td>
-            <span class="zone-badge">
-              <span class="zone-circle zone-red"></span>
-              特別対応（10km超）
-            </span>
-          </td>
-          <td>
-            <div class="fee-price">¥1,200</div>
-            <div class="fee-free">✅ ¥12,000以上で無料</div>
-          </td>
-          <td>¥12,000以上</td>
-          <td class="fee-area">大阪府内のみ対応<br>※京都府内10km超は配達不可</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="fee-simple-cards">
+      <div class="fee-simple-card">
+        <h3>¥2,000以上のご注文</h3>
+        <div class="fee-simple-price" style="color:#27ae60;">無料<small> / Free</small></div>
+        <p class="fee-simple-note">配達エリア内全域、距離に関わらず配達料は一切かかりません。</p>
+      </div>
+      <div class="fee-simple-card">
+        <h3>¥2,000未満のご注文</h3>
+        <div class="fee-simple-price">要相談<small></small></div>
+        <p class="fee-simple-note">配達料が発生する場合があります。<br>ご注文前にお電話またはメールにてご相談ください。</p>
+      </div>
+    </div>
+    <p style="text-align:center;font-size:0.88rem;color:var(--color-text-light);">
+      ※ ビールなどの飲料は1ケース単位で注文いただくことが多く、ほとんどの場合¥2,000以上になります。
+    </p>
+  </div>
+</section>
+
+<!-- 配達エリア -->
+<section class="area-section">
+  <div class="section-inner">
+    <h2 class="section-title">配達エリア</h2>
+    <p class="section-title-en">Delivery Area</p>
+
+    <div id="deliveryMap"></div>
+
+    <div class="area-list">
+      <div class="area-card">
+        <h4>🔵 大阪府内（全域）</h4>
+        <p>大阪府内であれば配達対応いたします。<br>枚方市・高槻市・寝屋川市・交野市・守口市・門真市など大阪府全域が対象です。</p>
+      </div>
+      <div class="area-card">
+        <h4>🟡 近隣京都府エリア（10km圏内）</h4>
+        <p>店舗から10km圏内の京都府エリアに対応しています。<br>京都府大山崎町・京都府八幡市・京都府京田辺市（松井山手エリア）など。</p>
+      </div>
+    </div>
 
     <div class="notice-box">
       <h4>⚠️ 配達に関するご注意</h4>
       <ul>
-        <li>配達範囲は店舗（大阪府枚方市渚西1丁目21-12）からの直線距離を目安としています。</li>
-        <li>京都府内への配達は店舗から10km以内のみ対応しています。</li>
-        <li>配達日時はご注文時にご相談ください。</li>
+        <li>上記エリア外への配達はお断りしております。ご不明な場合はお問い合わせください。</li>
+        <li>配達日時はご注文時にご相談ください（営業時間：11:00〜20:00、毎週火曜定休）。</li>
         <li>悪天候・交通状況により配達が遅れる場合があります。</li>
-        <li>ご不明な点はお電話（072-848-0289）にてお問い合わせください。</li>
+        <li>¥2,000未満のご注文の配達については、お電話（072-848-0289）にてご相談ください。</li>
       </ul>
     </div>
   </div>
@@ -252,8 +138,8 @@
 <!-- CTA -->
 <section style="background:var(--color-primary);padding:80px 20px;text-align:center;">
   <div class="section-inner">
-    <h2 style="font-family:'Noto Serif JP',serif;font-size:1.8rem;color:var(--color-white);margin-bottom:15px;">ご注文・配達のご依頼はこちら</h2>
-    <p style="color:rgba(255,255,255,0.7);margin-bottom:35px;font-size:0.95rem;">商品一覧から商品をお選びいただき、注文フォームよりお申し込みください。</p>
+    <h2 style="font-family:'Noto Serif JP',serif;font-size:1.8rem;color:#fff;margin-bottom:15px;">ご注文・配達のご依頼はこちら</h2>
+    <p style="color:rgba(255,255,255,0.7);margin-bottom:35px;">¥2,000以上で配達料無料。商品一覧からお選びください。</p>
     <div style="display:flex;gap:20px;justify-content:center;flex-wrap:wrap;">
       <a href="products.html" class="btn btn-primary">商品一覧・注文</a>
       <a href="tel:0728480289" class="btn btn-outline">📞 072-848-0289</a>
@@ -261,7 +147,6 @@
   </div>
 </section>
 
-<!-- フッター -->
 <footer>
   <div class="footer-inner">
     <div class="footer-logo">
@@ -276,6 +161,7 @@
         <li><a href="delivery.html">配達範囲</a></li>
         <li><a href="about.html">会社案内</a></li>
         <li><a href="contact.html">お問い合わせ</a></li>
+        <li><a href="tokusho.html">特定商取引法に基づく表記</a></li>
       </ul>
     </div>
     <div class="footer-info">
@@ -293,53 +179,23 @@
 </footer>
 
 <script>
-function toggleNav() {
-  document.getElementById('main-nav').classList.toggle('open');
-}
+function toggleNav() { document.getElementById('main-nav').classList.toggle('open'); }
 
-// 店舗座標
-const STORE_LAT = 34.8295796;
-const STORE_LNG = 135.6522798;
+const map = L.map('deliveryMap').setView([34.7800, 135.6523], 10);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap contributors'}).addTo(map);
 
-// Leafletマップ初期化
-const map = L.map('deliveryMap').setView([STORE_LAT, STORE_LNG], 12);
+// 大阪府の範囲（ポリゴン）をシンプルに表現
+L.circle([34.7800, 135.5200], {radius:40000, color:'#3498db', fillColor:'#3498db', fillOpacity:0.1, weight:2, dashArray:'6'})
+  .addTo(map).bindPopup('大阪府内（全域対応）');
 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution: '© OpenStreetMap contributors'
-}).addTo(map);
-
-// 配達範囲サークル（外→内の順で描画）
-L.circle([STORE_LAT, STORE_LNG], {
-  radius: 10000, color:'#c0392b', fillColor:'#e74c3c', fillOpacity:0.15, weight:2
-}).addTo(map).bindPopup('特別対応エリア（10km超）<br>配達料：¥1,200 / ¥12,000以上で無料');
-
-L.circle([STORE_LAT, STORE_LNG], {
-  radius: 6000, color:'#e67e22', fillColor:'#e67e22', fillOpacity:0.2, weight:2
-}).addTo(map).bindPopup('遠距離エリア（6〜10km）<br>配達料：¥800 / ¥8,000以上で無料');
-
-L.circle([STORE_LAT, STORE_LNG], {
-  radius: 3000, color:'#f39c12', fillColor:'#f1c40f', fillOpacity:0.25, weight:2
-}).addTo(map).bindPopup('中距離エリア（3〜6km）<br>配達料：¥500 / ¥4,000以上で無料');
-
-L.circle([STORE_LAT, STORE_LNG], {
-  radius: 3000, color:'#27ae60', fillColor:'#2ecc71', fillOpacity:0.3, weight:2,
-  dashArray: null
-}).addTo(map);
-
-L.circle([STORE_LAT, STORE_LNG], {
-  radius: 3000, color:'#27ae60', fillColor:'#2ecc71', fillOpacity:0.3, weight:2
-}).addTo(map).bindPopup('近距離エリア（3km以内）<br>配達料：¥300 / ¥2,000以上で無料');
+// 10km圏内（近隣京都府含む）
+L.circle([34.8295796, 135.6522798], {radius:10000, color:'#f39c12', fillColor:'#f1c40f', fillOpacity:0.2, weight:2})
+  .addTo(map).bindPopup('店舗から10km圏内（近隣京都府エリア含む）');
 
 // 店舗マーカー
-const storeIcon = L.divIcon({
-  html: '<div style="background:#e74c3c;width:16px;height:16px;border-radius:50%;border:3px solid white;box-shadow:0 2px 6px rgba(0,0,0,0.5);"></div>',
-  iconSize:[16,16], iconAnchor:[8,8]
-});
-
-L.marker([STORE_LAT, STORE_LNG], {icon: storeIcon})
-  .addTo(map)
-  .bindPopup('<strong>かしはら酒店</strong><br>大阪府枚方市渚西1丁目21-12')
-  .openPopup();
+const icon = L.divIcon({html:'<div style="background:#e74c3c;width:16px;height:16px;border-radius:50%;border:3px solid white;box-shadow:0 2px 6px rgba(0,0,0,0.5);"></div>',iconSize:[16,16],iconAnchor:[8,8]});
+L.marker([34.8295796, 135.6522798], {icon}).addTo(map)
+  .bindPopup('<strong>かしはら酒店</strong><br>大阪府枚方市渚西1丁目21-12').openPopup();
 </script>
 </body>
 </html>
