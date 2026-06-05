@@ -56,10 +56,17 @@
     .matrix-title::before { content:'';display:inline-block;width:4px;height:1.5rem;background:var(--color-accent); }
     .matrix-img { width:100%;max-width:800px;display:block;margin:0 auto;box-shadow:0 5px 25px rgba(0,0,0,.1); }
 
-    /* バナー */
-    .inquiry-banner { background:var(--color-primary);padding:60px 20px;text-align:center; }
-    .inquiry-banner h3 { font-family:'Noto Serif JP',serif;font-size:1.5rem;color:var(--color-white);margin-bottom:12px; }
-    .inquiry-banner p { color:rgba(255,255,255,0.65);font-size:0.9rem;margin-bottom:30px; }
+    /* お問い合わせカード */
+    .inquiry-card { display:flex;align-items:center;gap:16px;padding:20px 24px;background:var(--color-white);border:2px solid var(--color-accent);text-decoration:none;transition:all 0.3s;box-shadow:0 3px 15px rgba(0,0,0,0.07); }
+    .inquiry-card:hover { background:var(--color-accent);transform:translateY(-2px);box-shadow:0 8px 25px rgba(201,168,76,0.3); }
+    .inquiry-card:hover .inquiry-card-text strong,
+    .inquiry-card:hover .inquiry-card-text span,
+    .inquiry-card:hover .inquiry-card-arrow { color:var(--color-primary); }
+    .inquiry-card-icon { font-size:2rem;flex-shrink:0; }
+    .inquiry-card-text { flex:1; }
+    .inquiry-card-text strong { display:block;font-family:'Noto Serif JP',serif;font-size:1rem;color:var(--color-primary);margin-bottom:4px; }
+    .inquiry-card-text span { font-size:0.83rem;color:var(--color-text-light); }
+    .inquiry-card-arrow { font-size:1.3rem;color:var(--color-accent);font-weight:700;flex-shrink:0; }
 
     /* ============================
        共通モーダル
@@ -298,6 +305,7 @@
     <button class="tab-btn active" onclick="scrollToCategory('beer',this)">🍺 ビール</button>
     <button class="tab-btn" onclick="scrollToCategory('liqueur',this)">🥃 リキュール・ウイスキー</button>
     <button class="tab-btn" onclick="scrollToCategory('nonalcohol',this)">💧 ノンアルコール</button>
+    <a href="contact.html" class="tab-btn" style="text-decoration:none;">📩 その他・お問い合わせ</a>
   </div>
 </div>
 
@@ -500,17 +508,22 @@
         </div>
 
       </div>
+
+      <!-- お問い合わせ誘導カード（ノンアルコールの下） -->
+      <div style="margin-top:30px;">
+        <a href="contact.html" class="inquiry-card">
+          <div class="inquiry-card-icon">📩</div>
+          <div class="inquiry-card-text">
+            <strong>お求めの商品が見つからない場合は</strong>
+            <span>取り扱い商品についてはお気軽にお問い合わせください</span>
+          </div>
+          <div class="inquiry-card-arrow">→</div>
+        </a>
+      </div>
     </div>
 
   </div>
 </section>
-
-<!-- お問い合わせ誘導 -->
-<div class="inquiry-banner">
-  <h3>お求めの商品が見つからない場合は</h3>
-  <p>お気軽にお問い合わせください。ご要望に応じてご対応いたします。</p>
-  <a href="contact.html" class="btn btn-primary">お問い合わせ</a>
-</div>
 
 <!-- フッター -->
 <footer>
