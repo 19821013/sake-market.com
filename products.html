@@ -145,7 +145,11 @@
     .qty-unit-label input { accent-color:var(--color-accent);width:16px;height:16px; }
 
     .modal-qty-row { display:flex;gap:12px;align-items:center; }
-    .modal-qty-row .modal-input { max-width:90px; }
+    .qty-spinner-wrap { display:flex;align-items:stretch;border:1px solid var(--color-border);border-radius:4px;overflow:hidden; }
+    .qty-spin-btn { width:36px;background:var(--color-bg-dark);border:none;cursor:pointer;font-size:0.75rem;color:var(--color-primary);transition:background 0.2s;flex-shrink:0;display:flex;align-items:center;justify-content:center; }
+    .qty-spin-btn:hover { background:var(--color-accent);color:var(--color-primary-deep); }
+    .qty-spin-btn:active { background:var(--color-accent-light); }
+    .qty-spin-input { border:none!important;border-left:1px solid var(--color-border)!important;border-right:1px solid var(--color-border)!important;border-radius:0!important;width:70px;text-align:center;box-shadow:none!important; }
     .qty-unit-label-text { font-size:0.88rem;color:var(--color-text-light); }
 
     /* 送信ボタン */
@@ -735,7 +739,11 @@
             </label>
           </div>
           <div class="modal-qty-row">
-            <input type="number" id="beerQty" class="modal-input" value="1" min="1" oninput="onOrderQtyChange()">
+            <div class="qty-spinner-wrap">
+              <button type="button" class="qty-spin-btn" onclick="changeModalQty('beerQty', -1)">▼</button>
+              <input type="number" id="beerQty" class="modal-input qty-spin-input" value="1" min="1" oninput="onOrderQtyChange()">
+              <button type="button" class="qty-spin-btn" onclick="changeModalQty('beerQty', 1)">▲</button>
+            </div>
             <span class="qty-unit-label-text" id="beerQtyUnit">本</span>
           </div>
         </div>
@@ -744,7 +752,11 @@
         <div class="modal-form-group" id="normalQtyGroup" style="display:none">
           <label class="modal-label">数量（本） <span class="req">必須</span></label>
           <div class="modal-qty-row">
-            <input type="number" id="normalQty" class="modal-input" value="1" min="1" oninput="onOrderQtyChange()">
+            <div class="qty-spinner-wrap">
+              <button type="button" class="qty-spin-btn" onclick="changeModalQty('normalQty', -1)">▼</button>
+              <input type="number" id="normalQty" class="modal-input qty-spin-input" value="1" min="1" oninput="onOrderQtyChange()">
+              <button type="button" class="qty-spin-btn" onclick="changeModalQty('normalQty', 1)">▲</button>
+            </div>
             <span class="qty-unit-label-text">本</span>
           </div>
         </div>
@@ -1314,6 +1326,15 @@ function getOrderTotal() {
 // 注文モーダル内での数量変更時
 function onOrderQtyChange() {
   updateFeeDisplay();
+}
+
+// ▲▼ボタンで数量増減
+function changeModalQty(id, delta) {
+  const input = document.getElementById(id);
+  const current = parseInt(input.value) || 1;
+  const next = Math.max(1, current + delta);
+  input.value = next;
+  onOrderQtyChange();
 }
 
 // 銀行振込選択時に口座情報を表示
