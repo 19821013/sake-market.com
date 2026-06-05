@@ -698,11 +698,26 @@
         <!-- 生年月日（酒類のみ） -->
         <div class="modal-form-group" id="birthdayGroup" style="display:none">
           <label class="modal-label">生年月日 <span class="req">必須（酒類ご注文の方）</span></label>
-          <input type="text" id="orderBirthday" class="modal-input"
-            placeholder="例：1990/01/15（西暦/月/日）"
-            inputmode="numeric"
-            autocomplete="bday">
-          <p style="font-size:0.75rem;color:var(--color-text-light);margin-top:4px;">※ 西暦／月／日の順で入力（例：1990/01/15）</p>
+          <div style="display:flex;gap:8px;align-items:center;">
+            <input type="text" id="orderBirthday" class="modal-input"
+              placeholder="1990/01/15"
+              inputmode="numeric"
+              maxlength="10"
+              autocomplete="bday"
+              oninput="autoFormatBirthday(this)"
+              style="flex:1;">
+            <!-- カレンダー選択ボタン -->
+            <button type="button" onclick="openBdayPicker()"
+              style="padding:11px 14px;background:var(--color-bg-dark);border:1px solid var(--color-border);cursor:pointer;font-size:1.1rem;border-radius:4px;flex-shrink:0;"
+              title="カレンダーから選択">📅</button>
+            <!-- 非表示の date input（カレンダーピッカー用） -->
+            <input type="date" id="bdayPicker"
+              style="position:absolute;opacity:0;pointer-events:none;width:0;height:0;"
+              onchange="syncBdayFromPicker(this)">
+          </div>
+          <p style="font-size:0.75rem;color:var(--color-text-light);margin-top:5px;">
+            数字を入力するとスラッシュが自動で入ります　または 📅 でカレンダー選択
+          </p>
           <div class="age-error" id="ageError">⛔ 申し訳ございません。20歳未満の方への酒類の販売はお断りしております。</div>
         </div>
 
@@ -1392,6 +1407,39 @@ document.getElementById('orderPostalCode') && document.addEventListener('DOMCont
 });
 
 // 年齢計算
+// 生年月日：数字入力で自動スラッシュ
+function autoFormatBirthday(input) {
+  let v = input.value.replace(/[^\d]/g, ''); // 数字のみ抽出
+  if (v.length > 8) v = v.slice(0, 8);
+  // YYYY/MM/DD 形式に整形
+  if (v.length > 4) v = v.slice(0, 4) + '/' + v.slice(4);
+  if (v.length > 7) v = v.slice(0, 7) + '/' + v.slice(7);
+  input.value = v;
+}
+
+// カレンダーピッカーを開く
+function openBdayPicker() {
+  const picker = document.getElementById('bdayPicker');
+  picker.style.pointerEvents = 'auto';
+  try {
+    if (picker.showPicker) {
+      picker.showPicker();
+    } else {
+      picker.click();
+    }
+  } catch(e) {
+    picker.click();
+  }
+}
+
+// カレンダー選択 → テキスト欄に反映
+function syncBdayFromPicker(picker) {
+  if (!picker.value) return;
+  const [y, m, d] = picker.value.split('-');
+  document.getElementById('orderBirthday').value = `${y}/${m}/${d}`;
+  picker.style.pointerEvents = 'none';
+}
+
 function parseBirthDate(str) {
   // 対応フォーマット: YYYY/MM/DD, YYYY-MM-DD, YYYY.MM.DD, YYYYMMDD
   const s = str.replace(/[年月日\s]/g, '/').replace(/\/+/g, '/').trim();
