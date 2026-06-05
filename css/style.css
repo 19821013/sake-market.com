@@ -61,7 +61,7 @@ body {
    ヘッダー・ナビゲーション
    =========================== */
 header {
-  background-color: var(--color-primary-deep);
+  background: linear-gradient(180deg, #1C1A17 0%, #111827 100%);
   border-bottom: 2px solid rgba(201,168,76,0.25);
   position: sticky;
   top: 0;
