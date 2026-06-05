@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>お問い合わせ | かしはら酒店</title>
+  <meta name="description" content="かしはら酒店へのお問い合わせページ。ご注文・配達・商品に関するご質問はこちら。">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .page-hero {
+      background: linear-gradient(135deg, #0d0500 0%, #1a0a00 60%, #2d1500 100%);
+      padding: 120px 20px 80px;
+      text-align: center;
+    }
+    .page-hero h1 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      color: var(--color-white);
+      letter-spacing: 0.15em;
+      margin-bottom: 10px;
+    }
+    .page-hero p {
+      font-size: 0.8rem;
+      color: var(--color-accent);
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+    }
+    .page-hero-line {
+      width: 60px;
+      height: 1px;
+      background: var(--color-accent);
+      margin: 20px auto;
+    }
+
+    /* お問い合わせ方法カード */
+    .contact-methods {
+      background: var(--color-bg-dark);
+      padding: 60px 20px;
+    }
+
+    .methods-grid {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+
+    .method-card {
+      background: var(--color-white);
+      padding: 35px 20px;
+      text-align: center;
+      box-shadow: 0 3px 15px rgba(0,0,0,0.07);
+      border-top: 3px solid var(--color-accent);
+    }
+
+    .method-icon {
+      font-size: 2.2rem;
+      margin-bottom: 15px;
+    }
+
+    .method-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      color: var(--color-accent);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    .method-value {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 1.05rem;
+      color: var(--color-primary);
+      font-weight: 500;
+      text-decoration: none;
+      display: block;
+    }
+
+    .method-value:hover {
+      color: var(--color-accent);
+    }
+
+    .method-note {
+      font-size: 0.78rem;
+      color: var(--color-text-light);
+      margin-top: 8px;
+    }
+
+    /* フォームセクション */
+    .form-section {
+      background: var(--color-bg);
+    }
+
+    .form-wrap {
+      max-width: 720px;
+      margin: 0 auto;
+      background: var(--color-white);
+      padding: 60px;
+      box-shadow: 0 5px 30px rgba(0,0,0,0.08);
+    }
+
+    .form-group {
+      margin-bottom: 28px;
+    }
+
+    .form-label {
+      display: block;
+      font-family: 'Noto Serif JP', serif;
+      font-size: 0.88rem;
+      color: var(--color-primary);
+      margin-bottom: 8px;
+      letter-spacing: 0.05em;
+    }
+
+    .form-label .required {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 2px 6px;
+      background: var(--color-accent);
+      color: var(--color-primary);
+      font-weight: 700;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+
+    .form-label .optional {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 2px 6px;
+      background: var(--color-bg-dark);
+      color: var(--color-text-light);
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+
+    .form-input,
+    .form-select,
+    .form-textarea {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid var(--color-border);
+      background: var(--color-bg);
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 0.95rem;
+      color: var(--color-text);
+      outline: none;
+      transition: border-color 0.3s, box-shadow 0.3s;
+      border-radius: 0;
+      -webkit-appearance: none;
+    }
+
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus {
+      border-color: var(--color-accent);
+      box-shadow: 0 0 0 3px rgba(201,168,76,0.15);
+      background: var(--color-white);
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 160px;
+    }
+
+    .form-select {
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c9a84c' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      padding-right: 40px;
+    }
+
+    .form-privacy {
+      background: var(--color-bg-dark);
+      padding: 20px;
+      font-size: 0.82rem;
+      color: var(--color-text-light);
+      line-height: 1.8;
+      margin-bottom: 30px;
+    }
+
+    .form-check {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 30px;
+    }
+
+    .form-check input[type="checkbox"] {
+      margin-top: 3px;
+      accent-color: var(--color-accent);
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+    }
+
+    .form-check label {
+      font-size: 0.88rem;
+      color: var(--color-text);
+      cursor: pointer;
+    }
+
+    .form-submit {
+      text-align: center;
+    }
+
+    .btn-submit {
+      background: var(--color-accent);
+      color: var(--color-primary);
+      font-family: 'Noto Serif JP', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 18px 80px;
+      border: none;
+      cursor: pointer;
+      letter-spacing: 0.2em;
+      transition: all 0.3s;
+    }
+
+    .btn-submit:hover {
+      background: var(--color-accent-light);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(201,168,76,0.4);
+    }
+
+    .form-note {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--color-text-light);
+      margin-top: 15px;
+    }
+
+    @media (max-width: 768px) {
+      .methods-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+      }
+      .form-wrap {
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ヘッダー -->
+  <header>
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-jp">かしはら酒店</span>
+        <span class="logo-en">Kashihara Sake Shop</span>
+      </a>
+      <div class="hamburger" onclick="toggleNav()">
+        <span></span><span></span><span></span>
+      </div>
+      <nav id="main-nav">
+        <ul>
+          <li><a href="index.html">トップ</a></li>
+          <li><a href="products.html">商品一覧</a></li>
+          <li><a href="about.html">会社案内</a></li>
+          <li><a href="contact.html" class="active">お問い合わせ</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ページヘッダー -->
+  <div class="page-hero">
+    <h1>お問い合わせ</h1>
+    <div class="page-hero-line"></div>
+    <p>Contact</p>
+  </div>
+
+  <!-- お問い合わせ方法 -->
+  <div class="contact-methods">
+    <div class="methods-grid">
+      <div class="method-card">
+        <div class="method-icon">📞</div>
+        <div class="method-label">Phone</div>
+        <a href="tel:0728480289" class="method-value">072-848-0289</a>
+        <p class="method-note">11:00〜19:00（火曜定休）</p>
+      </div>
+      <div class="method-card">
+        <div class="method-icon">📠</div>
+        <div class="method-label">FAX</div>
+        <span class="method-value">072-840-0339</span>
+        <p class="method-note">24時間受付</p>
+      </div>
+      <div class="method-card">
+        <div class="method-icon">✉️</div>
+        <div class="method-label">Email</div>
+        <a href="mailto:sake@kashi-market.com" class="method-value" style="font-size:0.85rem;">sake@kashi-market.com</a>
+        <p class="method-note">2営業日以内にご返信</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- フォーム -->
+  <section class="form-section">
+    <div class="section-inner">
+      <h2 class="section-title">メールでのお問い合わせ</h2>
+      <p class="section-title-en">Contact Form</p>
+
+      <div class="form-wrap">
+        <form action="mailto:sake@kashi-market.com" method="post" enctype="text/plain" onsubmit="return validateForm()">
+
+          <div class="form-group">
+            <label class="form-label">お名前 <span class="required">必須</span></label>
+            <input type="text" name="name" class="form-input" placeholder="例：山田 太郎" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">メールアドレス <span class="required">必須</span></label>
+            <input type="email" name="email" class="form-input" placeholder="例：example@email.com" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">電話番号 <span class="optional">任意</span></label>
+            <input type="tel" name="phone" class="form-input" placeholder="例：06-0000-0000">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">お問い合わせ種別 <span class="required">必須</span></label>
+            <select name="category" class="form-select" required>
+              <option value="">選択してください</option>
+              <option value="order">商品のご注文・配達について</option>
+              <option value="product">商品についてのご質問</option>
+              <option value="business">法人・業務用のご相談</option>
+              <option value="other">その他</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">お問い合わせ内容 <span class="required">必須</span></label>
+            <textarea name="message" class="form-textarea" placeholder="お問い合わせ内容をご記入ください。&#10;&#10;例：〇〇のビールを10ケース配達希望です。" required></textarea>
+          </div>
+
+          <div class="form-privacy">
+            <strong>個人情報の取り扱いについて</strong><br>
+            ご入力いただいた個人情報は、お問い合わせへの回答のみに使用し、第三者への提供は行いません。
+          </div>
+
+          <div class="form-check">
+            <input type="checkbox" id="privacy" required>
+            <label for="privacy">個人情報の取り扱いに同意する</label>
+          </div>
+
+          <div class="form-submit">
+            <button type="submit" class="btn-submit">送　信</button>
+            <p class="form-note">※ 送信後、メールアプリが起動します。内容をご確認の上お送りください。</p>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- フッター -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">
+        <a href="index.html" class="logo">
+          <span class="logo-jp">かしはら酒店</span>
+        </a>
+        <p style="margin-top:12px;">Kashi Market合同会社<br>〒573-1178<br>大阪府枚方市渚西1丁目21-12</p>
+      </div>
+      <div class="footer-nav">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html">トップページ</a></li>
+          <li><a href="products.html">商品一覧</a></li>
+          <li><a href="about.html">会社案内</a></li>
+          <li><a href="contact.html">お問い合わせ</a></li>
+        </ul>
+      </div>
+      <div class="footer-info">
+        <h4>Shop Info</h4>
+        <p>📞 072-848-0289</p>
+        <p>📠 072-840-0339</p>
+        <p>✉️ sake@kashi-market.com</p>
+        <p>🕐 11:00〜19:00（火曜定休）</p>
+        <p>🚉 京阪御殿山駅 徒歩5分</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Kashi Market合同会社 かしはら酒店. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleNav() {
+      document.getElementById('main-nav').classList.toggle('open');
+    }
+    function validateForm() {
+      const checkbox = document.getElementById('privacy');
+      if (!checkbox.checked) {
+        alert('個人情報の取り扱いへの同意が必要です。');
+        return false;
+      }
+      return true;
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>会社案内 | かしはら酒店</title>
+  <meta name="description" content="かしはら酒店（Kashi Market合同会社）の会社案内。所在地・アクセス・代表者情報など。">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .page-hero {
+      background: linear-gradient(135deg, #0d0500 0%, #1a0a00 60%, #2d1500 100%);
+      padding: 120px 20px 80px;
+      text-align: center;
+    }
+    .page-hero h1 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      color: var(--color-white);
+      letter-spacing: 0.15em;
+      margin-bottom: 10px;
+    }
+    .page-hero p {
+      font-size: 0.8rem;
+      color: var(--color-accent);
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+    }
+    .page-hero-line {
+      width: 60px;
+      height: 1px;
+      background: var(--color-accent);
+      margin: 20px auto;
+    }
+
+    /* 会社概要テーブル */
+    .about-section {
+      background: var(--color-bg);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .company-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .company-table tr {
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .company-table tr:first-child {
+      border-top: 1px solid var(--color-border);
+    }
+
+    .company-table th {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 0.85rem;
+      color: var(--color-accent);
+      font-weight: 500;
+      padding: 18px 20px 18px 0;
+      white-space: nowrap;
+      vertical-align: top;
+      letter-spacing: 0.05em;
+      width: 35%;
+    }
+
+    .company-table td {
+      font-size: 0.92rem;
+      color: var(--color-text);
+      padding: 18px 0;
+      line-height: 1.8;
+    }
+
+    /* 営業時間テーブル */
+    .hours-box {
+      background: var(--color-white);
+      padding: 35px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+      border-top: 3px solid var(--color-accent);
+    }
+
+    .hours-box h3 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 1.1rem;
+      color: var(--color-primary);
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .hours-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--color-bg-dark);
+      font-size: 0.9rem;
+    }
+
+    .hours-row:last-child {
+      border-bottom: none;
+    }
+
+    .hours-day {
+      color: var(--color-text-light);
+      font-family: 'Noto Serif JP', serif;
+    }
+
+    .hours-time {
+      color: var(--color-primary);
+      font-weight: 500;
+    }
+
+    .hours-closed {
+      color: #c0392b;
+      font-weight: 500;
+    }
+
+    .hours-note {
+      margin-top: 15px;
+      font-size: 0.8rem;
+      color: var(--color-text-light);
+      line-height: 1.8;
+    }
+
+    /* アクセスセクション */
+    .access-section {
+      background: var(--color-bg-dark);
+    }
+
+    .access-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: start;
+    }
+
+    .access-info h3 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 1.2rem;
+      color: var(--color-primary);
+      margin-bottom: 25px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--color-accent);
+    }
+
+    .access-item {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 20px;
+      align-items: flex-start;
+    }
+
+    .access-icon {
+      font-size: 1.4rem;
+      min-width: 30px;
+    }
+
+    .access-text {
+      font-size: 0.92rem;
+      line-height: 1.8;
+    }
+
+    .access-text strong {
+      display: block;
+      font-family: 'Noto Serif JP', serif;
+      color: var(--color-primary);
+      margin-bottom: 3px;
+    }
+
+    .access-text span {
+      color: var(--color-text-light);
+    }
+
+    /* Google マップ */
+    .map-wrap {
+      position: relative;
+      border-radius: 2px;
+      overflow: hidden;
+      box-shadow: 0 5px 25px rgba(0,0,0,0.12);
+    }
+
+    .map-wrap iframe {
+      display: block;
+      width: 100%;
+      height: 400px;
+      border: 0;
+    }
+
+    .map-link {
+      display: block;
+      text-align: center;
+      margin-top: 12px;
+      font-size: 0.85rem;
+      color: var(--color-accent);
+      text-decoration: none;
+    }
+
+    .map-link:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .about-grid,
+      .access-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ヘッダー -->
+  <header>
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-jp">かしはら酒店</span>
+        <span class="logo-en">Kashihara Sake Shop</span>
+      </a>
+      <div class="hamburger" onclick="toggleNav()">
+        <span></span><span></span><span></span>
+      </div>
+      <nav id="main-nav">
+        <ul>
+          <li><a href="index.html">トップ</a></li>
+          <li><a href="products.html">商品一覧</a></li>
+          <li><a href="about.html" class="active">会社案内</a></li>
+          <li><a href="contact.html">お問い合わせ</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ページヘッダー -->
+  <div class="page-hero">
+    <h1>会社案内</h1>
+    <div class="page-hero-line"></div>
+    <p>About Us</p>
+  </div>
+
+  <!-- 会社概要 -->
+  <section class="about-section">
+    <div class="section-inner">
+      <h2 class="section-title">会社概要</h2>
+      <p class="section-title-en">Company Profile</p>
+
+      <div class="about-grid">
+        <div>
+          <table class="company-table">
+            <tr>
+              <th>店名</th>
+              <td>かしはら酒店</td>
+            </tr>
+            <tr>
+              <th>会社名</th>
+              <td>Kashi Market合同会社</td>
+            </tr>
+            <tr>
+              <th>代表者</th>
+              <td>樫原　辰徳</td>
+            </tr>
+            <tr>
+              <th>所在地</th>
+              <td>〒573-1178<br>大阪府枚方市渚西1丁目21-12</td>
+            </tr>
+            <tr>
+              <th>電話番号</th>
+              <td><a href="tel:0728480289" style="color:var(--color-primary);text-decoration:none;">072-848-0289</a></td>
+            </tr>
+            <tr>
+              <th>FAX番号</th>
+              <td>072-840-0339</td>
+            </tr>
+            <tr>
+              <th>メール</th>
+              <td><a href="mailto:sake@kashi-market.com" style="color:var(--color-primary);text-decoration:none;">sake@kashi-market.com</a></td>
+            </tr>
+            <tr>
+              <th>アクセス</th>
+              <td>京阪本線 御殿山駅より徒歩5分</td>
+            </tr>
+          </table>
+        </div>
+
+        <div>
+          <div class="hours-box">
+            <h3>🕐 営業時間</h3>
+            <div class="hours-row">
+              <span class="hours-day">月曜日</span>
+              <span class="hours-time">11:00 〜 19:00</span>
+            </div>
+            <div class="hours-row">
+              <span class="hours-day">火曜日</span>
+              <span class="hours-closed">定休日</span>
+            </div>
+            <div class="hours-row">
+              <span class="hours-day">水曜日</span>
+              <span class="hours-time">11:00 〜 19:00</span>
+            </div>
+            <div class="hours-row">
+              <span class="hours-day">木曜日</span>
+              <span class="hours-time">11:00 〜 19:00</span>
+            </div>
+            <div class="hours-row">
+              <span class="hours-day">金曜日</span>
+              <span class="hours-time">11:00 〜 19:00</span>
+            </div>
+            <div class="hours-row">
+              <span class="hours-day">土曜日</span>
+              <span class="hours-time">11:00 〜 19:00</span>
+            </div>
+            <div class="hours-row">
+              <span class="hours-day">日曜日・祝日</span>
+              <span class="hours-time">11:00 〜 19:00</span>
+            </div>
+            <p class="hours-note">※ 年末年始・お盆期間中は営業時間が変わる場合がございます。<br>詳しくはお電話またはメールにてお問い合わせください。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- アクセス -->
+  <section class="access-section">
+    <div class="section-inner">
+      <h2 class="section-title">アクセス</h2>
+      <p class="section-title-en">Access</p>
+
+      <div class="access-grid">
+        <div class="access-info">
+          <h3>店舗へのアクセス</h3>
+
+          <div class="access-item">
+            <span class="access-icon">🚉</span>
+            <div class="access-text">
+              <strong>電車でお越しの方</strong>
+              <span>京阪本線「御殿山駅」より徒歩約5分</span>
+            </div>
+          </div>
+
+          <div class="access-item">
+            <span class="access-icon">📍</span>
+            <div class="access-text">
+              <strong>住所</strong>
+              <span>〒573-1178<br>大阪府枚方市渚西1丁目21-12</span>
+            </div>
+          </div>
+
+          <div class="access-item">
+            <span class="access-icon">📞</span>
+            <div class="access-text">
+              <strong>お電話</strong>
+              <span><a href="tel:0728480289" style="color:var(--color-text-light);text-decoration:none;">072-848-0289</a></span>
+            </div>
+          </div>
+
+          <div class="access-item">
+            <span class="access-icon">🕐</span>
+            <div class="access-text">
+              <strong>営業時間</strong>
+              <span>11:00〜19:00（毎週火曜日定休）</span>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="map-wrap">
+            <iframe
+              src="https://maps.google.com/maps?q=34.8295796,135.6522798&hl=ja&z=17&output=embed"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+          <a href="https://www.google.com/maps/place/%E3%81%8B%E3%81%97%E3%81%AF%E3%82%89%E9%85%92%E5%BA%97/@34.8294189,135.652768,18z/" target="_blank" class="map-link">
+            📌 Google マップで大きく見る →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- フッター -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">
+        <a href="index.html" class="logo">
+          <span class="logo-jp">かしはら酒店</span>
+        </a>
+        <p style="margin-top:12px;">Kashi Market合同会社<br>〒573-1178<br>大阪府枚方市渚西1丁目21-12</p>
+      </div>
+      <div class="footer-nav">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html">トップページ</a></li>
+          <li><a href="products.html">商品一覧</a></li>
+          <li><a href="about.html">会社案内</a></li>
+          <li><a href="contact.html">お問い合わせ</a></li>
+        </ul>
+      </div>
+      <div class="footer-info">
+        <h4>Shop Info</h4>
+        <p>📞 072-848-0289</p>
+        <p>📠 072-840-0339</p>
+        <p>✉️ sake@kashi-market.com</p>
+        <p>🕐 11:00〜19:00（火曜定休）</p>
+        <p>🚉 京阪御殿山駅 徒歩5分</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Kashi Market合同会社 かしはら酒店. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleNav() {
+      document.getElementById('main-nav').classList.toggle('open');
+    }
+  </script>
+
+</body>
+</html>
