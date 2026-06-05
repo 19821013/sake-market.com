@@ -475,12 +475,36 @@
       .info-cards {
         grid-template-columns: repeat(2, 1fr);
       }
+      /* スマホ：縦積みリスト形式に変更 */
       .hero-info {
-        gap: 20px;
+        flex-direction: column;
+        max-width: 320px;
+        gap: 0;
       }
-      .hero-divider {
-        display: none;
+      .hero-info-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 13px 18px;
+        border-right: none;
+        border-bottom: 1px solid #E5E7EB;
+        text-align: left;
+        flex: none;
       }
+      .hero-info-item:last-child { border-bottom: none; }
+      .hero-info-label {
+        font-size: 0.7rem;
+        margin-bottom: 0;
+        white-space: nowrap;
+        flex-shrink: 0;
+        margin-right: 12px;
+      }
+      .hero-info-value {
+        font-size: 0.95rem;
+        text-align: right;
+        line-height: 1.5;
+      }
+      .hero-divider { display: none; }
     }
 
     @media (max-width: 480px) {
@@ -540,7 +564,7 @@
         <div class="hero-divider">｜</div>
         <div class="hero-info-item">
           <span class="hero-info-label">アクセス</span>
-          <span class="hero-info-value">御殿山駅 徒歩5分</span>
+          <span class="hero-info-value">京阪本線・御殿山駅<br>徒歩5分</span>
         </div>
       </div>
       <a href="products.html" class="btn btn-primary">商品を見る</a>
