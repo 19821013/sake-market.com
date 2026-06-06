@@ -236,11 +236,15 @@
     .card-unit-row { display:flex;gap:6px;margin-bottom:10px; }
     .card-unit-label { flex:1;min-width:0;display:flex;align-items:center;justify-content:center;gap:2px;font-size:0.72rem;padding:7px 1px;border:1px solid var(--color-border);border-radius:4px;cursor:pointer;transition:all 0.2s;color:var(--color-text-light);background:var(--color-bg);white-space:nowrap;overflow:hidden; }
     .card-unit-label small { white-space:nowrap; }
+    /* サイズ行：ラジオ＋テキスト（大瓶/容量の2段）を横並びで確実に収める */
+    .card-size-row .card-unit-label { padding:7px 4px;gap:5px; }
+    .card-size-row .card-unit-label span { display:flex;flex-direction:column;align-items:center;line-height:1.15;white-space:nowrap; }
+    .card-size-row .card-unit-label span small { font-size:0.64rem;opacity:0.7; }
     .card-unit-label input { accent-color:var(--color-accent);margin:0;flex-shrink:0; }
     .card-unit-label:has(input:checked) { border-color:var(--color-accent);background:#fffbf0;color:var(--color-primary);font-weight:700; }
     /* ビール価格表 */
     .beer-price-table { width:100%;border-collapse:collapse;margin-bottom:12px;font-size:0.78rem;table-layout:fixed; }
-    .beer-price-table th { background:var(--color-bg-dark);color:var(--color-text-light);font-weight:500;padding:5px 2px;border:1px solid var(--color-border);font-size:0.7rem;line-height:1.3; }
+    .beer-price-table th { background:var(--color-bg-dark);color:var(--color-text-light);font-weight:500;padding:5px 1px;border:1px solid var(--color-border);font-size:0.68rem;line-height:1.25; }
     .beer-price-table td { text-align:center;padding:6px 2px;border:1px solid var(--color-border);font-family:'Noto Serif JP',serif;color:var(--color-primary);font-weight:700;font-size:0.8rem; }
     .beer-price-table td.label { background:var(--color-bg);color:var(--color-text-light);font-weight:500;font-size:0.68rem;line-height:1.3;width:22%; }
     .card-actions { display:grid;grid-template-columns:1fr 1fr;gap:6px; }
@@ -402,9 +406,9 @@
               <tr><td class="label">中瓶<br>500ml</td><td>¥360</td><td>¥7,400</td></tr>
             </table>
             <div class="card-select-label">サイズ</div>
-            <div class="card-unit-row">
-              <label class="card-unit-label"><input type="radio" name="size-asahi" value="大瓶" checked onchange="changeCardUnit('asahi')"> 大瓶<small style="font-size:0.62rem;opacity:0.75;">633ml</small></label>
-              <label class="card-unit-label"><input type="radio" name="size-asahi" value="中瓶" onchange="changeCardUnit('asahi')"> 中瓶<small style="font-size:0.62rem;opacity:0.75;">500ml</small></label>
+            <div class="card-unit-row card-size-row">
+              <label class="card-unit-label"><input type="radio" name="size-asahi" value="大瓶" checked onchange="changeCardUnit('asahi')"> <span>大瓶<small>633ml</small></span></label>
+              <label class="card-unit-label"><input type="radio" name="size-asahi" value="中瓶" onchange="changeCardUnit('asahi')"> <span>中瓶<small>500ml</small></span></label>
             </div>
             <div class="card-select-label">注文単位</div>
             <div class="card-unit-row">
@@ -441,9 +445,9 @@
               <tr><td class="label">中瓶<br>500ml</td><td>¥360</td><td>¥7,400</td></tr>
             </table>
             <div class="card-select-label">サイズ</div>
-            <div class="card-unit-row">
-              <label class="card-unit-label"><input type="radio" name="size-kirin" value="大瓶" checked onchange="changeCardUnit('kirin')"> 大瓶<small style="font-size:0.62rem;opacity:0.75;">633ml</small></label>
-              <label class="card-unit-label"><input type="radio" name="size-kirin" value="中瓶" onchange="changeCardUnit('kirin')"> 中瓶<small style="font-size:0.62rem;opacity:0.75;">500ml</small></label>
+            <div class="card-unit-row card-size-row">
+              <label class="card-unit-label"><input type="radio" name="size-kirin" value="大瓶" checked onchange="changeCardUnit('kirin')"> <span>大瓶<small>633ml</small></span></label>
+              <label class="card-unit-label"><input type="radio" name="size-kirin" value="中瓶" onchange="changeCardUnit('kirin')"> <span>中瓶<small>500ml</small></span></label>
             </div>
             <div class="card-select-label">注文単位</div>
             <div class="card-unit-row">
@@ -480,9 +484,9 @@
               <tr><td class="label">中瓶<br>500ml</td><td>¥360</td><td>¥7,400</td></tr>
             </table>
             <div class="card-select-label">サイズ</div>
-            <div class="card-unit-row">
-              <label class="card-unit-label"><input type="radio" name="size-sapporo" value="大瓶" checked onchange="changeCardUnit('sapporo')"> 大瓶<small style="font-size:0.62rem;opacity:0.75;">633ml</small></label>
-              <label class="card-unit-label"><input type="radio" name="size-sapporo" value="中瓶" onchange="changeCardUnit('sapporo')"> 中瓶<small style="font-size:0.62rem;opacity:0.75;">500ml</small></label>
+            <div class="card-unit-row card-size-row">
+              <label class="card-unit-label"><input type="radio" name="size-sapporo" value="大瓶" checked onchange="changeCardUnit('sapporo')"> <span>大瓶<small>633ml</small></span></label>
+              <label class="card-unit-label"><input type="radio" name="size-sapporo" value="中瓶" onchange="changeCardUnit('sapporo')"> <span>中瓶<small>500ml</small></span></label>
             </div>
             <div class="card-select-label">注文単位</div>
             <div class="card-unit-row">
