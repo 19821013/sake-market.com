@@ -234,7 +234,7 @@
     /* ビールカードの選択UI */
     .card-select-label { font-size:0.72rem;color:var(--color-text-light);margin-bottom:4px;font-weight:700; }
     .card-unit-row { display:flex;gap:6px;margin-bottom:10px; }
-    .card-unit-label { flex:1;display:flex;align-items:center;justify-content:center;gap:3px;font-size:0.72rem;padding:7px 2px;border:1px solid var(--color-border);border-radius:4px;cursor:pointer;transition:all 0.2s;color:var(--color-text-light);background:var(--color-bg);white-space:nowrap; }
+    .card-unit-label { flex:1;min-width:0;display:flex;align-items:center;justify-content:center;gap:3px;font-size:0.7rem;padding:7px 2px;border:1px solid var(--color-border);border-radius:4px;cursor:pointer;transition:all 0.2s;color:var(--color-text-light);background:var(--color-bg);white-space:nowrap;overflow:hidden; }
     .card-unit-label input { accent-color:var(--color-accent);margin:0;flex-shrink:0; }
     .card-unit-label:has(input:checked) { border-color:var(--color-accent);background:#fffbf0;color:var(--color-primary);font-weight:700; }
     /* ビール価格表 */
@@ -393,7 +393,7 @@
           </div>
           <div class="product-body">
             <span class="product-tag">ビール</span>
-            <h3 class="product-name">アサヒスーパードライ 大瓶</h3>
+            <h3 class="product-name">アサヒスーパードライ</h3>
             <p class="product-desc-short">日本を代表するドライビール。キレのある辛口で料理を引き立てます。</p>
             <table class="beer-price-table">
               <tr><th></th><th>1本</th><th>1ケース<br>(20本)</th></tr>
@@ -432,7 +432,7 @@
           </div>
           <div class="product-body">
             <span class="product-tag">ビール</span>
-            <h3 class="product-name">キリンラガービール 大瓶</h3>
+            <h3 class="product-name">キリンラガービール</h3>
             <p class="product-desc-short">100年以上の歴史を誇る、コクと旨味の伝統的なラガービール。</p>
             <table class="beer-price-table">
               <tr><th></th><th>1本</th><th>1ケース<br>(20本)</th></tr>
@@ -471,7 +471,7 @@
           </div>
           <div class="product-body">
             <span class="product-tag">ビール</span>
-            <h3 class="product-name">サッポロ黒ラベル 大瓶</h3>
+            <h3 class="product-name">サッポロ黒ラベル</h3>
             <p class="product-desc-short">生ビールのおいしさを追求した、すっきりした飲みごたえが特徴。</p>
             <table class="beer-price-table">
               <tr><th></th><th>1本</th><th>1ケース<br>(20本)</th></tr>
@@ -1070,7 +1070,7 @@ const PRODUCTS = {
   asahi: {
     key: 'asahi',
     name: 'アサヒスーパードライ 大瓶',
-    formalName: 'アサヒスーパードライ 大瓶',
+    formalName: 'アサヒスーパードライ',
     tag: 'ビール',
     price: 425,         // 大瓶1本
     casePrice: 8700,    // 大瓶1ケース
@@ -1086,7 +1086,7 @@ const PRODUCTS = {
   kirin: {
     key: 'kirin',
     name: 'キリンラガービール 大瓶',
-    formalName: 'キリンラガービール 大瓶',
+    formalName: 'キリンラガービール',
     tag: 'ビール',
     price: 425,
     casePrice: 8700,
@@ -1102,7 +1102,7 @@ const PRODUCTS = {
   sapporo: {
     key: 'sapporo',
     name: 'サッポロ黒ラベル 大瓶',
-    formalName: 'サッポロ黒ラベル 大瓶',
+    formalName: 'サッポロ黒ラベル',
     tag: 'ビール',
     price: 425,
     casePrice: 8700,
