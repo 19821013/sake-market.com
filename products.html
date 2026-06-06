@@ -231,11 +231,17 @@
     .qty-num { min-width:28px;text-align:center;font-family:'Noto Serif JP',serif;font-size:1rem;font-weight:700;color:var(--color-primary); }
     .card-subtotal-row { display:flex;justify-content:flex-end;align-items:center;margin-bottom:10px; }
     .card-subtotal { font-family:'Noto Serif JP',serif;font-size:1rem;font-weight:700;color:#c0392b; }
-    /* ビールカードの本/ケース選択 */
-    .card-unit-row { display:flex;gap:6px;margin-bottom:8px; }
-    .card-unit-label { flex:1;display:flex;align-items:center;justify-content:center;gap:4px;font-size:0.74rem;padding:6px 4px;border:1px solid var(--color-border);border-radius:4px;cursor:pointer;transition:all 0.2s;color:var(--color-text-light);background:var(--color-bg); }
+    /* ビールカードの選択UI */
+    .card-select-label { font-size:0.72rem;color:var(--color-text-light);margin-bottom:4px;font-weight:700; }
+    .card-unit-row { display:flex;gap:6px;margin-bottom:10px; }
+    .card-unit-label { flex:1;display:flex;align-items:center;justify-content:center;gap:4px;font-size:0.74rem;padding:7px 4px;border:1px solid var(--color-border);border-radius:4px;cursor:pointer;transition:all 0.2s;color:var(--color-text-light);background:var(--color-bg); }
     .card-unit-label input { accent-color:var(--color-accent);margin:0; }
     .card-unit-label:has(input:checked) { border-color:var(--color-accent);background:#fffbf0;color:var(--color-primary);font-weight:700; }
+    /* ビール価格表 */
+    .beer-price-table { width:100%;border-collapse:collapse;margin-bottom:12px;font-size:0.78rem; }
+    .beer-price-table th { background:var(--color-bg-dark);color:var(--color-text-light);font-weight:500;padding:5px 4px;border:1px solid var(--color-border);font-size:0.72rem; }
+    .beer-price-table td { text-align:center;padding:6px 4px;border:1px solid var(--color-border);font-family:'Noto Serif JP',serif;color:var(--color-primary);font-weight:700; }
+    .beer-price-table td.label { background:var(--color-bg);color:var(--color-text-light);font-weight:500;font-size:0.72rem; }
     .card-actions { display:grid;grid-template-columns:1fr 1fr;gap:6px; }
     .btn-cart {
       padding:10px 4px;background:var(--color-bg-dark);color:var(--color-primary);
@@ -389,7 +395,17 @@
             <span class="product-tag">ビール</span>
             <h3 class="product-name">アサヒスーパードライ 大瓶</h3>
             <p class="product-desc-short">日本を代表するドライビール。キレのある辛口で料理を引き立てます。</p>
-            <div class="product-price">¥425 <small>/本（税込）</small><br><small style="color:var(--color-text-light);">1ケース（20本）：¥8,700</small></div>
+            <table class="beer-price-table">
+              <tr><th></th><th>1本</th><th>1ケース(20本)</th></tr>
+              <tr><td class="label">大瓶</td><td>¥425</td><td>¥8,700</td></tr>
+              <tr><td class="label">中瓶</td><td>¥360</td><td>¥7,400</td></tr>
+            </table>
+            <div class="card-select-label">サイズ</div>
+            <div class="card-unit-row">
+              <label class="card-unit-label"><input type="radio" name="size-asahi" value="大瓶" checked onchange="changeCardUnit('asahi')"> 大瓶</label>
+              <label class="card-unit-label"><input type="radio" name="size-asahi" value="中瓶" onchange="changeCardUnit('asahi')"> 中瓶</label>
+            </div>
+            <div class="card-select-label">注文単位</div>
             <div class="card-unit-row">
               <label class="card-unit-label"><input type="radio" name="unit-asahi" value="本" checked onchange="changeCardUnit('asahi')"> 1本単位</label>
               <label class="card-unit-label"><input type="radio" name="unit-asahi" value="ケース" onchange="changeCardUnit('asahi')"> 1ケース単位</label>
@@ -418,7 +434,17 @@
             <span class="product-tag">ビール</span>
             <h3 class="product-name">キリンラガービール 大瓶</h3>
             <p class="product-desc-short">100年以上の歴史を誇る、コクと旨味の伝統的なラガービール。</p>
-            <div class="product-price">¥425 <small>/本（税込）</small><br><small style="color:var(--color-text-light);">1ケース（20本）：¥8,700</small></div>
+            <table class="beer-price-table">
+              <tr><th></th><th>1本</th><th>1ケース(20本)</th></tr>
+              <tr><td class="label">大瓶</td><td>¥425</td><td>¥8,700</td></tr>
+              <tr><td class="label">中瓶</td><td>¥360</td><td>¥7,400</td></tr>
+            </table>
+            <div class="card-select-label">サイズ</div>
+            <div class="card-unit-row">
+              <label class="card-unit-label"><input type="radio" name="size-kirin" value="大瓶" checked onchange="changeCardUnit('kirin')"> 大瓶</label>
+              <label class="card-unit-label"><input type="radio" name="size-kirin" value="中瓶" onchange="changeCardUnit('kirin')"> 中瓶</label>
+            </div>
+            <div class="card-select-label">注文単位</div>
             <div class="card-unit-row">
               <label class="card-unit-label"><input type="radio" name="unit-kirin" value="本" checked onchange="changeCardUnit('kirin')"> 1本単位</label>
               <label class="card-unit-label"><input type="radio" name="unit-kirin" value="ケース" onchange="changeCardUnit('kirin')"> 1ケース単位</label>
@@ -447,7 +473,17 @@
             <span class="product-tag">ビール</span>
             <h3 class="product-name">サッポロ黒ラベル 大瓶</h3>
             <p class="product-desc-short">生ビールのおいしさを追求した、すっきりした飲みごたえが特徴。</p>
-            <div class="product-price">¥425 <small>/本（税込）</small><br><small style="color:var(--color-text-light);">1ケース（20本）：¥8,700</small></div>
+            <table class="beer-price-table">
+              <tr><th></th><th>1本</th><th>1ケース(20本)</th></tr>
+              <tr><td class="label">大瓶</td><td>¥425</td><td>¥8,700</td></tr>
+              <tr><td class="label">中瓶</td><td>¥360</td><td>¥7,400</td></tr>
+            </table>
+            <div class="card-select-label">サイズ</div>
+            <div class="card-unit-row">
+              <label class="card-unit-label"><input type="radio" name="size-sapporo" value="大瓶" checked onchange="changeCardUnit('sapporo')"> 大瓶</label>
+              <label class="card-unit-label"><input type="radio" name="size-sapporo" value="中瓶" onchange="changeCardUnit('sapporo')"> 中瓶</label>
+            </div>
+            <div class="card-select-label">注文単位</div>
             <div class="card-unit-row">
               <label class="card-unit-label"><input type="radio" name="unit-sapporo" value="本" checked onchange="changeCardUnit('sapporo')"> 1本単位</label>
               <label class="card-unit-label"><input type="radio" name="unit-sapporo" value="ケース" onchange="changeCardUnit('sapporo')"> 1ケース単位</label>
@@ -837,13 +873,22 @@
 
         <!-- 数量（ビール） -->
         <div class="modal-form-group" id="beerQtyGroup" style="display:none">
-          <label class="modal-label">注文単位と数量 <span class="req">必須</span></label>
+          <label class="modal-label">サイズ <span class="req">必須</span></label>
           <div class="qty-unit-group">
             <label class="qty-unit-label">
-              <input type="radio" name="qtyUnit" value="本" checked onchange="updateQtyLabel()"> 1本単位（¥425）
+              <input type="radio" name="beerSize" value="大瓶" checked onchange="updateQtyLabel()"> 大瓶
             </label>
             <label class="qty-unit-label">
-              <input type="radio" name="qtyUnit" value="ケース" onchange="updateQtyLabel()"> 1ケース単位（20本・¥8,700）
+              <input type="radio" name="beerSize" value="中瓶" onchange="updateQtyLabel()"> 中瓶
+            </label>
+          </div>
+          <label class="modal-label" style="margin-top:14px;">注文単位と数量 <span class="req">必須</span></label>
+          <div class="qty-unit-group">
+            <label class="qty-unit-label">
+              <input type="radio" name="qtyUnit" value="本" checked onchange="updateQtyLabel()"> 1本単位
+            </label>
+            <label class="qty-unit-label">
+              <input type="radio" name="qtyUnit" value="ケース" onchange="updateQtyLabel()"> 1ケース単位（20本）
             </label>
           </div>
           <div class="modal-qty-row" style="justify-content:space-between;">
@@ -1027,8 +1072,11 @@ const PRODUCTS = {
     name: 'アサヒスーパードライ 大瓶',
     formalName: 'アサヒスーパードライ 大瓶',
     tag: 'ビール',
-    price: 425,        // 1本単価
-    casePrice: 8700,   // 1ケース単価
+    price: 425,         // 大瓶1本
+    casePrice: 8700,    // 大瓶1ケース
+    mediumPrice: 360,   // 中瓶1本
+    mediumCasePrice: 7400, // 中瓶1ケース
+    hasSize: true,      // 大瓶/中瓶あり
     img: 'アサヒスーパードライ大瓶ビール画像.png',
     isAlcohol: true,
     isBeer: true,
@@ -1042,6 +1090,9 @@ const PRODUCTS = {
     tag: 'ビール',
     price: 425,
     casePrice: 8700,
+    mediumPrice: 360,
+    mediumCasePrice: 7400,
+    hasSize: true,
     img: 'キリンラガー大瓶ビール画像.png',
     isAlcohol: true,
     isBeer: true,
@@ -1055,6 +1106,9 @@ const PRODUCTS = {
     tag: 'ビール',
     price: 425,
     casePrice: 8700,
+    mediumPrice: 360,
+    mediumCasePrice: 7400,
+    hasSize: true,
     img: 'サッポロ黒ラベル大瓶ビール画像.png',
     isAlcohol: true,
     isBeer: true,
@@ -1122,11 +1176,14 @@ let cardQty = {};    // カード上の数量 { key: qty }
 let isCartOrder = false; // カート注文フラグ
 
 // カード数量変更
-// カードの選択単位を保持
+// カードの選択単位・サイズを保持
 let cardUnit = {};
+let cardSize = {};
 
-function getCardUnit(key) {
-  return cardUnit[key] || '本';
+function getCardUnit(key) { return cardUnit[key] || '本'; }
+function getCardSize(key) {
+  const sel = document.querySelector(`input[name="size-${key}"]:checked`);
+  return sel ? sel.value : '大瓶';
 }
 
 function changeCardUnit(key) {
@@ -1147,7 +1204,8 @@ function changeCardQty(key, delta) {
   if (!sub) return;
   if (p.isBeer) {
     const unit = getCardUnit(key);
-    const unitPrice = unit === 'ケース' ? (p.casePrice||8700) : (p.price||425);
+    const size = getCardSize(key);
+    const unitPrice = getBeerUnitPrice(p, unit, size);
     sub.textContent = `¥${(unitPrice * cardQty[key]).toLocaleString()}`;
   } else if (p.price) {
     sub.textContent = `¥${(p.price * cardQty[key]).toLocaleString()}`;
@@ -1156,14 +1214,17 @@ function changeCardQty(key, delta) {
 
 // カートに追加
 function addToCart(key) {
-  const qty = cardQty[key] || 1;
-  const unit = PRODUCTS[key].isBeer ? getCardUnit(key) : '本';
-  // 同一商品でも単位が違えば別エントリにする
-  const cartKey = PRODUCTS[key].isBeer ? `${key}__${unit}` : key;
-  if (!cart[cartKey]) cart[cartKey] = { qty: 0, unit: unit, productKey: key };
+  const qty  = cardQty[key] || 1;
+  const p    = PRODUCTS[key];
+  const unit = p.isBeer ? getCardUnit(key) : '本';
+  const size = p.isBeer ? getCardSize(key) : null;
+  // 同一商品でもサイズ・単位が違えば別エントリ
+  const cartKey = p.isBeer ? `${key}__${size}__${unit}` : key;
+  if (!cart[cartKey]) cart[cartKey] = { qty: 0, unit: unit, size: size, productKey: key };
   cart[cartKey].qty += qty;
   updateCartBadge();
-  showToast(`${PRODUCTS[key].name} を${qty}${unit}カートに追加しました`);
+  const sizeLabel = size ? size : '';
+  showToast(`${p.name} ${sizeLabel} を${qty}${unit}カートに追加しました`);
   cardQty[key] = 1;
   changeCardQty(key, 0); // 表示リセット
 }
@@ -1225,8 +1286,9 @@ function renderCart() {
     const p = PRODUCTS[cart[key].productKey || key];
     const { qty } = cart[key];
     const unit = cart[key].unit || '本';
+    const size = cart[key].size;
     const unitPrice = p.isBeer
-      ? (unit === 'ケース' ? (p.casePrice||8700) : (p.price||425))
+      ? getBeerUnitPrice(p, unit, size)
       : (p.price || null);
     const lineTotal = unitPrice ? unitPrice * qty : null;
     if (lineTotal) subtotal += lineTotal;
@@ -1235,11 +1297,12 @@ function renderCart() {
     const unitPriceText = unitPrice
       ? `¥${unitPrice.toLocaleString()}/${unitLabel}`
       : '価格はお問い合わせください';
+    const sizeTag = (p.isBeer && size) ? `【${size}】` : '';
     itemsHtml += `
       <div class="cart-item">
         <img src="${p.img}" alt="${p.name}" class="cart-item-img">
         <div class="cart-item-info">
-          <div class="cart-item-name">${p.formalName}${p.isBeer && unit==='ケース' ? '（ケース）' : ''}</div>
+          <div class="cart-item-name">${sizeTag}${p.formalName}</div>
           <div class="cart-item-unit-price">${unitPriceText}</div>
         </div>
         <div class="cart-item-qty-ctrl">
@@ -1323,12 +1386,6 @@ function openOrderWithQty(key) {
   const qty = cardQty[key] || 1;
 
   document.getElementById('orderProductName').textContent = p.formalName;
-  if (p.isBeer) {
-    document.getElementById('orderProductPrice').textContent = `¥425 / 本（税込）`;
-  } else {
-    document.getElementById('orderProductPrice').textContent =
-      p.price ? `¥${p.price.toLocaleString()} / 本（税込）` : '価格はお問い合わせください';
-  }
 
   document.getElementById('alcoholWarning').classList.toggle('show', p.isAlcohol);
   document.getElementById('birthdayGroup').style.display = p.isAlcohol ? 'block' : 'none';
@@ -1338,12 +1395,19 @@ function openOrderWithQty(key) {
   document.getElementById('beerQtyGroup').style.display = p.isBeer ? 'block' : 'none';
   document.getElementById('normalQtyGroup').style.display = !p.isBeer ? 'block' : 'none';
   if (p.isBeer) {
-    document.querySelector('input[name="qtyUnit"][value="本"]').checked = true;
-    document.getElementById('beerQtyUnit').textContent = '本';
+    // カードで選んだサイズ・単位を引き継ぐ
+    const cardSizeVal = getCardSize(key);
+    const cardUnitVal = getCardUnit(key);
+    document.querySelector(`input[name="beerSize"][value="${cardSizeVal}"]`).checked = true;
+    document.querySelector(`input[name="qtyUnit"][value="${cardUnitVal}"]`).checked = true;
+    document.getElementById('beerQtyUnit').textContent = cardUnitVal;
     document.getElementById('beerQty').value = qty;
     document.getElementById('beerQty').required = true;
     document.getElementById('normalQty').required = false;
+    updateQtyLabel();
   } else {
+    document.getElementById('orderProductPrice').textContent =
+      p.price ? `¥${p.price.toLocaleString()} / 本（税込）` : '価格はお問い合わせください';
     document.getElementById('normalQty').value = qty;
     document.getElementById('normalQty').required = true;
     document.getElementById('beerQty').required = false;
@@ -1352,7 +1416,6 @@ function openOrderWithQty(key) {
   toggleDelivery();
   document.getElementById('orderModal').classList.add('open');
   document.body.style.overflow = 'hidden';
-  // モーダルを開いたタイミングで配達料を即表示
   setTimeout(updateFeeDisplay, 50);
 }
 
@@ -1382,7 +1445,7 @@ function openDetail(key) {
   document.getElementById('detailTag').textContent = p.tag;
   document.getElementById('detailName').textContent = p.formalName;
   document.getElementById('detailPrice').innerHTML = p.isBeer
-    ? `¥425 / 本　<span style="font-size:0.8rem;color:var(--color-text-light);">｜ 1ケース ¥8,700（税込）</span>`
+    ? `<span style="font-size:0.85rem;line-height:1.7;">大瓶 ¥425/本・¥8,700/ケース<br>中瓶 ¥360/本・¥7,400/ケース<small style="color:var(--color-text-light);">（各ケース20本・税込）</small></span>`
     : (p.price ? `¥${p.price.toLocaleString()} / 本（税込）` : '価格はお問い合わせください');
   document.getElementById('detailDesc').innerHTML = p.desc.replace(/\n/g, '<br>');
 
@@ -1418,31 +1481,29 @@ function openOrder(key) {
   currentProductKey = key;
 
   document.getElementById('orderProductName').textContent = p.formalName;
-  document.getElementById('orderProductPrice').textContent = p.isBeer
-    ? `¥425 / 本（税込）`
-    : (p.price ? `¥${p.price.toLocaleString()} / 本（税込）` : '価格はお問い合わせください');
+  if (!p.isBeer) {
+    document.getElementById('orderProductPrice').textContent =
+      p.price ? `¥${p.price.toLocaleString()} / 本（税込）` : '価格はお問い合わせください';
+  }
 
   // 酒類警告・生年月日
   const isAlcohol = p.isAlcohol;
   document.getElementById('alcoholWarning').classList.toggle('show', isAlcohol);
   document.getElementById('birthdayGroup').style.display = isAlcohol ? 'block' : 'none';
-  if (isAlcohol) {
-    const maxDate = new Date();
-    maxDate.setFullYear(maxDate.getFullYear());
-    document.getElementById('orderBirthday').required = true;
-  } else {
-    document.getElementById('orderBirthday').required = false;
-  }
+  document.getElementById('orderBirthday').required = isAlcohol;
   document.getElementById('ageError').classList.remove('show');
 
   // 数量グループ
   document.getElementById('beerQtyGroup').style.display = p.isBeer ? 'block' : 'none';
   document.getElementById('normalQtyGroup').style.display = (!p.isBeer) ? 'block' : 'none';
   if (p.isBeer) {
+    document.querySelector('input[name="beerSize"][value="大瓶"]').checked = true;
     document.querySelector('input[name="qtyUnit"][value="本"]').checked = true;
     document.getElementById('beerQtyUnit').textContent = '本';
+    document.getElementById('beerQty').value = 1;
     document.getElementById('beerQty').required = true;
     document.getElementById('normalQty').required = false;
+    updateQtyLabel();
   } else {
     document.getElementById('beerQty').required = false;
     document.getElementById('normalQty').required = true;
@@ -1476,8 +1537,12 @@ function closeOrderOnOverlay(e) {
 // ===============================
 // 注文合計金額の取得
 // ===============================
-// ビールの単価取得（本 or ケース）
-function getBeerUnitPrice(p, unit) {
+// ビールの単価取得（サイズ：大瓶/中瓶 × 単位：本/ケース）
+function getBeerUnitPrice(p, unit, size) {
+  size = size || '大瓶';
+  if (size === '中瓶') {
+    return (unit === 'ケース') ? (p.mediumCasePrice || 7400) : (p.mediumPrice || 360);
+  }
   return (unit === 'ケース') ? (p.casePrice || 8700) : (p.price || 425);
 }
 
@@ -1487,7 +1552,7 @@ function getOrderTotal() {
       .reduce((s, k) => {
         const p = PRODUCTS[cart[k].productKey || k];
         const unitPrice = p.isBeer
-          ? (cart[k].unit === 'ケース' ? (p.casePrice||8700) : (p.price||425))
+          ? getBeerUnitPrice(p, cart[k].unit, cart[k].size)
           : (p.price || 0);
         return s + unitPrice * cart[k].qty;
       }, 0);
@@ -1496,8 +1561,9 @@ function getOrderTotal() {
   if (!p) return 0;
   if (p.isBeer) {
     const unit = document.querySelector('input[name="qtyUnit"]:checked')?.value || '本';
+    const size = document.querySelector('input[name="beerSize"]:checked')?.value || '大瓶';
     const qty  = parseInt(document.getElementById('beerQty').value) || 1;
-    return getBeerUnitPrice(p, unit) * qty;
+    return getBeerUnitPrice(p, unit, size) * qty;
   }
   if (!p.price) return 0;
   return p.price * (parseInt(document.getElementById('normalQty').value) || 1);
@@ -1510,8 +1576,9 @@ function onOrderQtyChange() {
   if (p && !isCartOrder) {
     if (p.isBeer) {
       const unit = document.querySelector('input[name="qtyUnit"]:checked')?.value || '本';
+      const size = document.querySelector('input[name="beerSize"]:checked')?.value || '大瓶';
       const qty  = parseInt(document.getElementById('beerQty').value) || 1;
-      const unitPrice = getBeerUnitPrice(p, unit);
+      const unitPrice = getBeerUnitPrice(p, unit, size);
       const amtEl = document.getElementById('beerQtyAmount');
       if (amtEl) amtEl.textContent = `¥${(unitPrice * qty).toLocaleString()}`;
     } else if (p.price) {
@@ -1541,15 +1608,15 @@ function toggleBankInfo() {
 // ビール数量単位更新＋価格表示切替
 function updateQtyLabel() {
   const unit = document.querySelector('input[name="qtyUnit"]:checked').value;
+  const size = document.querySelector('input[name="beerSize"]:checked')?.value || '大瓶';
   document.getElementById('beerQtyUnit').textContent = unit;
   // 単価表示を更新
   const p = currentProductKey ? PRODUCTS[currentProductKey] : null;
   if (p && p.isBeer) {
-    const unitPrice = getBeerUnitPrice(p, unit);
+    const unitPrice = getBeerUnitPrice(p, unit, size);
     const priceEl = document.getElementById('orderProductPrice');
-    if (priceEl) priceEl.textContent = unit === 'ケース'
-      ? `¥8,700 / ケース（税込）`
-      : `¥425 / 本（税込）`;
+    if (priceEl) priceEl.textContent =
+      `${size}　¥${unitPrice.toLocaleString()} / ${unit === 'ケース' ? 'ケース（20本）' : '本'}（税込）`;
   }
   onOrderQtyChange();
 }
@@ -1749,15 +1816,18 @@ async function submitOrder(e) {
     productName = keys.map(k => {
       const pp = PRODUCTS[cart[k].productKey || k];
       const u = (pp.isBeer && cart[k].unit === 'ケース') ? 'ケース' : '本';
-      return `${pp.formalName} ×${cart[k].qty}${u}`;
+      const sz = (pp.isBeer && cart[k].size) ? `【${cart[k].size}】` : '';
+      return `${sz}${pp.formalName} ×${cart[k].qty}${u}`;
     }).join('\n');
     qtyText = `合計 ${keys.reduce((s,k)=>s+cart[k].qty,0)} 点（複数商品）`;
   } else {
-    productName = p.formalName;
     if (p.isBeer) {
       const unit = document.querySelector('input[name="qtyUnit"]:checked').value;
+      const size = document.querySelector('input[name="beerSize"]:checked')?.value || '大瓶';
+      productName = `【${size}】${p.formalName}`;
       qtyText = `${document.getElementById('beerQty').value} ${unit}`;
     } else {
+      productName = p.formalName;
       qtyText = `${document.getElementById('normalQty').value} 本`;
     }
   }
