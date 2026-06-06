@@ -238,11 +238,10 @@
       min-width:0;
     }
     .btn-order-now:hover { background:var(--color-accent);color:var(--color-primary); }
-    @media(max-width:480px){
-      .btn-cart,.btn-order-now { font-size:0.7rem;letter-spacing:0;padding:10px 2px; }
-    }
-    @media(max-width:360px){
-      .btn-cart,.btn-order-now { font-size:0.62rem; }
+    @media(max-width:540px){
+      /* スマホ：縦積みで全幅表示 → テキストが確実に収まる */
+      .card-actions { grid-template-columns:1fr; gap:5px; }
+      .btn-cart,.btn-order-now { font-size:0.82rem;padding:11px 8px;letter-spacing:0.05em; }
     }
 
     /* 注文フォーム法的表記 */
