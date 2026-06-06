@@ -383,12 +383,15 @@
             <span class="product-tag">ビール</span>
             <h3 class="product-name">アサヒスーパードライ 大瓶</h3>
             <p class="product-desc-short">日本を代表するドライビール。キレのある辛口で料理を引き立てます。</p>
-            <div class="product-price">価格はお問い合わせください</div>
+            <div class="product-price">¥425 <small>/本（税込）</small><br><small style="color:var(--color-text-light);">1ケース：¥8,700</small></div>
             <div class="card-qty-row">
               <button type="button" class="qty-btn" onclick="changeCardQty('asahi',-1)">−</button>
               <span class="qty-num" id="card-qty-asahi">1</span>
               <button type="button" class="qty-btn" onclick="changeCardQty('asahi',1)">＋</button>
               <span style="font-size:0.78rem;color:var(--color-text-light);margin-left:4px;">本</span>
+            </div>
+            <div class="card-subtotal-row">
+              <span class="card-subtotal" id="card-sub-asahi">¥425</span>
             </div>
             <div class="card-actions">
               <button class="btn-cart" onclick="addToCart('asahi')">🛒 カートへ</button>
@@ -405,12 +408,15 @@
             <span class="product-tag">ビール</span>
             <h3 class="product-name">キリンラガービール 大瓶</h3>
             <p class="product-desc-short">100年以上の歴史を誇る、コクと旨味の伝統的なラガービール。</p>
-            <div class="product-price">価格はお問い合わせください</div>
+            <div class="product-price">¥425 <small>/本（税込）</small><br><small style="color:var(--color-text-light);">1ケース：¥8,700</small></div>
             <div class="card-qty-row">
               <button type="button" class="qty-btn" onclick="changeCardQty('kirin',-1)">−</button>
               <span class="qty-num" id="card-qty-kirin">1</span>
               <button type="button" class="qty-btn" onclick="changeCardQty('kirin',1)">＋</button>
               <span style="font-size:0.78rem;color:var(--color-text-light);margin-left:4px;">本</span>
+            </div>
+            <div class="card-subtotal-row">
+              <span class="card-subtotal" id="card-sub-kirin">¥425</span>
             </div>
             <div class="card-actions">
               <button class="btn-cart" onclick="addToCart('kirin')">🛒 カートへ</button>
@@ -427,12 +433,15 @@
             <span class="product-tag">ビール</span>
             <h3 class="product-name">サッポロ黒ラベル 大瓶</h3>
             <p class="product-desc-short">生ビールのおいしさを追求した、すっきりした飲みごたえが特徴。</p>
-            <div class="product-price">価格はお問い合わせください</div>
+            <div class="product-price">¥425 <small>/本（税込）</small><br><small style="color:var(--color-text-light);">1ケース：¥8,700</small></div>
             <div class="card-qty-row">
               <button type="button" class="qty-btn" onclick="changeCardQty('sapporo',-1)">−</button>
               <span class="qty-num" id="card-qty-sapporo">1</span>
               <button type="button" class="qty-btn" onclick="changeCardQty('sapporo',1)">＋</button>
               <span style="font-size:0.78rem;color:var(--color-text-light);margin-left:4px;">本</span>
+            </div>
+            <div class="card-subtotal-row">
+              <span class="card-subtotal" id="card-sub-sapporo">¥425</span>
             </div>
             <div class="card-actions">
               <button class="btn-cart" onclick="addToCart('sapporo')">🛒 カートへ</button>
@@ -720,6 +729,27 @@
         </table>
         <p style="font-size:0.78rem;color:#5a7a9a;margin-top:8px;">※ 振込手数料はお客様負担となります。</p>
       </div>
+
+      <!-- 瓶回収案内（ケース注文時） -->
+      <div id="successBottleCase" style="display:none;background:#fff8e8;border:1px solid #e0c060;border-left:4px solid #c9a84c;padding:16px 18px;margin:16px 0;text-align:left;">
+        <div style="font-family:'Noto Serif JP',serif;font-size:0.95rem;color:#8a6a10;font-weight:700;margin-bottom:8px;">♻️ 空き瓶回収のご案内</div>
+        <p style="font-size:0.85rem;color:#5a4500;line-height:1.9;margin:0;">
+          ケースでご注文の方は、<strong>ケース箱と空きビール瓶20本</strong>を回収に伺います。<br>
+          回収させていただいた場合、<strong style="color:#c0392b;">300円キャッシュバック＋粗品プレゼント</strong>！<br>
+          配達時にお気軽にお声がけください。
+        </p>
+      </div>
+
+      <!-- 瓶回収案内（本単位注文時） -->
+      <div id="successBottleSingle" style="display:none;background:#fff8e8;border:1px solid #e0c060;border-left:4px solid #c9a84c;padding:16px 18px;margin:16px 0;text-align:left;">
+        <div style="font-family:'Noto Serif JP',serif;font-size:0.95rem;color:#8a6a10;font-weight:700;margin-bottom:8px;">♻️ 空き瓶回収のご案内</div>
+        <p style="font-size:0.85rem;color:#5a4500;line-height:1.9;margin:0;">
+          飲み終わった空きビール瓶を<strong>かしはら酒店へお持ちいただく</strong>と、<br>
+          <strong style="color:#c0392b;">1本につき5円キャッシュバック</strong>いたします！<br>
+          ※当店でご購入いただいたビール瓶が対象です。
+        </p>
+      </div>
+
       <button class="btn-close-success" onclick="closeOrder()">閉じる</button>
     </div>
 
@@ -973,7 +1003,8 @@ const PRODUCTS = {
     name: 'アサヒスーパードライ 大瓶',
     formalName: 'アサヒスーパードライ 大瓶',
     tag: 'ビール',
-    price: null,
+    price: 425,        // 1本単価
+    casePrice: 8700,   // 1ケース単価
     img: 'アサヒスーパードライ大瓶ビール画像.png',
     isAlcohol: true,
     isBeer: true,
@@ -985,7 +1016,8 @@ const PRODUCTS = {
     name: 'キリンラガービール 大瓶',
     formalName: 'キリンラガービール 大瓶',
     tag: 'ビール',
-    price: null,
+    price: 425,
+    casePrice: 8700,
     img: 'キリンラガー大瓶ビール画像.png',
     isAlcohol: true,
     isBeer: true,
@@ -997,7 +1029,8 @@ const PRODUCTS = {
     name: 'サッポロ黒ラベル 大瓶',
     formalName: 'サッポロ黒ラベル 大瓶',
     tag: 'ビール',
-    price: null,
+    price: 425,
+    casePrice: 8700,
     img: 'サッポロ黒ラベル大瓶ビール画像.png',
     isAlcohol: true,
     isBeer: true,
@@ -1239,8 +1272,12 @@ function openOrderWithQty(key) {
   const qty = cardQty[key] || 1;
 
   document.getElementById('orderProductName').textContent = p.formalName;
-  document.getElementById('orderProductPrice').textContent =
-    p.price ? `¥${p.price.toLocaleString()} × ${qty}本 ＝ ¥${(p.price * qty).toLocaleString()}` : p.price === null ? '価格はお問い合わせください' : '';
+  if (p.isBeer) {
+    document.getElementById('orderProductPrice').textContent = `¥425 / 本（税込）`;
+  } else {
+    document.getElementById('orderProductPrice').textContent =
+      p.price ? `¥${p.price.toLocaleString()} / 本（税込）` : '価格はお問い合わせください';
+  }
 
   document.getElementById('alcoholWarning').classList.toggle('show', p.isAlcohol);
   document.getElementById('birthdayGroup').style.display = p.isAlcohol ? 'block' : 'none';
@@ -1293,7 +1330,9 @@ function openDetail(key) {
   document.getElementById('detailImg').alt = p.name;
   document.getElementById('detailTag').textContent = p.tag;
   document.getElementById('detailName').textContent = p.formalName;
-  document.getElementById('detailPrice').textContent = p.price ? `¥${p.price.toLocaleString()} / 本（税込）` : '価格はお問い合わせください';
+  document.getElementById('detailPrice').innerHTML = p.isBeer
+    ? `¥425 / 本　<span style="font-size:0.8rem;color:var(--color-text-light);">｜ 1ケース ¥8,700（税込）</span>`
+    : (p.price ? `¥${p.price.toLocaleString()} / 本（税込）` : '価格はお問い合わせください');
   document.getElementById('detailDesc').innerHTML = p.desc.replace(/\n/g, '<br>');
 
   const specialEl = document.getElementById('detailSpecial');
@@ -1328,7 +1367,9 @@ function openOrder(key) {
   currentProductKey = key;
 
   document.getElementById('orderProductName').textContent = p.formalName;
-  document.getElementById('orderProductPrice').textContent = p.price ? `¥${p.price.toLocaleString()} / 本（税込）` : '価格はお問い合わせください';
+  document.getElementById('orderProductPrice').textContent = p.isBeer
+    ? `¥425 / 本（税込）`
+    : (p.price ? `¥${p.price.toLocaleString()} / 本（税込）` : '価格はお問い合わせください');
 
   // 酒類警告・生年月日
   const isAlcohol = p.isAlcohol;
@@ -1356,8 +1397,11 @@ function openOrder(key) {
     document.getElementById('normalQty').required = true;
   }
 
+  isCartOrder = false;
+  toggleDelivery();
   document.getElementById('orderModal').classList.add('open');
   document.body.style.overflow = 'hidden';
+  setTimeout(updateFeeDisplay, 50);
 }
 function closeOrder() {
   document.getElementById('orderModal').classList.remove('open');
@@ -1369,6 +1413,9 @@ function closeOrder() {
     document.getElementById('orderFormBody').style.display = '';
     document.getElementById('orderSubmitBtn').disabled = false;
     document.getElementById('orderErrorMsg').classList.remove('show');
+    document.getElementById('successBottleCase').style.display = 'none';
+    document.getElementById('successBottleSingle').style.display = 'none';
+    document.getElementById('successBankInfo').style.display = 'none';
   }, 300);
 }
 function closeOrderOnOverlay(e) {
@@ -1378,18 +1425,30 @@ function closeOrderOnOverlay(e) {
 // ===============================
 // 注文合計金額の取得
 // ===============================
+// ビールの単価取得（本 or ケース）
+function getBeerUnitPrice(p, unit) {
+  return (unit === 'ケース') ? (p.casePrice || 8700) : (p.price || 425);
+}
+
 function getOrderTotal() {
   if (isCartOrder) {
     return Object.keys(cart).filter(k => cart[k].qty > 0)
-      .reduce((s, k) => s + (PRODUCTS[k].price ? PRODUCTS[k].price * cart[k].qty : 0), 0);
+      .reduce((s, k) => {
+        const p = PRODUCTS[k];
+        const unitPrice = p.isBeer
+          ? (cart[k].unit === 'ケース' ? (p.casePrice||8700) : (p.price||425))
+          : (p.price || 0);
+        return s + unitPrice * cart[k].qty;
+      }, 0);
   }
   const p = currentProductKey ? PRODUCTS[currentProductKey] : null;
-  if (!p || !p.price) return 0;
+  if (!p) return 0;
   if (p.isBeer) {
     const unit = document.querySelector('input[name="qtyUnit"]:checked')?.value || '本';
     const qty  = parseInt(document.getElementById('beerQty').value) || 1;
-    return p.price * qty; // ケースの本数は商品により異なるため固定換算なし
+    return getBeerUnitPrice(p, unit) * qty;
   }
+  if (!p.price) return 0;
   return p.price * (parseInt(document.getElementById('normalQty').value) || 1);
 }
 
@@ -1413,10 +1472,20 @@ function toggleBankInfo() {
   document.getElementById('bankInfoBox').style.display = isBankTransfer ? 'block' : 'none';
 }
 
-// ビール数量単位更新
+// ビール数量単位更新＋価格表示切替
 function updateQtyLabel() {
   const unit = document.querySelector('input[name="qtyUnit"]:checked').value;
   document.getElementById('beerQtyUnit').textContent = unit;
+  // 単価表示を更新
+  const p = currentProductKey ? PRODUCTS[currentProductKey] : null;
+  if (p && p.isBeer) {
+    const unitPrice = getBeerUnitPrice(p, unit);
+    const priceEl = document.getElementById('orderProductPrice');
+    if (priceEl) priceEl.textContent = unit === 'ケース'
+      ? `¥8,700 / ケース（税込）`
+      : `¥425 / 本（税込）`;
+  }
+  onOrderQtyChange();
 }
 
 // 受取方法の切替
@@ -1611,8 +1680,11 @@ async function submitOrder(e) {
   let productName = '';
   if (isCartOrder) {
     const keys = Object.keys(cart).filter(k => cart[k].qty > 0);
-    productName = keys.map(k => `${PRODUCTS[k].formalName} ×${cart[k].qty}本`).join('\n');
-    qtyText = `${keys.reduce((s,k)=>s+cart[k].qty,0)}本（複数商品）`;
+    productName = keys.map(k => {
+      const u = (PRODUCTS[k].isBeer && cart[k].unit === 'ケース') ? 'ケース' : '本';
+      return `${PRODUCTS[k].formalName} ×${cart[k].qty}${u}`;
+    }).join('\n');
+    qtyText = `合計 ${keys.reduce((s,k)=>s+cart[k].qty,0)} 点（複数商品）`;
   } else {
     productName = p.formalName;
     if (p.isBeer) {
@@ -1648,16 +1720,9 @@ async function submitOrder(e) {
   const note     = document.getElementById('orderNote').value;
   const birthday = isAlcohol ? document.getElementById('orderBirthday').value : '対象外';
 
-  // 小計
-  let subtotalText = '';
-  if (isCartOrder) {
-    const keys = Object.keys(cart).filter(k=>cart[k].qty>0);
-    const tot = keys.reduce((s,k)=> s+(PRODUCTS[k].price?PRODUCTS[k].price*cart[k].qty:0),0);
-    subtotalText = tot>0 ? `¥${tot.toLocaleString()}（価格未定商品含まず）` : 'お問い合わせください';
-  } else {
-    const qty2 = parseInt(document.getElementById(p.isBeer?'beerQty':'normalQty').value)||1;
-    subtotalText = p.price ? `¥${(p.price*qty2).toLocaleString()}` : 'お問い合わせください';
-  }
+  // 小計（getOrderTotalでケース価格も正しく計算）
+  const orderTotal = getOrderTotal();
+  const subtotalText = orderTotal > 0 ? `¥${orderTotal.toLocaleString()}` : 'お問い合わせください';
 
   // 送信データ
   const orderData = {
@@ -1704,6 +1769,27 @@ async function submitOrder(e) {
       // 銀行振込なら完了画面に口座情報を表示
       const isBankTransfer = document.querySelector('input[name="payment"]:checked')?.value === '銀行振込';
       document.getElementById('successBankInfo').style.display = isBankTransfer ? 'block' : 'none';
+
+      // ビール瓶回収案内の判定
+      let beerCase = false;   // ケース単位のビール注文あり
+      let beerSingle = false; // 本単位のビール注文あり
+      if (isCartOrder) {
+        Object.keys(cart).filter(k => cart[k].qty > 0).forEach(k => {
+          if (PRODUCTS[k].isBeer) {
+            if (cart[k].unit === 'ケース') beerCase = true;
+            else beerSingle = true;
+          }
+        });
+      } else {
+        const pp = PRODUCTS[currentProductKey];
+        if (pp && pp.isBeer) {
+          const unit = document.querySelector('input[name="qtyUnit"]:checked')?.value || '本';
+          if (unit === 'ケース') beerCase = true;
+          else beerSingle = true;
+        }
+      }
+      document.getElementById('successBottleCase').style.display   = beerCase   ? 'block' : 'none';
+      document.getElementById('successBottleSingle').style.display = beerSingle ? 'block' : 'none';
     } else {
       // サーバーエラー
       document.getElementById('orderSubmitBtn').disabled = false;
@@ -1732,26 +1818,12 @@ function updateFeeDisplay() {
   const box   = document.getElementById('deliveryFeeBox');
   if (!box) return;
 
-  // 価格不明（ビールのみ）の場合は固定メッセージ表示
-  const p = !isCartOrder && currentProductKey ? PRODUCTS[currentProductKey] : null;
-  const beerOnly = p && p.isBeer && !p.price;
-
-  if (total <= 0 && !beerOnly) {
+  if (total <= 0) {
     box.style.display = 'none';
     return;
   }
 
   box.style.display = 'block';
-
-  if (beerOnly) {
-    // ビールは価格未定なので金額ベース判定不可
-    box.className = 'delivery-fee-box';
-    document.getElementById('feeAmount').textContent = '¥2,000以上で配達料無料';
-    document.getElementById('feeAmount').style.color = 'var(--color-primary)';
-    document.getElementById('feeFreeInfo').textContent = '※ ビールの価格はお問い合わせください。¥2,000以上で配達料無料になります。';
-    document.getElementById('feeFreeInfo').style.color = '';
-    return;
-  }
 
   const isFree = total >= 2000;
   const rem    = 2000 - total;
