@@ -222,12 +222,27 @@
     .card-subtotal-row { display:flex;justify-content:flex-end;align-items:center;margin-bottom:10px; }
     .card-subtotal { font-family:'Noto Serif JP',serif;font-size:1rem;font-weight:700;color:#c0392b; }
     .card-actions { display:grid;grid-template-columns:1fr 1fr;gap:6px; }
-    .btn-cart { padding:10px 4px;background:var(--color-bg-dark);color:var(--color-primary);font-family:'Noto Serif JP',serif;font-size:0.78rem;letter-spacing:0.05em;border:1px solid var(--color-border);cursor:pointer;transition:all 0.3s;text-align:center;white-space:nowrap;overflow:hidden; }
+    .btn-cart {
+      padding:10px 4px;background:var(--color-bg-dark);color:var(--color-primary);
+      font-family:'Noto Serif JP',serif;font-size:0.78rem;letter-spacing:0.02em;
+      border:1px solid var(--color-border);cursor:pointer;transition:all 0.3s;
+      text-align:center;white-space:nowrap;overflow:hidden;text-overflow:clip;
+      min-width:0; /* グリッドセルが縮めるよう必須 */
+    }
     .btn-cart:hover { background:var(--color-accent);border-color:var(--color-accent); }
-    .btn-order-now { padding:10px 4px;background:var(--color-primary);color:var(--color-accent);font-family:'Noto Serif JP',serif;font-size:0.78rem;letter-spacing:0.05em;border:none;cursor:pointer;transition:all 0.3s;text-align:center;white-space:nowrap;overflow:hidden; }
+    .btn-order-now {
+      padding:10px 4px;background:var(--color-primary);color:var(--color-accent);
+      font-family:'Noto Serif JP',serif;font-size:0.78rem;letter-spacing:0.02em;
+      border:none;cursor:pointer;transition:all 0.3s;
+      text-align:center;white-space:nowrap;overflow:hidden;text-overflow:clip;
+      min-width:0;
+    }
     .btn-order-now:hover { background:var(--color-accent);color:var(--color-primary); }
     @media(max-width:480px){
-      .btn-cart,.btn-order-now { font-size:0.72rem;letter-spacing:0; }
+      .btn-cart,.btn-order-now { font-size:0.7rem;letter-spacing:0;padding:10px 2px; }
+    }
+    @media(max-width:360px){
+      .btn-cart,.btn-order-now { font-size:0.62rem; }
     }
 
     /* 注文フォーム法的表記 */
