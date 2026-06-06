@@ -159,6 +159,7 @@
     .qty-spin-btn:hover { background:var(--color-accent);color:var(--color-primary-deep); }
     .qty-spin-btn:active { background:var(--color-accent-light); }
     .qty-spin-input { border:none!important;border-left:1px solid var(--color-border)!important;border-right:1px solid var(--color-border)!important;border-radius:0!important;width:70px;text-align:center;box-shadow:none!important; }
+    .qty-amount { font-family:'Noto Serif JP',serif;font-size:1.2rem;font-weight:700;color:#c0392b; }
     .qty-unit-label-text { font-size:0.88rem;color:var(--color-text-light); }
 
     /* 送信ボタン */
@@ -230,6 +231,11 @@
     .qty-num { min-width:28px;text-align:center;font-family:'Noto Serif JP',serif;font-size:1rem;font-weight:700;color:var(--color-primary); }
     .card-subtotal-row { display:flex;justify-content:flex-end;align-items:center;margin-bottom:10px; }
     .card-subtotal { font-family:'Noto Serif JP',serif;font-size:1rem;font-weight:700;color:#c0392b; }
+    /* ビールカードの本/ケース選択 */
+    .card-unit-row { display:flex;gap:6px;margin-bottom:8px; }
+    .card-unit-label { flex:1;display:flex;align-items:center;justify-content:center;gap:4px;font-size:0.74rem;padding:6px 4px;border:1px solid var(--color-border);border-radius:4px;cursor:pointer;transition:all 0.2s;color:var(--color-text-light);background:var(--color-bg); }
+    .card-unit-label input { accent-color:var(--color-accent);margin:0; }
+    .card-unit-label:has(input:checked) { border-color:var(--color-accent);background:#fffbf0;color:var(--color-primary);font-weight:700; }
     .card-actions { display:grid;grid-template-columns:1fr 1fr;gap:6px; }
     .btn-cart {
       padding:10px 4px;background:var(--color-bg-dark);color:var(--color-primary);
@@ -383,12 +389,16 @@
             <span class="product-tag">ビール</span>
             <h3 class="product-name">アサヒスーパードライ 大瓶</h3>
             <p class="product-desc-short">日本を代表するドライビール。キレのある辛口で料理を引き立てます。</p>
-            <div class="product-price">¥425 <small>/本（税込）</small><br><small style="color:var(--color-text-light);">1ケース：¥8,700</small></div>
+            <div class="product-price">¥425 <small>/本（税込）</small><br><small style="color:var(--color-text-light);">1ケース（20本）：¥8,700</small></div>
+            <div class="card-unit-row">
+              <label class="card-unit-label"><input type="radio" name="unit-asahi" value="本" checked onchange="changeCardUnit('asahi')"> 1本単位</label>
+              <label class="card-unit-label"><input type="radio" name="unit-asahi" value="ケース" onchange="changeCardUnit('asahi')"> 1ケース単位</label>
+            </div>
             <div class="card-qty-row">
               <button type="button" class="qty-btn" onclick="changeCardQty('asahi',-1)">−</button>
               <span class="qty-num" id="card-qty-asahi">1</span>
               <button type="button" class="qty-btn" onclick="changeCardQty('asahi',1)">＋</button>
-              <span style="font-size:0.78rem;color:var(--color-text-light);margin-left:4px;">本</span>
+              <span style="font-size:0.78rem;color:var(--color-text-light);margin-left:4px;" id="card-unit-asahi">本</span>
             </div>
             <div class="card-subtotal-row">
               <span class="card-subtotal" id="card-sub-asahi">¥425</span>
@@ -408,12 +418,16 @@
             <span class="product-tag">ビール</span>
             <h3 class="product-name">キリンラガービール 大瓶</h3>
             <p class="product-desc-short">100年以上の歴史を誇る、コクと旨味の伝統的なラガービール。</p>
-            <div class="product-price">¥425 <small>/本（税込）</small><br><small style="color:var(--color-text-light);">1ケース：¥8,700</small></div>
+            <div class="product-price">¥425 <small>/本（税込）</small><br><small style="color:var(--color-text-light);">1ケース（20本）：¥8,700</small></div>
+            <div class="card-unit-row">
+              <label class="card-unit-label"><input type="radio" name="unit-kirin" value="本" checked onchange="changeCardUnit('kirin')"> 1本単位</label>
+              <label class="card-unit-label"><input type="radio" name="unit-kirin" value="ケース" onchange="changeCardUnit('kirin')"> 1ケース単位</label>
+            </div>
             <div class="card-qty-row">
               <button type="button" class="qty-btn" onclick="changeCardQty('kirin',-1)">−</button>
               <span class="qty-num" id="card-qty-kirin">1</span>
               <button type="button" class="qty-btn" onclick="changeCardQty('kirin',1)">＋</button>
-              <span style="font-size:0.78rem;color:var(--color-text-light);margin-left:4px;">本</span>
+              <span style="font-size:0.78rem;color:var(--color-text-light);margin-left:4px;" id="card-unit-kirin">本</span>
             </div>
             <div class="card-subtotal-row">
               <span class="card-subtotal" id="card-sub-kirin">¥425</span>
@@ -433,12 +447,16 @@
             <span class="product-tag">ビール</span>
             <h3 class="product-name">サッポロ黒ラベル 大瓶</h3>
             <p class="product-desc-short">生ビールのおいしさを追求した、すっきりした飲みごたえが特徴。</p>
-            <div class="product-price">¥425 <small>/本（税込）</small><br><small style="color:var(--color-text-light);">1ケース：¥8,700</small></div>
+            <div class="product-price">¥425 <small>/本（税込）</small><br><small style="color:var(--color-text-light);">1ケース（20本）：¥8,700</small></div>
+            <div class="card-unit-row">
+              <label class="card-unit-label"><input type="radio" name="unit-sapporo" value="本" checked onchange="changeCardUnit('sapporo')"> 1本単位</label>
+              <label class="card-unit-label"><input type="radio" name="unit-sapporo" value="ケース" onchange="changeCardUnit('sapporo')"> 1ケース単位</label>
+            </div>
             <div class="card-qty-row">
               <button type="button" class="qty-btn" onclick="changeCardQty('sapporo',-1)">−</button>
               <span class="qty-num" id="card-qty-sapporo">1</span>
               <button type="button" class="qty-btn" onclick="changeCardQty('sapporo',1)">＋</button>
-              <span style="font-size:0.78rem;color:var(--color-text-light);margin-left:4px;">本</span>
+              <span style="font-size:0.78rem;color:var(--color-text-light);margin-left:4px;" id="card-unit-sapporo">本</span>
             </div>
             <div class="card-subtotal-row">
               <span class="card-subtotal" id="card-sub-sapporo">¥425</span>
@@ -822,32 +840,38 @@
           <label class="modal-label">注文単位と数量 <span class="req">必須</span></label>
           <div class="qty-unit-group">
             <label class="qty-unit-label">
-              <input type="radio" name="qtyUnit" value="本" checked onchange="updateQtyLabel()"> 1本単位
+              <input type="radio" name="qtyUnit" value="本" checked onchange="updateQtyLabel()"> 1本単位（¥425）
             </label>
             <label class="qty-unit-label">
-              <input type="radio" name="qtyUnit" value="ケース" onchange="updateQtyLabel()"> 1ケース単位
+              <input type="radio" name="qtyUnit" value="ケース" onchange="updateQtyLabel()"> 1ケース単位（20本・¥8,700）
             </label>
           </div>
-          <div class="modal-qty-row">
-            <div class="qty-spinner-wrap">
-              <button type="button" class="qty-spin-btn" onclick="changeModalQty('beerQty', -1)">▼</button>
-              <input type="number" id="beerQty" class="modal-input qty-spin-input" value="1" min="1" oninput="onOrderQtyChange()">
-              <button type="button" class="qty-spin-btn" onclick="changeModalQty('beerQty', 1)">▲</button>
+          <div class="modal-qty-row" style="justify-content:space-between;">
+            <div style="display:flex;align-items:center;gap:12px;">
+              <div class="qty-spinner-wrap">
+                <button type="button" class="qty-spin-btn" onclick="changeModalQty('beerQty', -1)">▼</button>
+                <input type="number" id="beerQty" class="modal-input qty-spin-input" value="1" min="1" oninput="onOrderQtyChange()">
+                <button type="button" class="qty-spin-btn" onclick="changeModalQty('beerQty', 1)">▲</button>
+              </div>
+              <span class="qty-unit-label-text" id="beerQtyUnit">本</span>
             </div>
-            <span class="qty-unit-label-text" id="beerQtyUnit">本</span>
+            <span class="qty-amount" id="beerQtyAmount">¥425</span>
           </div>
         </div>
 
         <!-- 数量（ビール以外） -->
         <div class="modal-form-group" id="normalQtyGroup" style="display:none">
           <label class="modal-label">数量（本） <span class="req">必須</span></label>
-          <div class="modal-qty-row">
-            <div class="qty-spinner-wrap">
-              <button type="button" class="qty-spin-btn" onclick="changeModalQty('normalQty', -1)">▼</button>
-              <input type="number" id="normalQty" class="modal-input qty-spin-input" value="1" min="1" oninput="onOrderQtyChange()">
-              <button type="button" class="qty-spin-btn" onclick="changeModalQty('normalQty', 1)">▲</button>
+          <div class="modal-qty-row" style="justify-content:space-between;">
+            <div style="display:flex;align-items:center;gap:12px;">
+              <div class="qty-spinner-wrap">
+                <button type="button" class="qty-spin-btn" onclick="changeModalQty('normalQty', -1)">▼</button>
+                <input type="number" id="normalQty" class="modal-input qty-spin-input" value="1" min="1" oninput="onOrderQtyChange()">
+                <button type="button" class="qty-spin-btn" onclick="changeModalQty('normalQty', 1)">▲</button>
+              </div>
+              <span class="qty-unit-label-text">本</span>
             </div>
-            <span class="qty-unit-label-text">本</span>
+            <span class="qty-amount" id="normalQtyAmount"></span>
           </div>
         </div>
 
@@ -1098,25 +1122,48 @@ let cardQty = {};    // カード上の数量 { key: qty }
 let isCartOrder = false; // カート注文フラグ
 
 // カード数量変更
+// カードの選択単位を保持
+let cardUnit = {};
+
+function getCardUnit(key) {
+  return cardUnit[key] || '本';
+}
+
+function changeCardUnit(key) {
+  const sel = document.querySelector(`input[name="unit-${key}"]:checked`);
+  cardUnit[key] = sel ? sel.value : '本';
+  const unitEl = document.getElementById(`card-unit-${key}`);
+  if (unitEl) unitEl.textContent = cardUnit[key];
+  changeCardQty(key, 0); // 小計更新
+}
+
 function changeCardQty(key, delta) {
   if (!cardQty[key]) cardQty[key] = 1;
   cardQty[key] = Math.max(1, cardQty[key] + delta);
   const el = document.getElementById(`card-qty-${key}`);
   if (el) el.textContent = cardQty[key];
   const p = PRODUCTS[key];
-  if (p.price) {
-    const sub = document.getElementById(`card-sub-${key}`);
-    if (sub) sub.textContent = `¥${(p.price * cardQty[key]).toLocaleString()}`;
+  const sub = document.getElementById(`card-sub-${key}`);
+  if (!sub) return;
+  if (p.isBeer) {
+    const unit = getCardUnit(key);
+    const unitPrice = unit === 'ケース' ? (p.casePrice||8700) : (p.price||425);
+    sub.textContent = `¥${(unitPrice * cardQty[key]).toLocaleString()}`;
+  } else if (p.price) {
+    sub.textContent = `¥${(p.price * cardQty[key]).toLocaleString()}`;
   }
 }
 
 // カートに追加
 function addToCart(key) {
   const qty = cardQty[key] || 1;
-  if (!cart[key]) cart[key] = { qty: 0, unit: '本' };
-  cart[key].qty += qty;
+  const unit = PRODUCTS[key].isBeer ? getCardUnit(key) : '本';
+  // 同一商品でも単位が違えば別エントリにする
+  const cartKey = PRODUCTS[key].isBeer ? `${key}__${unit}` : key;
+  if (!cart[cartKey]) cart[cartKey] = { qty: 0, unit: unit, productKey: key };
+  cart[cartKey].qty += qty;
   updateCartBadge();
-  showToast(`${PRODUCTS[key].name} を${qty}本カートに追加しました`);
+  showToast(`${PRODUCTS[key].name} を${qty}${unit}カートに追加しました`);
   cardQty[key] = 1;
   changeCardQty(key, 0); // 表示リセット
 }
@@ -1175,21 +1222,29 @@ function renderCart() {
   let itemsHtml = '';
 
   keys.forEach(key => {
-    const p = PRODUCTS[key];
+    const p = PRODUCTS[cart[key].productKey || key];
     const { qty } = cart[key];
-    const lineTotal = p.price ? p.price * qty : null;
+    const unit = cart[key].unit || '本';
+    const unitPrice = p.isBeer
+      ? (unit === 'ケース' ? (p.casePrice||8700) : (p.price||425))
+      : (p.price || null);
+    const lineTotal = unitPrice ? unitPrice * qty : null;
     if (lineTotal) subtotal += lineTotal;
     else hasUnknown = true;
+    const unitLabel = (p.isBeer && unit === 'ケース') ? 'ケース' : '本';
+    const unitPriceText = unitPrice
+      ? `¥${unitPrice.toLocaleString()}/${unitLabel}`
+      : '価格はお問い合わせください';
     itemsHtml += `
       <div class="cart-item">
         <img src="${p.img}" alt="${p.name}" class="cart-item-img">
         <div class="cart-item-info">
-          <div class="cart-item-name">${p.formalName}</div>
-          <div class="cart-item-unit-price">${p.price ? '¥'+p.price.toLocaleString()+'/本' : '価格はお問い合わせください'}</div>
+          <div class="cart-item-name">${p.formalName}${p.isBeer && unit==='ケース' ? '（ケース）' : ''}</div>
+          <div class="cart-item-unit-price">${unitPriceText}</div>
         </div>
         <div class="cart-item-qty-ctrl">
           <button onclick="changeCartQty('${key}',-1)">−</button>
-          <span>${qty}本</span>
+          <span>${qty}${unitLabel}</span>
           <button onclick="changeCartQty('${key}',1)">＋</button>
         </div>
         <div class="cart-item-subtotal">${lineTotal ? '¥'+lineTotal.toLocaleString() : '—'}</div>
@@ -1211,13 +1266,10 @@ function renderCart() {
     deliveryHtml = `<p class="cart-note">※ ¥2,000以上のご注文で配達料無料です。</p>`;
   }
 
-  const unknownNote = hasUnknown ? '<p class="cart-note">※ ビールの価格はお問い合わせください。合計には含まれていません。</p>' : '';
-
   body.innerHTML = `
     ${itemsHtml}
     <div class="cart-summary">
-      <div class="cart-summary-row"><span>小計（価格確定分）</span><span class="cart-summary-total">¥${subtotal.toLocaleString()}</span></div>
-      ${unknownNote}
+      <div class="cart-summary-row"><span>小計</span><span class="cart-summary-total">¥${subtotal.toLocaleString()}</span></div>
       ${deliveryHtml}
     </div>
     <button class="btn-cart-order" onclick="orderFromCart()">この内容で注文する →</button>
@@ -1244,13 +1296,12 @@ function orderFromCart() {
   closeCart();
   // カート内容をまとめて注文モーダルへ
   const keys = Object.keys(cart).filter(k => cart[k].qty > 0);
-  const names = keys.map(k => `${PRODUCTS[k].formalName} ×${cart[k].qty}本`).join('、');
-  const subtotal = keys.reduce((s,k) => s + (PRODUCTS[k].price ? PRODUCTS[k].price * cart[k].qty : 0), 0);
-  document.getElementById('orderProductName').textContent = `カート (${keys.length}種類)`;
-  document.getElementById('orderProductPrice').textContent = subtotal > 0 ? `小計 ¥${subtotal.toLocaleString()}（+ 価格未定商品あり）` : '価格はお問い合わせください';
+  const subtotal = getOrderTotal();
+  document.getElementById('orderProductName').textContent = `カート (${keys.length}点)`;
+  document.getElementById('orderProductPrice').textContent = `小計 ¥${subtotal.toLocaleString()}`;
 
   // アルコール商品が含まれる場合は年齢確認表示
-  const hasAlcohol = keys.some(k => PRODUCTS[k].isAlcohol);
+  const hasAlcohol = keys.some(k => PRODUCTS[cart[k].productKey || k].isAlcohol);
   document.getElementById('alcoholWarning').classList.toggle('show', hasAlcohol);
   document.getElementById('birthdayGroup').style.display = hasAlcohol ? 'block' : 'none';
   document.getElementById('birthdayGroup').querySelector('input').required = hasAlcohol;
@@ -1434,7 +1485,7 @@ function getOrderTotal() {
   if (isCartOrder) {
     return Object.keys(cart).filter(k => cart[k].qty > 0)
       .reduce((s, k) => {
-        const p = PRODUCTS[k];
+        const p = PRODUCTS[cart[k].productKey || k];
         const unitPrice = p.isBeer
           ? (cart[k].unit === 'ケース' ? (p.casePrice||8700) : (p.price||425))
           : (p.price || 0);
@@ -1454,6 +1505,21 @@ function getOrderTotal() {
 
 // 注文モーダル内での数量変更時
 function onOrderQtyChange() {
+  // 数量欄の金額表示を更新
+  const p = currentProductKey ? PRODUCTS[currentProductKey] : null;
+  if (p && !isCartOrder) {
+    if (p.isBeer) {
+      const unit = document.querySelector('input[name="qtyUnit"]:checked')?.value || '本';
+      const qty  = parseInt(document.getElementById('beerQty').value) || 1;
+      const unitPrice = getBeerUnitPrice(p, unit);
+      const amtEl = document.getElementById('beerQtyAmount');
+      if (amtEl) amtEl.textContent = `¥${(unitPrice * qty).toLocaleString()}`;
+    } else if (p.price) {
+      const qty = parseInt(document.getElementById('normalQty').value) || 1;
+      const amtEl = document.getElementById('normalQtyAmount');
+      if (amtEl) amtEl.textContent = `¥${(p.price * qty).toLocaleString()}`;
+    }
+  }
   updateFeeDisplay();
 }
 
@@ -1650,7 +1716,7 @@ async function submitOrder(e) {
   // カート注文 or 単品注文
   const p = isCartOrder ? null : PRODUCTS[currentProductKey];
   const isAlcohol = isCartOrder
-    ? Object.keys(cart).filter(k=>cart[k].qty>0).some(k=>PRODUCTS[k].isAlcohol)
+    ? Object.keys(cart).filter(k=>cart[k].qty>0).some(k=>PRODUCTS[cart[k].productKey || k].isAlcohol)
     : p.isAlcohol;
 
   // 年齢チェック
@@ -1681,8 +1747,9 @@ async function submitOrder(e) {
   if (isCartOrder) {
     const keys = Object.keys(cart).filter(k => cart[k].qty > 0);
     productName = keys.map(k => {
-      const u = (PRODUCTS[k].isBeer && cart[k].unit === 'ケース') ? 'ケース' : '本';
-      return `${PRODUCTS[k].formalName} ×${cart[k].qty}${u}`;
+      const pp = PRODUCTS[cart[k].productKey || k];
+      const u = (pp.isBeer && cart[k].unit === 'ケース') ? 'ケース' : '本';
+      return `${pp.formalName} ×${cart[k].qty}${u}`;
     }).join('\n');
     qtyText = `合計 ${keys.reduce((s,k)=>s+cart[k].qty,0)} 点（複数商品）`;
   } else {
@@ -1775,7 +1842,7 @@ async function submitOrder(e) {
       let beerSingle = false; // 本単位のビール注文あり
       if (isCartOrder) {
         Object.keys(cart).filter(k => cart[k].qty > 0).forEach(k => {
-          if (PRODUCTS[k].isBeer) {
+          if (PRODUCTS[cart[k].productKey || k].isBeer) {
             if (cart[k].unit === 'ケース') beerCase = true;
             else beerSingle = true;
           }
