@@ -32,6 +32,64 @@
       margin: 20px auto;
     }
 
+    /* 看板・シンボルセクション */
+    .signboard-section {
+      background: linear-gradient(160deg, #1c1a18 0%, #2e2b26 100%);
+      padding: 70px 20px;
+    }
+    .signboard-wrap {
+      display: grid;
+      grid-template-columns: 0.85fr 1fr;
+      gap: 50px;
+      align-items: center;
+    }
+    .signboard-img-box {
+      position: relative;
+    }
+    .signboard-img {
+      width: 100%;
+      max-width: 360px;
+      display: block;
+      margin: 0 auto;
+      border-radius: 4px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+    }
+    .signboard-text {
+      color: #fff;
+    }
+    .signboard-badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      letter-spacing: 0.35em;
+      color: var(--color-accent);
+      border: 1px solid var(--color-accent);
+      padding: 5px 16px;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+    .signboard-title {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      color: #fff;
+      line-height: 1.5;
+      margin-bottom: 24px;
+      letter-spacing: 0.05em;
+    }
+    .signboard-desc {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.8);
+      line-height: 2;
+    }
+    @media (max-width: 768px) {
+      .signboard-wrap {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        text-align: center;
+      }
+      .signboard-badge { margin-top: 0; }
+      .signboard-desc { text-align: left; }
+    }
+
     /* 会社概要テーブル */
     .about-section {
       background: var(--color-bg);
@@ -244,6 +302,26 @@
     <div class="page-hero-line"></div>
     <p>About Us</p>
   </div>
+
+  <!-- 看板・シンボルセクション -->
+  <section class="signboard-section">
+    <div class="section-inner">
+      <div class="signboard-wrap">
+        <div class="signboard-img-box">
+          <img src="かしはら酒店看板.jpg" alt="かしはら酒店の看板「酒」" class="signboard-img">
+        </div>
+        <div class="signboard-text">
+          <div class="signboard-badge">Our Symbol</div>
+          <h2 class="signboard-title">受け継がれる、<br>酒屋のこころ。</h2>
+          <p class="signboard-desc">
+            この看板は、長年地域とともに歩んできた、かしはら酒店のシンボルです。<br><br>
+            これまで受け継がれてきた想いを大切にしながら、新しい時代に合わせた酒屋づくりに取り組んでいます。<br><br>
+            先代から受け継いだ酒屋の歴史と、地域とのつながりをこれからも大切にしてまいります。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- 会社概要 -->
   <section class="about-section">
