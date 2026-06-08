@@ -161,6 +161,47 @@
       50% { transform: translateX(-50%) translateY(8px); }
     }
 
+    /* ===== 新ロゴ・キャッチコピーセクション ===== */
+    .logo-intro {
+      background: var(--color-bg);
+      padding: 70px 20px 50px;
+    }
+    .logo-intro-inner {
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .logo-intro-img {
+      width: 100%;
+      max-width: 320px;
+      height: auto;
+      display: block;
+      margin: 0 auto 30px;
+    }
+    .logo-catch {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 700;
+      color: var(--color-primary);
+      line-height: 1.5;
+      letter-spacing: 0.08em;
+      margin-bottom: 24px;
+    }
+    .logo-sub {
+      font-size: 0.95rem;
+      color: var(--color-text-light);
+      line-height: 2;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+    .logo-divider {
+      color: var(--color-accent);
+      font-size: 0.9rem;
+      margin-top: 36px;
+      opacity: 0.6;
+      letter-spacing: 0.3em;
+    }
+
     /* ===== 店舗外観・ビジョンセクション ===== */
     .store-intro {
       background: linear-gradient(160deg, #1c1a18 0%, #2e2b26 50%, #1c1a18 100%);
@@ -570,6 +611,16 @@
       <a href="products.html" class="btn btn-primary">商品を見る</a>
     </div>
     <div class="hero-scroll">SCROLL</div>
+  </section>
+
+  <!-- 新ロゴ・キャッチコピー -->
+  <section class="logo-intro">
+    <div class="logo-intro-inner">
+      <img src="かしはら酒店ロゴ.jpg" alt="かしはら酒店 ロゴ（お酒の配達・地域のよろず屋・スマホ相談）" class="logo-intro-img">
+      <h2 class="logo-catch">酒屋から、<br>地域の相談拠点へ。</h2>
+      <p class="logo-sub">お酒の販売や配達に加え、地域の皆さまの暮らしを支える身近なパートナーを目指しています。</p>
+      <div class="logo-divider">◆</div>
+    </div>
   </section>
 
   <!-- 店舗外観 & ビジョン -->
