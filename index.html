@@ -178,6 +178,12 @@
       display: block;
       margin: 0 auto 22px;
     }
+    /* PC：ロゴを大きく、補足文を1行に */
+    @media (min-width: 769px) {
+      .logo-intro-inner { max-width: 900px; }
+      .logo-intro-img { max-width: 380px; }
+      .logo-sub { max-width: none; white-space: nowrap; font-size: 1.1rem; }
+    }
     .logo-catch {
       font-family: 'Noto Serif JP', serif;
       font-size: clamp(1.6rem, 4vw, 2.4rem);
