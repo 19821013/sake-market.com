@@ -194,20 +194,32 @@
 <script>
 function toggleNav() { document.getElementById('main-nav').classList.toggle('open'); }
 
-const map = L.map('deliveryMap').setView([34.7800, 135.6523], 10);
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap contributors'}).addTo(map);
+const STORE = [34.8295796, 135.6522798];
 
-// 大阪府の範囲（ポリゴン）をシンプルに表現
-L.circle([34.7800, 135.5200], {radius:40000, color:'#3498db', fillColor:'#3498db', fillOpacity:0.1, weight:2, dashArray:'6'})
-  .addTo(map).bindPopup('大阪府内（全域対応）');
+const map = L.map('deliveryMap').setView([34.62, 135.50], 9);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '© OpenStreetMap contributors', maxZoom: 19
+}).addTo(map);
 
-// 10km圏内（近隣京都府含む）
-L.circle([34.8295796, 135.6522798], {radius:10000, color:'#f39c12', fillColor:'#f1c40f', fillOpacity:0.2, weight:2})
+// 大阪府の境界線（薄い青）— 府内が配達エリアであることを表現
+fetch('osaka.geojson')
+  .then(r => r.json())
+  .then(geo => {
+    const osaka = L.geoJSON(geo, {
+      style: { color: '#3498db', weight: 1.5, opacity: 0.8, fillColor: '#3498db', fillOpacity: 0.05 }
+    }).addTo(map).bindPopup('大阪府内（全域配達対応）');
+    // 大阪府全体と店舗が収まるよう表示範囲を自動調整
+    map.fitBounds(osaka.getBounds().extend(STORE), { padding: [20, 20] });
+  })
+  .catch(() => {});
+
+// 店舗から10km圏内（近隣京都府エリア含む）
+L.circle(STORE, { radius: 10000, color: '#f39c12', fillColor: '#f1c40f', fillOpacity: 0.2, weight: 2 })
   .addTo(map).bindPopup('店舗から10km圏内（近隣京都府エリア含む）');
 
-// 店舗マーカー
-const icon = L.divIcon({html:'<div style="background:#e74c3c;width:16px;height:16px;border-radius:50%;border:3px solid white;box-shadow:0 2px 6px rgba(0,0,0,0.5);"></div>',iconSize:[16,16],iconAnchor:[8,8]});
-L.marker([34.8295796, 135.6522798], {icon}).addTo(map)
+// 店舗マーカー（かしはら酒店）
+const icon = L.divIcon({ html: '<div style="background:#e74c3c;width:16px;height:16px;border-radius:50%;border:3px solid white;box-shadow:0 2px 6px rgba(0,0,0,0.5);"></div>', iconSize: [16,16], iconAnchor: [8,8] });
+L.marker(STORE, { icon }).addTo(map)
   .bindPopup('<strong>かしはら酒店</strong><br>大阪府枚方市渚西1丁目21-12').openPopup();
 </script>
 </body>
