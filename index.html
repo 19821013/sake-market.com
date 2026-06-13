@@ -607,6 +607,75 @@
         grid-template-columns: 1fr 1fr;
       }
     }
+
+    /* ===== スマホ相談プレビュー ===== */
+    .smartphone-preview { background: var(--color-bg); padding: 80px 20px; }
+    .sp-preview-wrap { max-width: 580px; margin: 0 auto 40px; }
+    .sp-preview-card {
+      display: block;
+      text-decoration: none;
+      background: var(--color-white);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.09);
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .sp-preview-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 14px 40px rgba(0,0,0,0.14);
+    }
+    .sp-preview-img-wrap {
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+    }
+    .sp-preview-img-wrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.4s;
+    }
+    .sp-preview-card:hover .sp-preview-img-wrap img { transform: scale(1.02); }
+    .sp-preview-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(37,99,235,0.6);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Noto Serif JP', serif;
+      font-size: 1.2rem;
+      letter-spacing: 0.2em;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .sp-preview-card:hover .sp-preview-overlay { opacity: 1; }
+    .sp-preview-info {
+      padding: 22px 28px 24px;
+      border-top: 3px solid var(--color-blue);
+    }
+    .sp-preview-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 3px 10px;
+      background: var(--color-blue);
+      color: var(--color-white);
+      font-weight: 700;
+      margin-bottom: 10px;
+      letter-spacing: 0.05em;
+    }
+    .sp-preview-info h3 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 1.05rem;
+      color: var(--color-primary);
+      margin-bottom: 8px;
+      line-height: 1.6;
+    }
+    .sp-preview-info p {
+      font-size: 0.83rem;
+      color: var(--color-text-light);
+      line-height: 1.9;
+    }
   </style>
 </head>
 <body>
@@ -776,6 +845,30 @@
       </div>
       <div class="products-preview-cta">
         <a href="products.html" class="btn btn-outline">すべての商品を見る</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- スマホ相談プレビュー -->
+  <section class="smartphone-preview">
+    <div class="section-inner">
+      <h2 class="section-title">スマホ相談</h2>
+      <p class="section-title-en">Smartphone Consultation</p>
+      <div class="sp-preview-wrap">
+        <a href="smartphone.html" class="sp-preview-card">
+          <div class="sp-preview-img-wrap">
+            <img src="スマホ相談メニュー一覧.png" alt="スマホ相談はじめました チラシ — かしはら酒店のスマホ相談サービス">
+            <div class="sp-preview-overlay">詳しく見る →</div>
+          </div>
+          <div class="sp-preview-info">
+            <span class="sp-preview-tag">新サービス</span>
+            <h3>スマホのお困りごと、<br>お気軽にご相談ください</h3>
+            <p>LINE・PayPay・機種変更・バッテリー交換など対応<br>初回お試し相談 550円（オープン記念価格）</p>
+          </div>
+        </a>
+      </div>
+      <div class="products-preview-cta">
+        <a href="smartphone.html" class="btn btn-primary">スマホ相談の詳細を見る</a>
       </div>
     </div>
   </section>
