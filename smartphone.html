@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>スマホ相談・デジタル活用支援｜かしはら酒店（枚方市）</title>
+  <link rel="canonical" href="https://kashi-market.com/smartphone.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="かしはら酒店">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:title" content="スマホ相談・デジタル活用支援｜かしはら酒店（枚方市）">
+  <meta property="og:description" content="かしはら酒店のスマホ相談サービス。携帯ショップへ行くほどではないお困りごとをお気軽に。LINE・PayPay・機種変更・データ移行・iPhoneバッテリー交換など対応。初回550円。">
+  <meta property="og:url" content="https://kashi-market.com/smartphone.html">
+  <meta property="og:image" content="https://kashi-market.com/ogp.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="description" content="かしはら酒店のスマホ相談サービス。携帯ショップへ行くほどではないお困りごとをお気軽に。LINE・PayPay・機種変更・データ移行・iPhoneバッテリー交換など対応。初回550円。">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ページヒーロー */
+    .page-hero {
+      background: linear-gradient(135deg, #0a0e2a 0%, #0f1b4d 50%, #1a2060 100%);
+      padding: 120px 20px 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(ellipse at 20% 50%, rgba(37,99,235,0.2) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 50%, rgba(201,168,76,0.15) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .page-hero h1 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      color: var(--color-white);
+      letter-spacing: 0.15em;
+      margin-bottom: 10px;
+      position: relative;
+    }
+    .page-hero p.en {
+      font-size: 0.8rem;
+      color: var(--color-accent);
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      position: relative;
+    }
+    .page-hero-line { width: 60px; height: 1px; background: var(--color-accent); margin: 20px auto; }
+    .hero-tags {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 20px;
+      position: relative;
+    }
+    .hero-tag {
+      background: rgba(37,99,235,0.3);
+      border: 1px solid rgba(37,99,235,0.5);
+      color: #93c5fd;
+      font-size: 0.75rem;
+      padding: 5px 14px;
+      letter-spacing: 0.1em;
+    }
+
+    /* チラシセクション */
+    .flyer-section { background: var(--color-bg-dark); padding: 60px 20px; }
+    .flyer-wrap {
+      max-width: 480px;
+      margin: 0 auto;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.15);
+      overflow: hidden;
+    }
+    .flyer-wrap img { width: 100%; height: auto; display: block; }
+
+    /* イメージ＋説明 */
+    .concept-section { background: var(--color-bg); padding: 80px 20px; }
+    .concept-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .concept-img-wrap { border-radius: 6px; overflow: hidden; box-shadow: 0 8px 40px rgba(0,0,0,0.12); }
+    .concept-img-wrap img { width: 100%; height: auto; display: block; }
+    .concept-text h3 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 1.4rem;
+      color: var(--color-primary);
+      margin-bottom: 20px;
+      line-height: 1.7;
+    }
+    .concept-text p { font-size: 0.92rem; color: var(--color-text-light); line-height: 2; }
+    .concept-text .hl { color: var(--color-blue); font-weight: 700; }
+
+    /* お困りごとリスト */
+    .trouble-section { background: var(--color-bg-dark); padding: 80px 20px; }
+    .trouble-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      max-width: 820px;
+      margin: 0 auto;
+    }
+    .trouble-item {
+      background: var(--color-white);
+      padding: 16px 20px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      border-left: 3px solid var(--color-blue);
+    }
+    .trouble-check { color: var(--color-blue); font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+    .trouble-text { font-size: 0.9rem; color: var(--color-text); line-height: 1.6; }
+
+    /* 料金テーブル */
+    .price-section { background: var(--color-bg); padding: 80px 20px; }
+    .price-badge {
+      display: inline-block;
+      background: #e74c3c;
+      color: #fff;
+      font-size: 0.75rem;
+      padding: 4px 14px;
+      letter-spacing: 0.15em;
+      margin-bottom: 30px;
+      font-weight: 700;
+    }
+    .price-table-wrap {
+      max-width: 640px;
+      margin: 0 auto;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+    .price-table { width: 100%; border-collapse: collapse; }
+    .price-table thead tr { background: var(--color-primary); }
+    .price-table thead th {
+      color: var(--color-accent);
+      font-family: 'Noto Serif JP', serif;
+      font-size: 0.85rem;
+      padding: 14px 20px;
+      letter-spacing: 0.1em;
+      text-align: left;
+    }
+    .price-table tbody tr { background: var(--color-white); border-bottom: 1px solid var(--color-border); }
+    .price-table tbody tr:nth-child(even) { background: var(--color-bg); }
+    .price-table tbody tr.featured { background: #eff6ff; border-left: 4px solid var(--color-blue); }
+    .price-table tbody td { padding: 16px 20px; font-size: 0.9rem; color: var(--color-text); }
+    .price-val {
+      font-family: 'Noto Serif JP', serif;
+      font-weight: 700;
+      color: var(--color-blue);
+      font-size: 1.05rem;
+    }
+    .price-note { font-size: 0.75rem; color: var(--color-text-light); }
+    .price-disclaimer {
+      max-width: 640px;
+      margin: 14px auto 0;
+      font-size: 0.8rem;
+      color: var(--color-text-light);
+      line-height: 1.9;
+    }
+
+    /* その他メニュー */
+    .menu-section { background: var(--color-bg-dark); padding: 80px 20px; }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-width: 900px;
+      margin: 0 auto 25px;
+    }
+    .menu-card {
+      background: var(--color-white);
+      padding: 28px 18px;
+      text-align: center;
+      box-shadow: 0 3px 15px rgba(0,0,0,0.07);
+      border-top: 3px solid var(--color-blue);
+    }
+    .menu-icon { font-size: 2rem; margin-bottom: 12px; }
+    .menu-name {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 0.92rem;
+      color: var(--color-primary);
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+    .menu-sub { font-size: 0.78rem; color: var(--color-text-light); line-height: 1.7; }
+
+    /* 詳細料金表 */
+    .detail-price-section { background: var(--color-bg); padding: 80px 20px; }
+    .detail-price-wrap {
+      max-width: 540px;
+      margin: 0 auto;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.12);
+      overflow: hidden;
+    }
+    .detail-price-wrap img { width: 100%; height: auto; display: block; }
+
+    /* フォームセクション */
+    .form-section { background: var(--color-bg-dark); }
+    .form-wrap {
+      max-width: 720px;
+      margin: 0 auto;
+      background: var(--color-white);
+      padding: 60px;
+      box-shadow: 0 5px 30px rgba(0,0,0,0.08);
+    }
+    .form-group { margin-bottom: 28px; }
+    .form-label {
+      display: block;
+      font-family: 'Noto Serif JP', serif;
+      font-size: 0.88rem;
+      color: var(--color-primary);
+      margin-bottom: 8px;
+      letter-spacing: 0.05em;
+    }
+    .form-label .req {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 2px 6px;
+      background: var(--color-blue);
+      color: #fff;
+      font-weight: 700;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+    .form-label .opt {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 2px 6px;
+      background: var(--color-bg-dark);
+      color: var(--color-text-light);
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+    .form-input, .form-select, .form-textarea {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid var(--color-border);
+      background: var(--color-bg);
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 0.95rem;
+      color: var(--color-text);
+      outline: none;
+      transition: border-color 0.3s, box-shadow 0.3s;
+      border-radius: 0;
+      -webkit-appearance: none;
+    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      border-color: var(--color-blue);
+      box-shadow: 0 0 0 3px rgba(37,99,235,0.12);
+      background: var(--color-white);
+    }
+    .form-textarea { resize: vertical; min-height: 160px; }
+    .form-select {
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%232563EB' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      padding-right: 40px;
+    }
+    .form-privacy {
+      background: var(--color-bg-dark);
+      padding: 20px;
+      font-size: 0.82rem;
+      color: var(--color-text-light);
+      line-height: 1.8;
+      margin-bottom: 30px;
+    }
+    .form-check {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 30px;
+    }
+    .form-check input[type="checkbox"] {
+      margin-top: 3px;
+      accent-color: var(--color-blue);
+      width: 16px; height: 16px;
+      cursor: pointer;
+    }
+    .form-check label { font-size: 0.88rem; color: var(--color-text); cursor: pointer; }
+    .form-submit { text-align: center; }
+    .btn-submit-blue {
+      background: var(--color-blue);
+      color: var(--color-white);
+      font-family: 'Noto Serif JP', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 18px 80px;
+      border: none;
+      cursor: pointer;
+      letter-spacing: 0.2em;
+      transition: all 0.3s;
+    }
+    .btn-submit-blue:hover {
+      background: var(--color-blue-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(37,99,235,0.35);
+    }
+    .form-note {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--color-text-light);
+      margin-top: 15px;
+    }
+
+    @media (max-width: 768px) {
+      .concept-grid { grid-template-columns: 1fr; gap: 30px; }
+      .trouble-grid { grid-template-columns: 1fr; }
+      .menu-grid { grid-template-columns: repeat(2, 1fr); }
+      .form-wrap { padding: 30px 20px; }
+    }
+    @media (max-width: 480px) {
+      .menu-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-jp">かしはら酒店</span>
+      <span class="logo-en">Kashihara Sake Shop</span>
+    </a>
+    <div class="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></div>
+    <nav id="main-nav">
+      <ul>
+        <li><a href="index.html">トップ</a></li>
+        <li><a href="products.html">商品一覧</a></li>
+        <li><a href="delivery.html">配達範囲</a></li>
+        <li><a href="smartphone.html" class="active">スマホ相談</a></li>
+        <li><a href="about.html">会社案内</a></li>
+        <li><a href="contact.html">お問い合わせ</a></li>
+        <li><a href="tokusho.html">特定商取引法に基づく表記</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- ページヒーロー -->
+<div class="page-hero">
+  <h1>スマホ相談</h1>
+  <div class="page-hero-line"></div>
+  <p class="en">Smartphone Consultation</p>
+  <div class="hero-tags">
+    <span class="hero-tag">📱 スマホのお困りごと</span>
+    <span class="hero-tag">💬 気軽に相談できる</span>
+    <span class="hero-tag">🏪 地域の酒屋で</span>
+  </div>
+</div>
+
+<!-- ① スマホ相談はじめましたチラシ -->
+<section class="flyer-section">
+  <div class="section-inner">
+    <h2 class="section-title">スマホ相談 はじめました</h2>
+    <p class="section-title-en">New Service Launch</p>
+    <div class="flyer-wrap">
+      <img src="スマホ相談メニュー一覧.png" alt="スマホ相談はじめました チラシ — かしはら酒店のスマホ相談サービス案内">
+    </div>
+  </div>
+</section>
+
+<!-- ② イメージ画像＋コンセプト -->
+<section class="concept-section">
+  <div class="section-inner">
+    <h2 class="section-title">地域の酒屋で、気軽に相談を</h2>
+    <p class="section-title-en">Your Neighborhood Digital Helper</p>
+    <div class="concept-grid">
+      <div class="concept-img-wrap">
+        <img src="スマホ相談の描写.png" alt="かしはら酒店でスマホ相談をしているイメージ — 高齢のお客様が店頭で店主にスマートフォンを見せながら相談している様子">
+      </div>
+      <div class="concept-text">
+        <h3>携帯ショップへ行くほどでは<br>ないお困りごとに。</h3>
+        <p>
+          かしはら酒店では、お酒の配達や地域の皆さまとのつながりを大切にしてきました。<br><br>
+          その中で「<span class="hl">LINEの使い方が分からない</span>」「<span class="hl">スマホ料金を見直したい</span>」「<span class="hl">機種変更が不安</span>」といったご相談をいただく機会が増えています。<br><br>
+          そこで、地域の皆さまが<strong>気軽に相談できる窓口</strong>として、スマホ相談サービスを開始いたしました。<br><br>
+          スマートフォンショップに行くほどではない、ちょっとしたお困りごとでも、お気軽にどうぞ。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ③ サービスコンセプトバー -->
+<div style="background:var(--color-primary);padding:50px 20px;text-align:center;">
+  <div class="section-inner">
+    <p style="font-family:'Noto Serif JP',serif;font-size:1.1rem;color:rgba(255,255,255,0.9);line-height:2.3;max-width:700px;margin:0 auto;">
+      「お酒の配達」「地域のよろず屋」そして「<strong style="color:var(--color-accent);">スマホ相談</strong>」。<br>
+      かしはら酒店は、地域の皆さまの暮らしに寄り添う存在でありたいと考えています。<br>
+      <span style="font-size:0.85rem;color:rgba(255,255,255,0.55);">※ お酒の配達の際にも相談を承っております</span>
+    </p>
+  </div>
+</div>
+
+<!-- ④ こんなお困りごとはありませんか？ -->
+<section class="trouble-section">
+  <div class="section-inner">
+    <h2 class="section-title">こんなお困りごとはありませんか？</h2>
+    <p class="section-title-en">Common Concerns</p>
+    <div class="trouble-grid">
+      <div class="trouble-item">
+        <span class="trouble-check">✓</span>
+        <span class="trouble-text">LINEの使い方がよく分からない</span>
+      </div>
+      <div class="trouble-item">
+        <span class="trouble-check">✓</span>
+        <span class="trouble-text">PayPayやキャッシュレス決済を始めたい</span>
+      </div>
+      <div class="trouble-item">
+        <span class="trouble-check">✓</span>
+        <span class="trouble-text">スマホ料金を見直したい</span>
+      </div>
+      <div class="trouble-item">
+        <span class="trouble-check">✓</span>
+        <span class="trouble-text">機種変更やデータ移行が不安</span>
+      </div>
+      <div class="trouble-item">
+        <span class="trouble-check">✓</span>
+        <span class="trouble-text">変なSMSや電話が来て心配</span>
+      </div>
+      <div class="trouble-item">
+        <span class="trouble-check">✓</span>
+        <span class="trouble-text">Wi-Fi接続や初期設定を手伝ってほしい</span>
+      </div>
+      <div class="trouble-item">
+        <span class="trouble-check">✓</span>
+        <span class="trouble-text">ご家族のスマホについて相談したい</span>
+      </div>
+      <div class="trouble-item">
+        <span class="trouble-check">✓</span>
+        <span class="trouble-text">アプリの使い方が分からない</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑤ オープン記念料金 -->
+<section class="price-section">
+  <div class="section-inner" style="text-align:center;">
+    <h2 class="section-title">オープン記念料金</h2>
+    <p class="section-title-en">Opening Special Price</p>
+    <div>
+      <span class="price-badge">オープン記念価格 ※2026年12月まで</span>
+    </div>
+    <div class="price-table-wrap">
+      <table class="price-table">
+        <thead>
+          <tr>
+            <th>サービス名</th>
+            <th>料金（税込）</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="featured">
+            <td>
+              <strong>【初回お試し相談】30分</strong><br>
+              <span class="price-note">初めての方限定・オープン記念価格</span>
+            </td>
+            <td class="price-val">550円</td>
+          </tr>
+          <tr>
+            <td>【2回目以降】30分</td>
+            <td class="price-val">1,100円</td>
+          </tr>
+          <tr>
+            <td>【個別相談】60分</td>
+            <td class="price-val">2,200円</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="price-disclaimer">
+      ※ 初回お試し相談はオープン記念価格です（2026年12月まで）<br>
+      ※ 表示価格はMVNO以外税込です
+    </p>
+  </div>
+</section>
+
+<!-- ⑥ その他の対応メニュー -->
+<section class="menu-section">
+  <div class="section-inner">
+    <h2 class="section-title">その他の対応メニュー</h2>
+    <p class="section-title-en">Other Services</p>
+    <div class="menu-grid">
+      <div class="menu-card">
+        <div class="menu-icon">🔍</div>
+        <div class="menu-name">スマホ健康診断</div>
+        <div class="menu-sub">90分 3,300円<br>スマホの状態を総合チェック</div>
+      </div>
+      <div class="menu-card">
+        <div class="menu-icon">📦</div>
+        <div class="menu-name">データ移行</div>
+        <div class="menu-sub">3,300円<br>機種変更時の大切なデータ移行</div>
+      </div>
+      <div class="menu-card">
+        <div class="menu-icon">🔋</div>
+        <div class="menu-name">iPhoneバッテリー交換</div>
+        <div class="menu-sub">7,700円〜<br>機種により価格が異なります</div>
+      </div>
+      <div class="menu-card">
+        <div class="menu-icon">🛡️</div>
+        <div class="menu-name">スマホコーティング</div>
+        <div class="menu-sub">4,400円〜（片面）<br>画面保護コーティング</div>
+      </div>
+      <div class="menu-card">
+        <div class="menu-icon">📡</div>
+        <div class="menu-name">MVNO（格安SIM）相談</div>
+        <div class="menu-sub">980円〜5,200円/月（税抜）<br>docomo回線の格安SIM対応</div>
+      </div>
+      <div class="menu-card">
+        <div class="menu-icon">💬</div>
+        <div class="menu-name">その他ご相談</div>
+        <div class="menu-sub">内容によりご案内<br>まずはお気軽にご相談を</div>
+      </div>
+    </div>
+    <p style="text-align:center;font-size:0.85rem;color:var(--color-text-light);">※ 詳細はお問い合わせください</p>
+  </div>
+</section>
+
+<!-- ⑦ 詳細料金表 -->
+<section class="detail-price-section">
+  <div class="section-inner">
+    <h2 class="section-title">スマホ相談 詳細料金表</h2>
+    <p class="section-title-en">Full Price List</p>
+    <div class="detail-price-wrap">
+      <img src="スマホ相談 料金詳細表.png" alt="スマホ相談 詳細料金表 — サービスメニュー一覧と各料金">
+    </div>
+  </div>
+</section>
+
+<!-- ⑧ お問い合わせ・ご予約フォーム -->
+<section class="form-section">
+  <div class="section-inner">
+    <h2 class="section-title">お問い合わせ・ご予約</h2>
+    <p class="section-title-en">Contact &amp; Reservation</p>
+
+    <p style="text-align:center;max-width:600px;margin:0 auto 40px;font-size:0.92rem;color:var(--color-text-light);line-height:2;">
+      スマホ相談をご希望の方は、お電話またはフォームよりお気軽にご連絡ください。<br>
+      「こんなこと相談しても大丈夫かな？」という内容でも歓迎しております。
+    </p>
+
+    <div style="display:flex;gap:15px;justify-content:center;flex-wrap:wrap;margin-bottom:50px;">
+      <a href="tel:0728480289" class="btn btn-primary">📞 072-848-0289</a>
+      <a href="mailto:sake@kashi-market.com" class="btn btn-outline">✉️ メールで問い合わせ</a>
+    </div>
+
+    <div class="form-wrap" style="position:relative;">
+
+      <div id="smSending" style="display:none;position:absolute;inset:0;background:rgba(255,255,255,0.92);z-index:10;flex-direction:column;align-items:center;justify-content:center;gap:16px;">
+        <div style="width:48px;height:48px;border:4px solid #d4c5a9;border-top-color:var(--color-blue);border-radius:50%;animation:spin 0.8s linear infinite;"></div>
+        <p style="font-family:'Noto Serif JP',serif;color:#1a0a00;">送信中です。しばらくお待ちください…</p>
+      </div>
+
+      <div id="smSuccess" style="display:none;padding:60px 30px;text-align:center;">
+        <div style="font-size:4rem;margin-bottom:20px;">✅</div>
+        <h3 style="font-family:'Noto Serif JP',serif;font-size:1.4rem;color:#1a0a00;margin-bottom:14px;">お問い合わせを受け付けました</h3>
+        <p style="font-size:0.9rem;color:#6b5440;line-height:1.9;margin-bottom:30px;">
+          ご連絡いただきありがとうございます。<br>
+          担当者より折り返しご連絡いたします。<br><br>
+          <strong>営業時間：11:00〜20:00（毎週火曜日定休）</strong><br>
+          お急ぎの場合はお電話ください：072-848-0289
+        </p>
+        <a href="index.html" class="btn btn-primary">トップページへ戻る</a>
+      </div>
+
+      <div id="smFormBody">
+        <div id="smError" style="display:none;background:#fff0f0;border:1px solid #f5a0a0;border-left:4px solid #e74c3c;padding:14px 16px;font-size:0.85rem;color:#8b0000;line-height:1.8;margin-bottom:20px;">
+          ⚠️ 送信に失敗しました。お手数ですが、お電話（072-848-0289）にてご連絡ください。
+        </div>
+
+        <form id="smForm" onsubmit="submitSmartphone(event)">
+
+          <div class="form-group">
+            <label class="form-label">お名前 <span class="req">必須</span></label>
+            <input type="text" id="smName" class="form-input" placeholder="例：山田 太郎" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">電話番号 <span class="req">必須</span></label>
+            <input type="tel" id="smPhone" class="form-input" placeholder="例：090-0000-0000" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">メールアドレス <span class="opt">任意</span></label>
+            <input type="email" id="smEmail" class="form-input" placeholder="例：example@email.com">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">ご相談内容 <span class="req">必須</span></label>
+            <textarea id="smMessage" class="form-textarea" placeholder="例：LINEの使い方について相談したい。iPhoneを使っています。" required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">ご希望日時 <span class="opt">任意</span></label>
+            <input type="text" id="smDate" class="form-input" placeholder="例：〇月〇日の午後など、ご希望があればお知らせください">
+          </div>
+
+          <div class="form-privacy">
+            <strong>個人情報の取り扱いについて</strong><br>
+            ご入力いただいた個人情報は、お問い合わせへの回答のみに使用し、第三者への提供は行いません。
+          </div>
+
+          <div class="form-check">
+            <input type="checkbox" id="smPrivacy" required>
+            <label for="smPrivacy">個人情報の取り扱いに同意する</label>
+          </div>
+
+          <div class="form-submit">
+            <button type="submit" id="smSubmitBtn" class="btn-submit-blue">送　信</button>
+            <p class="form-note">※ 担当者より折り返しご連絡いたします（営業時間：11:00〜20:00 火曜定休）</p>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <a href="index.html" class="logo"><span class="logo-jp">かしはら酒店</span></a>
+      <p style="margin-top:12px;"><span style="font-size:0.72rem;color:rgba(255,255,255,0.45);letter-spacing:0.05em;">運営会社</span><br>Kashi Market合同会社<br>〒573-1178<br>大阪府枚方市渚西1丁目21-12</p>
+    </div>
+    <div class="footer-nav">
+      <h4>Navigation</h4>
+      <ul>
+        <li><a href="index.html">トップページ</a></li>
+        <li><a href="products.html">商品一覧</a></li>
+        <li><a href="delivery.html">配達範囲</a></li>
+        <li><a href="smartphone.html">スマホ相談</a></li>
+        <li><a href="about.html">会社案内</a></li>
+        <li><a href="contact.html">お問い合わせ</a></li>
+        <li><a href="tokusho.html">特定商取引法に基づく表記</a></li>
+      </ul>
+    </div>
+    <div class="footer-info">
+      <h4>Shop Info</h4>
+      <p>📞 072-848-0289</p>
+      <p>📠 072-840-0339</p>
+      <p>✉️ sake@kashi-market.com</p>
+      <p>🕐 11:00〜20:00（火曜定休）</p>
+      <p>🚉 京阪本線御殿山駅 徒歩5分</p>
+      <p>📍 <a href="https://www.google.com/maps/search/?api=1&query=%E3%81%8B%E3%81%97%E3%81%AF%E3%82%89%E9%85%92%E5%BA%97%20%E5%A4%A7%E9%98%AA%E5%BA%9C%E6%9E%9A%E6%96%B9%E5%B8%82%E6%B8%9A%E8%A5%BF1%E4%B8%81%E7%9B%AE21-12" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">Googleマップで見る</a></p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2025 Kashi Market合同会社 かしはら酒店. All rights reserved.</p>
+  </div>
+</footer>
+
+<style>
+  @keyframes spin { to { transform: rotate(360deg); } }
+  #smSending { display: none; }
+  #smSending.show { display: flex !important; }
+</style>
+<script>
+function toggleNav() {
+  document.getElementById('main-nav').classList.toggle('open');
+}
+
+async function submitSmartphone(e) {
+  e.preventDefault();
+
+  if (!document.getElementById('smPrivacy').checked) {
+    alert('個人情報の取り扱いへの同意が必要です。');
+    return;
+  }
+
+  const name    = document.getElementById('smName').value;
+  const phone   = document.getElementById('smPhone').value;
+  const email   = document.getElementById('smEmail').value;
+  const message = document.getElementById('smMessage').value;
+  const date    = document.getElementById('smDate').value;
+
+  const data = {
+    _subject: `【スマホ相談】${name} 様`,
+    お名前: name,
+    電話番号: phone,
+    メールアドレス: email || 'なし',
+    ご相談内容: message,
+    ご希望日時: date || 'なし',
+  };
+
+  document.getElementById('smSending').classList.add('show');
+  document.getElementById('smSubmitBtn').disabled = true;
+  document.getElementById('smError').style.display = 'none';
+
+  try {
+    const res = await fetch('https://formspree.io/f/xlgkdwkd', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(data)
+    });
+
+    document.getElementById('smSending').classList.remove('show');
+
+    if (res.ok) {
+      document.getElementById('smFormBody').style.display = 'none';
+      document.getElementById('smSuccess').style.display = 'block';
+    } else {
+      document.getElementById('smSubmitBtn').disabled = false;
+      document.getElementById('smError').style.display = 'block';
+    }
+  } catch (err) {
+    document.getElementById('smSending').classList.remove('show');
+    document.getElementById('smSubmitBtn').disabled = false;
+    document.getElementById('smError').style.display = 'block';
+  }
+}
+</script>
+</body>
+</html>
