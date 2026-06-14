@@ -18,9 +18,9 @@
   <meta name="description" content="かしはら酒店のスマホ相談サービス。携帯ショップへ行くほどではないお困りごとをお気軽に。LINE・PayPay・機種変更・データ移行・iPhoneバッテリー交換など対応。初回550円。">
   <link rel="stylesheet" href="css/style.css">
   <style>
-    /* ページヒーロー */
+    /* ページヒーロー — 暖かみのある琥珀グラデーション */
     .page-hero {
-      background: linear-gradient(135deg, #0a0e2a 0%, #0f1b4d 50%, #1a2060 100%);
+      background: linear-gradient(135deg, #78350f 0%, #b45309 60%, #d97706 100%);
       padding: 120px 20px 80px;
       text-align: center;
       position: relative;
@@ -31,8 +31,8 @@
       position: absolute;
       inset: 0;
       background-image:
-        radial-gradient(ellipse at 20% 50%, rgba(37,99,235,0.2) 0%, transparent 60%),
-        radial-gradient(ellipse at 80% 50%, rgba(201,168,76,0.15) 0%, transparent 60%);
+        radial-gradient(ellipse at 20% 50%, rgba(255,200,80,0.15) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 50%, rgba(255,255,255,0.08) 0%, transparent 60%);
       pointer-events: none;
     }
     .page-hero h1 {
@@ -45,12 +45,12 @@
     }
     .page-hero p.en {
       font-size: 0.8rem;
-      color: var(--color-accent);
+      color: rgba(255,255,255,0.8);
       letter-spacing: 0.4em;
       text-transform: uppercase;
       position: relative;
     }
-    .page-hero-line { width: 60px; height: 1px; background: var(--color-accent); margin: 20px auto; }
+    .page-hero-line { width: 60px; height: 1px; background: rgba(255,255,255,0.6); margin: 20px auto; }
     .hero-tags {
       display: flex;
       gap: 10px;
@@ -60,10 +60,10 @@
       position: relative;
     }
     .hero-tag {
-      background: rgba(37,99,235,0.3);
-      border: 1px solid rgba(37,99,235,0.5);
-      color: #93c5fd;
-      font-size: 0.75rem;
+      background: rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.4);
+      color: #fff;
+      font-size: 0.8rem;
       padding: 5px 14px;
       letter-spacing: 0.1em;
     }
@@ -98,7 +98,7 @@
       line-height: 1.7;
     }
     .concept-text p { font-size: 0.92rem; color: var(--color-text-light); line-height: 2; }
-    .concept-text .hl { color: var(--color-blue); font-weight: 700; }
+    .concept-text .hl { color: #ea580c; font-weight: 700; }
 
     /* お困りごとリスト */
     .trouble-section { background: var(--color-bg-dark); padding: 80px 20px; }
@@ -116,9 +116,9 @@
       align-items: flex-start;
       gap: 12px;
       box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-      border-left: 3px solid var(--color-blue);
+      border-left: 3px solid #ea580c;
     }
-    .trouble-check { color: var(--color-blue); font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+    .trouble-check { color: #ea580c; font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
     .trouble-text { font-size: 0.9rem; color: var(--color-text); line-height: 1.6; }
 
     /* 料金テーブル */
@@ -151,12 +151,12 @@
     }
     .price-table tbody tr { background: var(--color-white); border-bottom: 1px solid var(--color-border); }
     .price-table tbody tr:nth-child(even) { background: var(--color-bg); }
-    .price-table tbody tr.featured { background: #eff6ff; border-left: 4px solid var(--color-blue); }
+    .price-table tbody tr.featured { background: #fff8f0; border-left: 4px solid #ea580c; }
     .price-table tbody td { padding: 16px 20px; font-size: 0.9rem; color: var(--color-text); }
     .price-val {
       font-family: 'Noto Serif JP', serif;
       font-weight: 700;
-      color: var(--color-blue);
+      color: #92400e;
       font-size: 1.05rem;
     }
     .price-note { font-size: 0.75rem; color: var(--color-text-light); }
@@ -182,7 +182,7 @@
       padding: 28px 18px;
       text-align: center;
       box-shadow: 0 3px 15px rgba(0,0,0,0.07);
-      border-top: 3px solid var(--color-blue);
+      border-top: 3px solid #ea580c;
     }
     .menu-icon { font-size: 2rem; margin-bottom: 12px; }
     .menu-name {
@@ -216,7 +216,7 @@
       display: inline-block;
       font-size: 0.7rem;
       padding: 2px 6px;
-      background: var(--color-blue);
+      background: #ea580c;
       color: #fff;
       font-weight: 700;
       margin-left: 8px;
@@ -245,14 +245,14 @@
       -webkit-appearance: none;
     }
     .form-input:focus, .form-select:focus, .form-textarea:focus {
-      border-color: var(--color-blue);
-      box-shadow: 0 0 0 3px rgba(37,99,235,0.12);
+      border-color: #ea580c;
+      box-shadow: 0 0 0 3px rgba(234,88,12,0.12);
       background: var(--color-white);
     }
     .form-textarea { resize: vertical; min-height: 160px; }
     .form-select {
       cursor: pointer;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%232563EB' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23ea580c' stroke-width='2' fill='none'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
       background-position: right 16px center;
       padding-right: 40px;
@@ -273,14 +273,14 @@
     }
     .form-check input[type="checkbox"] {
       margin-top: 3px;
-      accent-color: var(--color-blue);
+      accent-color: #ea580c;
       width: 16px; height: 16px;
       cursor: pointer;
     }
     .form-check label { font-size: 0.88rem; color: var(--color-text); cursor: pointer; }
     .form-submit { text-align: center; }
     .btn-submit-blue {
-      background: var(--color-blue);
+      background: #ea580c;
       color: var(--color-white);
       font-family: 'Noto Serif JP', serif;
       font-size: 1rem;
@@ -292,9 +292,9 @@
       transition: all 0.3s;
     }
     .btn-submit-blue:hover {
-      background: var(--color-blue-dark);
+      background: #c2410c;
       transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(37,99,235,0.35);
+      box-shadow: 0 6px 20px rgba(234,88,12,0.35);
     }
     .form-note {
       text-align: center;
@@ -388,13 +388,16 @@
   </div>
 </section>
 
-<!-- ③ サービスコンセプトバー -->
-<div style="background:var(--color-primary);padding:50px 20px;text-align:center;">
+<!-- ③ 安心メッセージバー -->
+<div style="background:linear-gradient(135deg,#78350f 0%,#b45309 100%);padding:50px 20px;text-align:center;">
   <div class="section-inner">
-    <p style="font-family:'Noto Serif JP',serif;font-size:1.1rem;color:rgba(255,255,255,0.9);line-height:2.3;max-width:700px;margin:0 auto;">
-      「お酒の配達」「地域のよろず屋」そして「<strong style="color:var(--color-accent);">スマホ相談</strong>」。<br>
-      かしはら酒店は、地域の皆さまの暮らしに寄り添う存在でありたいと考えています。<br>
-      <span style="font-size:0.85rem;color:rgba(255,255,255,0.55);">※ お酒の配達の際にも相談を承っております</span>
+    <p style="font-family:'Noto Serif JP',serif;font-size:1.15rem;color:#fff;line-height:2.3;max-width:700px;margin:0 auto 10px;">
+      「こんなこと聞いても大丈夫かな？」<br>
+      <strong style="font-size:1.3rem;">大丈夫です。どんな小さなことでも歓迎します。</strong>
+    </p>
+    <p style="font-size:0.9rem;color:rgba(255,255,255,0.85);line-height:1.9;margin:0 auto;max-width:600px;">
+      断られることはありません。「こんなこと恥ずかしい」という内容こそ、お気軽にどうぞ。<br>
+      <span style="font-size:0.8rem;color:rgba(255,255,255,0.65);">※ お酒の配達の際にも相談を承っております</span>
     </p>
   </div>
 </div>
@@ -535,10 +538,10 @@
       <a href="mailto:sake@kashi-market.com" class="btn btn-outline">✉️ メールで問い合わせ</a>
     </div>
 
-    <div style="max-width:720px;margin:0 auto 24px;background:var(--color-blue-light);border-left:4px solid var(--color-blue);padding:18px 24px;display:flex;align-items:center;gap:14px;">
+    <div style="max-width:720px;margin:0 auto 24px;background:#fff8f0;border-left:4px solid #ea580c;padding:18px 24px;display:flex;align-items:center;gap:14px;">
       <span style="font-size:1.8rem;flex-shrink:0;">📝</span>
       <div>
-        <p style="font-family:'Noto Serif JP',serif;font-size:1rem;color:var(--color-blue-dark);font-weight:700;margin-bottom:4px;">フォームからもお問い合わせいただけます</p>
+        <p style="font-family:'Noto Serif JP',serif;font-size:1rem;color:#92400e;font-weight:700;margin-bottom:4px;">フォームからもお問い合わせいただけます</p>
         <p style="font-size:0.85rem;color:var(--color-primary);line-height:1.7;">下の項目に入力して「送信」を押すだけで完了です。お気軽にどうぞ。</p>
       </div>
     </div>
@@ -546,7 +549,7 @@
     <div class="form-wrap" style="position:relative;">
 
       <div id="smSending" style="display:none;position:absolute;inset:0;background:rgba(255,255,255,0.92);z-index:10;flex-direction:column;align-items:center;justify-content:center;gap:16px;">
-        <div style="width:48px;height:48px;border:4px solid #d4c5a9;border-top-color:var(--color-blue);border-radius:50%;animation:spin 0.8s linear infinite;"></div>
+        <div style="width:48px;height:48px;border:4px solid #d4c5a9;border-top-color:#ea580c;border-radius:50%;animation:spin 0.8s linear infinite;"></div>
         <p style="font-family:'Noto Serif JP',serif;color:#1a0a00;">送信中です。しばらくお待ちください…</p>
       </div>
 
