@@ -637,15 +637,6 @@
 
       </div>
 
-      <!-- 飲み方ガイド -->
-      <div class="beer-pr-section" style="margin-top:30px;padding-top:24px;border-top:2px dashed var(--color-border);">
-        <div class="beer-pr-item">
-          <p class="beer-pr-caption">▼ 蔵元おすすめの飲み方：ロック（0〜5℃）または湯割りでどうぞ</p>
-          <div class="beer-pr-card">
-            <img src="ふしぎ屋おすすめの飲み方.png" alt="ふしぎ屋 おすすめの飲み方（ロック・湯割り）" class="beer-pr-img">
-          </div>
-        </div>
-      </div>
     </div>
 
     <!-- ノンアルコール -->
@@ -805,6 +796,10 @@
       <div class="detail-price" id="detailPrice"></div>
       <p class="detail-desc" id="detailDesc"></p>
       <div class="detail-special" id="detailSpecial" style="display:none"></div>
+      <div id="detailGuideWrap" style="display:none;margin-bottom:20px;">
+        <p style="font-size:0.78rem;font-weight:700;color:var(--color-text-light);margin-bottom:8px;letter-spacing:0.05em;">蔵元おすすめの飲み方</p>
+        <img id="detailGuideImg" src="" alt="おすすめの飲み方" style="width:100%;max-width:340px;display:block;margin:0 auto;border-radius:6px;box-shadow:0 4px 16px rgba(0,0,0,0.1);">
+      </div>
       <button class="detail-order-btn" id="detailOrderBtn">🛒 この商品を注文する</button>
     </div>
   </div>
@@ -1235,6 +1230,7 @@ const PRODUCTS = {
     tag: '焼酎',
     price: 1150,
     img: 'ふしぎ屋画像.png',
+    guideImg: 'ふしぎ屋おすすめの飲み方.png',
     isAlcohol: true,
     isBeer: false,
     desc: '麦本来の旨味を引き出した、やわらかな味わい。古来よりの常圧蒸留法で仕込み、原酒を氷点まで冷却濾過。まろやかで飲み応えがあり、香味の調和とキレの良さが楽しめる大分麦焼酎です。ロックはもちろん、冬は湯割りもおすすめです。',
@@ -1532,6 +1528,14 @@ function openDetail(key) {
     specialEl.style.display = 'block';
   } else {
     specialEl.style.display = 'none';
+  }
+
+  const guideWrap = document.getElementById('detailGuideWrap');
+  if (p.guideImg) {
+    document.getElementById('detailGuideImg').src = p.guideImg;
+    guideWrap.style.display = 'block';
+  } else {
+    guideWrap.style.display = 'none';
   }
 
   document.getElementById('detailOrderBtn').onclick = () => {
