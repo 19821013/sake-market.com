@@ -384,6 +384,7 @@
   <div class="tabs-inner">
     <button class="tab-btn active" onclick="scrollToCategory('beer',this)">🍺 ビール</button>
     <button class="tab-btn" onclick="scrollToCategory('liqueur',this)">🥃 リキュール・ウイスキー</button>
+    <button class="tab-btn" onclick="scrollToCategory('shochu',this)">🍶 焼酎</button>
     <button class="tab-btn" onclick="scrollToCategory('nonalcohol',this)">💧 ノンアルコール</button>
     <a href="contact.html" class="tab-btn" style="text-decoration:none;">📩 その他・お問い合わせ</a>
   </div>
@@ -601,6 +602,49 @@
           </div>
         </div>
 
+      </div>
+    </div>
+
+    <!-- 焼酎 -->
+    <div class="category-section" id="shochu">
+      <h2 class="category-title">焼酎</h2>
+      <div class="products-grid">
+
+        <div class="product-card">
+          <div class="product-img-wrap" onclick="openDetail('fushigiya')">
+            <img src="ふしぎ屋画像.png" alt="ふしぎ屋 大分麦焼酎 25度 720ml">
+          </div>
+          <div class="product-body">
+            <span class="product-tag">焼酎</span>
+            <h3 class="product-name">ふしぎ屋<br>大分麦焼酎 25度 720ml</h3>
+            <p class="product-desc-short">常圧蒸留・氷点冷却濾過で仕上げた、まろやかでキレのある大分麦焼酎。</p>
+            <div class="product-price">¥1,150 <small>/本（税込）</small></div>
+            <div class="card-qty-row">
+              <button type="button" class="qty-btn" onclick="changeCardQty('fushigiya',-1)">−</button>
+              <span class="qty-num" id="card-qty-fushigiya">1</span>
+              <button type="button" class="qty-btn" onclick="changeCardQty('fushigiya',1)">＋</button>
+              <span style="font-size:0.78rem;color:var(--color-text-light);">本</span>
+            </div>
+            <div class="card-subtotal-row">
+              <span class="card-subtotal" id="card-sub-fushigiya">¥1,150</span>
+            </div>
+            <div class="card-actions">
+              <button class="btn-cart" onclick="addToCart('fushigiya')">🛒 カートへ</button>
+              <button class="btn-order-now" onclick="openOrderWithQty('fushigiya')">⚡ すぐ注文</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 飲み方ガイド -->
+      <div class="beer-pr-section" style="margin-top:30px;padding-top:24px;border-top:2px dashed var(--color-border);">
+        <div class="beer-pr-item">
+          <p class="beer-pr-caption">▼ 蔵元おすすめの飲み方：ロック（0〜5℃）または湯割りでどうぞ</p>
+          <div class="beer-pr-card">
+            <img src="ふしぎ屋おすすめの飲み方.png" alt="ふしぎ屋 おすすめの飲み方（ロック・湯割り）" class="beer-pr-img">
+          </div>
+        </div>
       </div>
     </div>
 
@@ -1183,6 +1227,18 @@ const PRODUCTS = {
     isBeer: false,
     desc: '大分県日田市で3,500年という遥かな時を、地中深く、幾重もの天然のフィルターを巡って湧き出る天然活性水素水です。阿蘇やくじゅうの火山活動などによって形成された複雑な地質が天然のろ過層として機能し、長い年月をかけて育まれた無添加の命の水。\n\nグルコシルセラミドによる肌の潤い保持、オリゴ糖による腸内環境改善、ブドウ糖による疲労軽減効果など、「選ばれる水」として多くの方々にご愛顧いただいております。',
     special: '🚚 重い水の配達はお任せください！\n20ℓの大容量ボックスは約20kgの重量があり、ご自宅まで運ぶのは大変です。当店では、重たいお水をご自宅まで配達いたします。定期的なご注文も承っており、いつでも新鮮な天然水をお届けします。'
+  },
+  fushigiya: {
+    key: 'fushigiya',
+    name: 'ふしぎ屋 大分麦焼酎 25度 720ml',
+    formalName: 'ふしぎ屋 大分麦焼酎 25度 720ml',
+    tag: '焼酎',
+    price: 1150,
+    img: 'ふしぎ屋画像.png',
+    isAlcohol: true,
+    isBeer: false,
+    desc: '麦本来の旨味を引き出した、やわらかな味わい。古来よりの常圧蒸留法で仕込み、原酒を氷点まで冷却濾過。まろやかで飲み応えがあり、香味の調和とキレの良さが楽しめる大分麦焼酎です。ロックはもちろん、冬は湯割りもおすすめです。',
+    special: null
   }
 };
 
