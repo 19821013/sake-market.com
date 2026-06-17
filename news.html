@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>お知らせ｜かしはら酒店（枚方市）</title>
+  <link rel="canonical" href="https://kashi-market.com/news.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="かしはら酒店">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:title" content="お知らせ｜かしはら酒店（枚方市）">
+  <meta property="og:description" content="かしはら酒店からのお知らせ。ホームページ開設・スマホ相談・配達サービス・空き瓶回収など最新情報をお届けします。">
+  <meta property="og:url" content="https://kashi-market.com/news.html">
+  <meta property="og:image" content="https://kashi-market.com/ogp.jpg">
+  <meta name="description" content="かしはら酒店からのお知らせ。ホームページ開設・スマホ相談・配達サービス・空き瓶回収など最新情報をお届けします。">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .page-hero {
+      background: linear-gradient(135deg,#0d0500 0%,#1a0a00 60%,#2d1500 100%);
+      padding:120px 20px 80px; text-align:center;
+    }
+    .page-hero h1 {
+      font-family:'Noto Serif JP',serif;
+      font-size:clamp(2rem,5vw,3.5rem); color:var(--color-white);
+      letter-spacing:0.15em; margin-bottom:10px;
+    }
+    .page-hero p { font-size:0.8rem; color:var(--color-accent); letter-spacing:0.4em; text-transform:uppercase; }
+    .page-hero-line { width:60px;height:1px;background:var(--color-accent);margin:20px auto; }
+
+    /* 記事リスト */
+    .news-section { background:var(--color-bg); padding:80px 20px; }
+    .news-list { max-width:820px; margin:0 auto; }
+
+    /* 記事カード */
+    .news-card {
+      background:var(--color-white);
+      box-shadow:0 4px 20px rgba(0,0,0,0.07);
+      margin-bottom:60px;
+      overflow:hidden;
+    }
+    .news-card-header {
+      background:var(--color-primary);
+      padding:24px 32px;
+      display:flex; align-items:baseline; gap:20px; flex-wrap:wrap;
+    }
+    .news-date {
+      font-size:0.8rem; color:var(--color-accent); letter-spacing:0.2em; font-weight:600;
+    }
+    .news-category {
+      font-size:0.7rem; padding:2px 12px; background:var(--color-accent);
+      color:var(--color-primary); font-weight:700;
+    }
+    .news-card-header h2 {
+      width:100%; font-family:'Noto Serif JP',serif;
+      font-size:clamp(1.1rem,2.5vw,1.4rem); color:var(--color-white);
+      line-height:1.6; letter-spacing:0.05em; margin-top:8px;
+    }
+
+    /* 記事本文 */
+    .news-body { padding:36px 32px; }
+    .news-body p { font-size:0.92rem; color:var(--color-text); line-height:2; margin-bottom:20px; }
+    .news-body h3 {
+      font-family:'Noto Serif JP',serif;
+      font-size:1.1rem; color:var(--color-primary);
+      margin:36px 0 14px; padding-bottom:10px;
+      border-bottom:2px solid var(--color-border);
+      display:flex; align-items:center; gap:10px;
+    }
+    .news-body h3::before { content:''; display:inline-block; width:4px; height:1.1rem; background:var(--color-accent); flex-shrink:0; }
+    .news-body ul { padding-left:0; margin-bottom:20px; list-style:none; }
+    .news-body ul li {
+      font-size:0.9rem; color:var(--color-text); line-height:1.9;
+      padding:6px 0 6px 20px; border-bottom:1px solid var(--color-border);
+      position:relative;
+    }
+    .news-body ul li::before { content:'▶'; position:absolute; left:0; color:var(--color-accent); font-size:0.7rem; top:9px; }
+
+    /* 料金ボックス */
+    .price-box {
+      background:var(--color-bg-dark);
+      border-left:4px solid var(--color-accent);
+      padding:20px 24px; margin:20px 0 24px;
+    }
+    .price-box h4 {
+      font-family:'Noto Serif JP',serif; font-size:0.95rem;
+      color:var(--color-primary); margin-bottom:12px; font-weight:700;
+    }
+    .price-box table { width:100%; border-collapse:collapse; }
+    .price-box table td {
+      padding:8px 12px; font-size:0.88rem; color:var(--color-text);
+      border-bottom:1px solid var(--color-border); line-height:1.6;
+    }
+    .price-box table td:last-child {
+      font-family:'Noto Serif JP',serif; font-weight:700;
+      color:var(--color-primary); text-align:right; white-space:nowrap;
+    }
+    .price-note { font-size:0.78rem; color:var(--color-text-light); margin-top:10px; line-height:1.8; }
+
+    /* お得ボックス */
+    .benefit-box {
+      background:#fffbf0; border:1px solid var(--color-accent);
+      border-left:4px solid var(--color-accent);
+      padding:20px 24px; margin:20px 0 24px;
+    }
+    .benefit-box h4 { font-family:'Noto Serif JP',serif; font-size:0.95rem; color:var(--color-primary); margin-bottom:12px; font-weight:700; }
+    .benefit-box p { font-size:0.88rem; color:var(--color-text); line-height:1.9; margin-bottom:8px; }
+    .benefit-box p:last-child { margin-bottom:0; }
+    .benefit-highlight { font-size:1rem; color:#c0392b; font-weight:700; }
+
+    /* 警告ボックス */
+    .caution-box {
+      background:#fff5f5; border:1px solid #f5a0a0; border-left:4px solid #e74c3c;
+      padding:14px 18px; margin:16px 0; font-size:0.85rem; color:#8b0000; line-height:1.8;
+    }
+
+    /* 締めくくり */
+    .news-footer-box {
+      background:var(--color-primary); padding:28px 24px; margin-top:36px;
+      border-top:3px solid var(--color-accent);
+    }
+    .news-footer-box p { font-size:0.9rem; color:rgba(255,255,255,0.85); line-height:2; margin-bottom:8px; }
+    .news-footer-box p:last-child { margin-bottom:0; }
+    .news-footer-box a { color:var(--color-accent); }
+
+    /* 画像 */
+    .news-img {
+      width:100%; max-width:680px; display:block;
+      margin:24px auto; border-radius:4px;
+      box-shadow:0 6px 24px rgba(0,0,0,0.12);
+    }
+    .news-img-caption {
+      text-align:center; font-size:0.76rem;
+      color:var(--color-text-light); margin-top:-16px; margin-bottom:24px;
+    }
+
+    /* 戻るリンク */
+    .back-link { display:inline-flex; align-items:center; gap:6px; font-size:0.85rem; color:var(--color-text-light); text-decoration:none; margin-bottom:32px; transition:color 0.2s; }
+    .back-link:hover { color:var(--color-primary); }
+
+    @media(max-width:600px){
+      .news-body { padding:24px 18px; }
+      .news-card-header { padding:18px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ヘッダー -->
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-jp">かしはら酒店</span>
+      <span class="logo-en">Kashihara Sake Shop</span>
+    </a>
+    <div class="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></div>
+    <nav id="main-nav">
+      <ul>
+        <li><a href="index.html">トップ</a></li>
+        <li><a href="products.html">商品一覧</a></li>
+        <li><a href="smartphone.html">スマホ相談</a></li>
+        <li><a href="delivery.html">配達範囲</a></li>
+        <li><a href="about.html">会社案内</a></li>
+        <li><a href="news.html" class="active">お知らせ</a></li>
+        <li><a href="contact.html">お問い合わせ</a></li>
+        <li><a href="tokusho.html">特定商取引法に基づく表記</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- ページヒーロー -->
+<div class="page-hero">
+  <h1>お知らせ</h1>
+  <div class="page-hero-line"></div>
+  <p>News &amp; Information</p>
+</div>
+
+<!-- お知らせ一覧 -->
+<section class="news-section">
+  <div class="news-list">
+
+    <!-- ===== 記事1 ===== -->
+    <article class="news-card">
+
+      <div class="news-card-header">
+        <span class="news-date">2026.06.17</span>
+        <span class="news-category">お知らせ</span>
+        <h2>かしはら酒店 公式ホームページ開設のご報告</h2>
+      </div>
+
+      <div class="news-body">
+
+        <!-- 冒頭画像 -->
+        <img src="かしはら酒店リニューアルオープン案内.png"
+             alt="かしはら酒店 新しいスタート！ホームページ開設しました"
+             class="news-img">
+
+        <!-- ご挨拶 -->
+        <p>地域の皆様、いつも「かしはら酒店」をご愛顧いただき、誠にありがとうございます。</p>
+        <p>この度、父から受け継いだお店で2代目として新しいスタートを切るにあたり、初めて公式ホームページを開設いたしました。長年地域の皆様に支えていただいてきた感謝の気持ちを胸に、これまでの良き伝統を大切にしながら、さらに皆様の暮らしに寄り添える「地域のよろず屋」として歩んでまいります。</p>
+        <p>記念すべき第1回目のお知らせとして、新しくなった当店が自信を持ってお届けする<strong>「3つの安心サービス」</strong>をご紹介させていただきます。</p>
+
+        <!-- ① スマホ相談 -->
+        <h3>📱 ① 地域初！？酒屋なのに「スマホ相談」始めました</h3>
+
+        <p>「酒屋でスマホ相談？」と驚かれる方も多いのですが、地域の皆様の「ちょっと困った」を解決したく、新しくスタートしたサービスです。</p>
+
+        <p><strong>こんなお困りごとはありませんか？</strong></p>
+        <ul>
+          <li>LINEの使い方がよくわからない</li>
+          <li>スマホ料金を見直したい</li>
+          <li>機種変更・乗り換えが不安</li>
+          <li>変なSMSや電話が来て心配</li>
+          <li>データ移行や初期設定を相談したい</li>
+        </ul>
+
+        <div class="price-box">
+          <h4>スマホ相談 料金メニュー</h4>
+          <table>
+            <tr><td>初回お試し相談　30分</td><td>550円 <small style="font-weight:400;font-size:0.78rem;">※2026年12月まで</small></td></tr>
+            <tr><td>2回目以降　30分</td><td>1,100円</td></tr>
+            <tr><td>個別相談　60分</td><td>2,200円</td></tr>
+            <tr><td>iPhoneバッテリー交換</td><td>7,700円〜</td></tr>
+          </table>
+          <p class="price-note">※ 表示価格は税込です　※ 内容により後日対応・別途ご案内となる場合があります</p>
+        </div>
+
+        <img src="スマホ相談 料金詳細表.png"
+             alt="かしはら酒店 スマホ相談はじめました チラシ（料金メニュー一覧）"
+             class="news-img">
+
+        <p>お酒の配達ついでに玄関先でのご相談も大歓迎です！まずはお気軽にお声がけください。</p>
+
+        <!-- ② 配達サービス -->
+        <h3>🚚 ② 重いお酒もお任せ！笑顔の配達サービス</h3>
+
+        <p>「ビールをケースで買いたいけど、重くて運べない…」「エレベーターのない建物の上階まで運ぶのが大変…」そんなお悩みは、かしはら酒店にお任せください！</p>
+        <p>エレベーターなしの高層階でも、スタッフが笑顔で玄関先まで責任を持ってお届けします。重たいビールケースや一升瓶など、運ぶのが大変なお酒こそ、ぜひ当店の配達サービスをご活用ください。</p>
+
+        <img src="重いビールケースの配達画像.png"
+             alt="重いビールケースの配達イラスト — 高層階・エレベーターなしでもかしはら酒店がお届け"
+             class="news-img">
+        <p class="news-img-caption">重いビールケースも、エレベーターなしの高層階でも、笑顔でお届けします！</p>
+
+        <!-- ③ 空き瓶回収 -->
+        <h3>🔄 ③ 飲んだ後もお得！空きビール瓶回収サービス</h3>
+
+        <p>当店では、お酒をお届けするだけでなく、飲み終わった後の空きビール瓶・空きケースの回収も承っております。</p>
+
+        <div class="benefit-box">
+          <h4>🎁 ケース丸ごと回収（20本）</h4>
+          <p><span class="benefit-highlight">300円キャッシュバック ＋ 粗品プレゼント</span></p>
+          <p>酒店スタッフがご自宅まで取りに伺います。新しいビールのお届けと同時に、空きケースの回収も可能です。</p>
+        </div>
+
+        <div class="benefit-box">
+          <h4>🍺 瓶1本回収（店舗持ち込み限定）</h4>
+          <p><span class="benefit-highlight">1本につき5円キャッシュバック</span></p>
+          <p>重たい空き瓶の処分が「お得」に変わります！</p>
+        </div>
+
+        <img src="空き瓶回収サービス画像.png"
+             alt="かしはら酒店 空きビール瓶回収サービス — 300円キャッシュバック＋粗品プレゼント"
+             class="news-img">
+
+        <div class="caution-box">
+          ⚠️ <strong>重要：</strong> かしはら酒店でご購入いただいたビール瓶のみが対象となります。他店でご購入の瓶はお受けできません。
+        </div>
+
+        <!-- 締め -->
+        <h3>これからの「かしはら酒店」</h3>
+
+        <p>美味しいお酒をお届けするのはもちろん、スマホの操作から重い荷物運びまで、地域の皆様の「ちょっと困った」を「助かった！」に変えられる、そんな身近なお店を目指してまいります。</p>
+        <p>このホームページでは、今後も季節のおすすめ商品やお店の最新情報を定期的に発信してまいりますので、ぜひ時々覗いてみてください。</p>
+        <p>新体制となった「かしはら酒店」を、今後とも末永くよろしくお願い申し上げます。皆様からのご注文・ご相談を心よりお待ちしております！</p>
+
+        <div class="news-footer-box">
+          <p>📞 TEL：<a href="tel:0728480289">072-848-0289</a></p>
+          <p>✉️ Mail：<a href="mailto:sake@kashi-market.com">sake@kashi-market.com</a></p>
+          <p style="font-size:0.8rem;margin-top:8px;">🕐 営業時間：11:00〜20:00（毎週火曜日定休）</p>
+        </div>
+
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- フッター -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <a href="index.html" class="logo"><span class="logo-jp">かしはら酒店</span></a>
+      <p style="margin-top:12px;"><span style="font-size:0.72rem;color:rgba(255,255,255,0.45);letter-spacing:0.05em;">運営会社</span><br>Kashi Market合同会社<br>〒573-1178<br>大阪府枚方市渚西1丁目21-12</p>
+    </div>
+    <div class="footer-nav">
+      <h4>Navigation</h4>
+      <ul>
+        <li><a href="index.html">トップページ</a></li>
+        <li><a href="products.html">商品一覧</a></li>
+        <li><a href="smartphone.html">スマホ相談</a></li>
+        <li><a href="delivery.html">配達範囲</a></li>
+        <li><a href="about.html">会社案内</a></li>
+        <li><a href="news.html">お知らせ</a></li>
+        <li><a href="contact.html">お問い合わせ</a></li>
+        <li><a href="tokusho.html" target="_blank">特定商取引に関する表記</a></li>
+      </ul>
+    </div>
+    <div class="footer-info">
+      <h4>Shop Info</h4>
+      <p>📞 072-848-0289</p>
+      <p>📠 072-840-0339</p>
+      <p>✉️ sake@kashi-market.com</p>
+      <p>🕐 11:00〜20:00（火曜定休）</p>
+      <p>🚉 京阪本線御殿山駅 徒歩5分</p>
+      <p>📍 <a href="https://www.google.com/maps/search/?api=1&query=%E3%81%8B%E3%81%97%E3%81%AF%E3%82%89%E9%85%92%E5%BA%97%20%E5%A4%A7%E9%98%AA%E5%BA%9C%E6%9E%9A%E6%96%B9%E5%B8%82%E6%B8%9A%E8%A5%BF1%E4%B8%81%E7%9B%AE21-12" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">Googleマップで見る</a></p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2025 Kashi Market合同会社 かしはら酒店. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+  function toggleNav() {
+    document.getElementById('main-nav').classList.toggle('open');
+  }
+</script>
+
+</body>
+</html>
