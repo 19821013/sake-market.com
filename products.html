@@ -386,6 +386,7 @@
     <button class="tab-btn active" onclick="scrollToCategory('beer',this)">🍺 ビール</button>
     <button class="tab-btn" onclick="scrollToCategory('liqueur',this)">🥃 リキュール・ウイスキー</button>
     <button class="tab-btn" onclick="scrollToCategory('shochu',this)">🍶 焼酎</button>
+    <button class="tab-btn" onclick="scrollToCategory('seishu',this)">🌸 清酒</button>
     <button class="tab-btn" onclick="scrollToCategory('nonalcohol',this)">💧 ノンアルコール</button>
     <a href="contact.html" class="tab-btn" style="text-decoration:none;">📩 その他・お問い合わせ</a>
   </div>
@@ -638,6 +639,39 @@
 
       </div>
 
+    </div>
+
+    <!-- 清酒 -->
+    <div class="category-section" id="seishu">
+      <h2 class="category-title">清酒</h2>
+      <div class="products-grid">
+
+        <div class="product-card">
+          <div class="product-img-wrap" onclick="openDetail('ichonamiki')">
+            <img src="いちょうなみき商品写真.png" alt="いちょうなみき 吟醸酒 720ml">
+          </div>
+          <div class="product-body">
+            <span class="product-tag">清酒</span>
+            <h3 class="product-name">いちょうなみき<br>吟醸酒 720ml</h3>
+            <p class="product-desc-short">大阪酒販協同組合オリジナル。果実を思わせる爽やかな吟醸香と、淡麗でキレのよい飲み口。</p>
+            <div class="product-price">¥1,320 <small>/本（税込）</small></div>
+            <div class="card-qty-row">
+              <button type="button" class="qty-btn" onclick="changeCardQty('ichonamiki',-1)">−</button>
+              <span class="qty-num" id="card-qty-ichonamiki">1</span>
+              <button type="button" class="qty-btn" onclick="changeCardQty('ichonamiki',1)">＋</button>
+              <span style="font-size:0.78rem;color:var(--color-text-light);">本</span>
+            </div>
+            <div class="card-subtotal-row">
+              <span class="card-subtotal" id="card-sub-ichonamiki">¥1,320</span>
+            </div>
+            <div class="card-actions">
+              <button class="btn-cart" onclick="addToCart('ichonamiki')">🛒 カートへ</button>
+              <button class="btn-order-now" onclick="openOrderWithQty('ichonamiki')">⚡ すぐ注文</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
 
     <!-- ノンアルコール -->
@@ -1271,6 +1305,18 @@ const PRODUCTS = {
     isBeer: false,
     desc: '麦本来の旨味を引き出した、やわらかな味わい。古来よりの常圧蒸留法で仕込み、原酒を氷点まで冷却濾過。まろやかで飲み応えがあり、香味の調和とキレの良さが楽しめる大分麦焼酎です。ロックはもちろん、冬は湯割りもおすすめです。',
     special: null
+  },
+  ichonamiki: {
+    key: 'ichonamiki',
+    name: 'いちょうなみき 吟醸酒 720ml',
+    formalName: 'いちょうなみき 吟醸酒 720ml',
+    tag: '清酒',
+    price: 1320,
+    img: 'いちょうなみき商品写真.png',
+    isAlcohol: true,
+    isBeer: false,
+    desc: 'やわらかな甘さと酸味が、果実を思わせる爽やかな吟醸香とともに口の中でふわりと調和します。きれいで繊細な味わいに、キレのよい後口が続く一杯。淡麗でありながら旨みもしっかり感じられる、飲み飽きしない味わいです。ぜひ冷やしてお楽しみください。大阪府内限定流通の大阪酒販協同組合オリジナル清酒で、醸造は1856年創業・広島県呉市の老舗蔵元・株式会社三宅本店が手がけています。',
+    special: '🌸 大阪府内限定・大阪酒販協同組合オリジナル\n精米歩合60%・使用米：八反錦＆新千本・アルコール分15.5度\n大阪の街路樹「いちょう並木」にちなんだ、大阪ならではの一本です。'
   }
 };
 
