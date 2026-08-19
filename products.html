@@ -388,6 +388,7 @@
     <button class="tab-btn" onclick="scrollToCategory('shochu',this)">🍶 焼酎</button>
     <button class="tab-btn" onclick="scrollToCategory('seishu',this)">🌸 清酒</button>
     <button class="tab-btn" onclick="scrollToCategory('nonalcohol',this)">💧 ノンアルコール</button>
+    <button id="wine-tab-btn" class="tab-btn" onclick="scrollToCategory('wine',this)">🍷 ワイン頒布会 <span style="font-size:0.62rem;background:#ffd700;color:#7b1a3e;padding:1px 6px;border-radius:2px;font-weight:700;vertical-align:middle;margin-left:2px;">〜9/30</span></button>
     <a href="contact.html" class="tab-btn" style="text-decoration:none;">📩 その他・お問い合わせ</a>
   </div>
 </div>
@@ -730,6 +731,99 @@
         </div>
 
       </div>
+
+    </div><!-- /nonalcohol -->
+
+    <!-- ワイン頒布会（〜2026年9月30日） -->
+    <div class="category-section" id="wine">
+
+      <div style="background:linear-gradient(135deg,#4a0020,#7b1a3e);padding:20px 28px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+        <div>
+          <p style="font-size:0.68rem;color:rgba(255,210,180,0.85);letter-spacing:0.2em;font-weight:700;margin-bottom:6px;">PERIOD LIMITED</p>
+          <h2 style="font-family:'Noto Serif JP',serif;font-size:clamp(1.05rem,3vw,1.45rem);color:#fff;margin:0;letter-spacing:0.05em;">🍷 ワイン頒布会 2026年秋</h2>
+          <p style="font-size:0.78rem;color:rgba(255,210,180,0.75);margin-top:6px;margin-bottom:0;">飯田ワイン（IIDAWINE）厳選ワインが毎月ご自宅に届く定期便</p>
+        </div>
+        <span style="display:inline-block;background:#ffd700;color:#4a0020;font-size:0.72rem;font-weight:700;padding:5px 16px;border-radius:2px;letter-spacing:0.05em;white-space:nowrap;">申込締切 9月30日（水）</span>
+      </div>
+
+      <div style="background:#fffbf0;border:1px solid #f5c842;border-left:4px solid #d4a017;padding:14px 20px;margin-bottom:28px;font-size:0.84rem;color:#5a3e00;line-height:1.85;">
+        <strong>🚚 送料無料・自社便でお届け（配達エリア限定）</strong><br>
+        大阪府内全域 ／ 京都府の一部（八幡市・大山崎町・京田辺市松井山手エリアほか）<br>
+        <span style="font-size:0.78rem;color:#999;">エリア外の方はお申込みいただけません。不明な場合はお電話（072-848-0289）でご確認ください。</span>
+      </div>
+
+      <div class="products-grid">
+
+        <div class="product-card">
+          <div class="product-img-wrap" style="cursor:default;">
+            <img src="ワイン頒布会_王道.png" alt="①王道コース">
+          </div>
+          <div class="product-body">
+            <span class="product-tag" style="background:#7b1a3e;">期間限定</span>
+            <h3 class="product-name">①「王道」コース<br><small style="font-size:0.73rem;font-weight:400;color:var(--color-text-light);">750ml×2本／毎月お届け</small></h3>
+            <p class="product-desc-short">バイヤーやソムリエが「これさえ飲めば間違いない」と太鼓判の世界的王道セレクト。</p>
+            <div class="product-price">¥4,400 <small>/月（税込・送料無料）</small></div>
+            <div class="card-actions" style="margin-top:14px;">
+              <button class="btn-order-now" onclick="openWineApply('①「王道」コース','¥4,400 / 月（税込・送料無料）')" style="width:100%;font-size:0.85rem;">🍷 このコースに申し込む</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-img-wrap" style="cursor:default;">
+            <img src="ワイン頒布会_掘り出し赤.png" alt="②掘り出し赤コース">
+          </div>
+          <div class="product-body">
+            <span class="product-tag" style="background:#7b1a3e;">期間限定</span>
+            <h3 class="product-name">②「掘り出し赤」コース<br><small style="font-size:0.73rem;font-weight:400;color:var(--color-text-light);">750ml×2本／毎月お届け</small></h3>
+            <p class="product-desc-short">世界の珍しい産地・マイナー品種からバイヤーが唸った驚きの掘り出し物だけを厳選。</p>
+            <div class="product-price">¥5,500 <small>/月（税込・送料無料）</small></div>
+            <div class="card-actions" style="margin-top:14px;">
+              <button class="btn-order-now" onclick="openWineApply('②「掘り出し赤」コース','¥5,500 / 月（税込・送料無料）')" style="width:100%;font-size:0.85rem;">🍷 このコースに申し込む</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-img-wrap" style="cursor:default;">
+            <img src="ワイン頒布会_週末ご褒美の泡.png" alt="③週末ご褒美の泡コース">
+          </div>
+          <div class="product-body">
+            <span class="product-tag" style="background:#7b1a3e;">期間限定</span>
+            <h3 class="product-name">③「週末ご褒美の泡」コース<br><small style="font-size:0.73rem;font-weight:400;color:var(--color-text-light);">750ml×2本／毎月お届け</small></h3>
+            <p class="product-desc-short">辛口からシャンパーニュまで網羅。グラスに注ぐだけで日常がイベントに変わります。</p>
+            <div class="product-price">¥7,700 <small>/月（税込・送料無料）</small></div>
+            <div class="card-actions" style="margin-top:14px;">
+              <button class="btn-order-now" onclick="openWineApply('③「週末ご褒美の泡」コース','¥7,700 / 月（税込・送料無料）')" style="width:100%;font-size:0.85rem;">🍷 このコースに申し込む</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-img-wrap" style="cursor:default;">
+            <img src="ワイン頒布会_至高の紅白.png" alt="④至高の紅白コース">
+          </div>
+          <div class="product-body">
+            <span class="product-tag" style="background:#7b1a3e;">期間限定</span>
+            <h3 class="product-name">④「至高の紅白」コース<br><small style="font-size:0.73rem;font-weight:400;color:var(--color-text-light);">750ml×2本／毎月お届け</small></h3>
+            <p class="product-desc-short">マルゴーやシャトーヌフ・デュ・パプなど名醸地の伝統を受け継ぐ贅沢なフレンチデュオ。</p>
+            <div class="product-price">¥11,000 <small>/月（税込・送料無料）</small></div>
+            <div class="card-actions" style="margin-top:14px;">
+              <button class="btn-order-now" onclick="openWineApply('④「至高の紅白」コース','¥11,000 / 月（税込・送料無料）')" style="width:100%;font-size:0.85rem;">🍷 このコースに申し込む</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div style="background:#f9f3ff;border:1px solid #d4b0d8;border-left:4px solid #7b1a3e;padding:16px 22px;margin-top:28px;font-size:0.84rem;color:#3a003a;line-height:1.9;">
+        <strong>📅 お届けスケジュール・お支払い</strong><br>
+        申込締切：2026年9月30日（水）<br>
+        お届け期間：2026年10月〜2027年1月（毎月第3木曜日頃出荷・各月下旬頃お届け予定）<br>
+        お支払い：代金引換（現金のみ・お届け時）または銀行振込（前払い）
+      </div>
+
+    </div><!-- /wine -->
 
       <!-- お問い合わせ誘導カード（ノンアルコールの下） -->
       <div style="margin-top:30px;">
@@ -2149,6 +2243,50 @@ function resetDeliveryFee() {
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') { closeDetail(); closeOrder(); }
 });
+</script>
+
+<!-- ワイン頒布会 申し込みモーダル -->
+<div id="wine-apply-modal" onclick="if(event.target===this)closeWineModal()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.65);z-index:9999;align-items:center;justify-content:center;padding:20px;">
+  <div style="background:#fff;max-width:500px;width:100%;padding:36px 28px 28px;border-radius:4px;position:relative;max-height:90vh;overflow-y:auto;">
+    <button onclick="closeWineModal()" style="position:absolute;top:12px;right:16px;border:none;background:none;font-size:1.5rem;cursor:pointer;color:#999;line-height:1;">×</button>
+    <p style="font-size:0.68rem;color:#7b1a3e;font-weight:700;letter-spacing:0.15em;margin-bottom:8px;">WINE SUBSCRIPTION — お申込み</p>
+    <h3 id="wine-modal-course" style="font-family:'Noto Serif JP',serif;font-size:1.08rem;color:#1a0a00;line-height:1.6;margin-bottom:4px;padding-right:24px;"></h3>
+    <p id="wine-modal-price" style="font-size:0.92rem;color:#7b1a3e;font-weight:700;margin-bottom:18px;"></p>
+    <p style="font-size:0.84rem;color:#444;line-height:1.85;margin-bottom:20px;">ご希望のコース・お名前・ご住所・お電話番号を、以下いずれかの方法でお知らせください。</p>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <a href="tel:0728480289" style="display:flex;align-items:center;gap:14px;padding:14px 18px;background:#1a0a00;color:#fff;text-decoration:none;border-radius:3px;">
+        <span style="font-size:1.3rem;">📞</span>
+        <div><div style="font-size:0.68rem;color:rgba(255,255,255,0.55);letter-spacing:0.1em;margin-bottom:3px;">お電話でお申込み</div><strong style="font-size:0.95rem;">072-848-0289</strong></div>
+      </a>
+      <a href="contact.html" style="display:flex;align-items:center;gap:14px;padding:14px 18px;background:#f9f3ff;border:1px solid #7b1a3e;color:#7b1a3e;text-decoration:none;border-radius:3px;">
+        <span style="font-size:1.3rem;">✉️</span>
+        <div><div style="font-size:0.68rem;color:#aaa;letter-spacing:0.1em;margin-bottom:3px;">フォームでお申込み</div><strong style="font-size:0.9rem;">お問い合わせフォームへ</strong></div>
+      </a>
+    </div>
+    <p style="margin-top:16px;font-size:0.76rem;color:#999;line-height:1.8;">件名に「ワイン頒布会申込み」とご記入ください。LINE公式アカウントからのお申込みも承っております。</p>
+  </div>
+</div>
+
+<script>
+function openWineApply(courseName, price) {
+  document.getElementById('wine-modal-course').textContent = courseName;
+  document.getElementById('wine-modal-price').textContent = price;
+  document.getElementById('wine-apply-modal').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+function closeWineModal() {
+  document.getElementById('wine-apply-modal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+// 2026年9月30日を過ぎたらワインセクションとタブを自動非表示
+(function() {
+  if (new Date() > new Date('2026-09-30T23:59:59+09:00')) {
+    var wine = document.getElementById('wine');
+    if (wine) wine.style.display = 'none';
+    var tab = document.getElementById('wine-tab-btn');
+    if (tab) tab.style.display = 'none';
+  }
+})();
 </script>
 
 </body>
