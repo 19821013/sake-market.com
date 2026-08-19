@@ -54,6 +54,11 @@
     .wine-img { aspect-ratio:3/4 !important; cursor:default !important; }
     .wine-img::after { display:none !important; }
     .wine-img img { object-fit:contain !important; transform:none !important; }
+    .wine-info-box { overflow-wrap:break-word; word-break:break-word; }
+    @media(max-width:600px){
+      #wine .products-grid { grid-template-columns:1fr !important; }
+      .wine-header-bar { padding:16px 16px !important; }
+    }
     .product-body { padding:18px 16px;flex:1;display:flex;flex-direction:column; }
     .product-tag { display:inline-block;font-size:0.7rem;padding:2px 10px;background:var(--color-accent);color:var(--color-primary);font-weight:700;margin-bottom:8px; }
     .product-name { font-family:'Noto Serif JP',serif;font-size:0.9rem;color:var(--color-primary);margin-bottom:6px;line-height:1.5; }
@@ -740,7 +745,7 @@
     <!-- ワイン頒布会（〜2026年9月30日） -->
     <div class="category-section" id="wine">
 
-      <div style="background:linear-gradient(135deg,#4a0020,#7b1a3e);padding:20px 28px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+      <div class="wine-header-bar" style="background:linear-gradient(135deg,#4a0020,#7b1a3e);padding:20px 28px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
         <div>
           <p style="font-size:0.68rem;color:rgba(255,210,180,0.85);letter-spacing:0.2em;font-weight:700;margin-bottom:6px;">PERIOD LIMITED</p>
           <h2 style="font-family:'Noto Serif JP',serif;font-size:clamp(1.05rem,3vw,1.45rem);color:#fff;margin:0;letter-spacing:0.05em;">🍷 ワイン頒布会 2026年秋</h2>
@@ -749,9 +754,10 @@
         <span style="display:inline-block;background:#ffd700;color:#4a0020;font-size:0.72rem;font-weight:700;padding:5px 16px;border-radius:2px;letter-spacing:0.05em;white-space:nowrap;">申込締切 9月30日（水）</span>
       </div>
 
-      <div style="background:#fffbf0;border:1px solid #f5c842;border-left:4px solid #d4a017;padding:14px 20px;margin-bottom:28px;font-size:0.84rem;color:#5a3e00;line-height:1.85;">
+      <div class="wine-info-box" style="background:#fffbf0;border:1px solid #f5c842;border-left:4px solid #d4a017;padding:14px 20px;margin-bottom:28px;font-size:0.84rem;color:#5a3e00;line-height:1.85;">
         <strong>🚚 送料無料・自社便でお届け（配達エリア限定）</strong><br>
-        大阪府内全域 ／ 京都府の一部（八幡市・大山崎町・京田辺市松井山手エリアほか）<br>
+        配達エリア：大阪府内全域 ／ 京都府の一部<br>
+        <span style="font-size:0.78rem;color:#888;">（八幡市・大山崎町・京田辺市松井山手エリアほか）</span><br>
         <span style="font-size:0.78rem;color:#999;">エリア外の方はお申込みいただけません。不明な場合はお電話（072-848-0289）でご確認ください。</span>
       </div>
 
@@ -819,11 +825,13 @@
 
       </div>
 
-      <div style="background:#f9f3ff;border:1px solid #d4b0d8;border-left:4px solid #7b1a3e;padding:16px 22px;margin-top:28px;font-size:0.84rem;color:#3a003a;line-height:1.9;">
-        <strong>📅 お届けスケジュール・お支払い</strong><br>
-        申込締切：2026年9月30日（水）<br>
-        お届け期間：2026年10月〜2027年1月（毎月第3木曜日頃出荷・各月下旬頃お届け予定）<br>
-        お支払い：代金引換（現金のみ・お届け時）または銀行振込（前払い）
+      <div class="wine-info-box" style="background:#f9f3ff;border:1px solid #d4b0d8;border-left:4px solid #7b1a3e;padding:16px 22px;margin-top:28px;font-size:0.84rem;color:#3a003a;">
+        <strong>📅 お届けスケジュール・お支払い</strong>
+        <table style="margin-top:10px;border-collapse:collapse;width:100%;font-size:0.84rem;line-height:1.8;">
+          <tr><td style="white-space:nowrap;padding-right:10px;font-weight:600;vertical-align:top;color:#5a2060;">申込締切</td><td>2026年9月30日（水）</td></tr>
+          <tr><td style="white-space:nowrap;padding-right:10px;font-weight:600;vertical-align:top;color:#5a2060;">お届け期間</td><td>2026年10月〜2027年1月<br><span style="font-size:0.78rem;color:#666;">毎月第3木曜日頃出荷・各月下旬頃お届け予定</span></td></tr>
+          <tr><td style="white-space:nowrap;padding-right:10px;font-weight:600;vertical-align:top;color:#5a2060;">お支払い</td><td>代金引換（現金のみ・お届け時）<br>または銀行振込（前払い）</td></tr>
+        </table>
       </div>
 
     </div><!-- /wine -->
