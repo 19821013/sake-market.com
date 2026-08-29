@@ -102,23 +102,19 @@
       background: rgba(255,255,255,0.6);
     }
 
-    /* タイトル：デジタルブルーのボックス＋ゴールドアクセントライン */
+    /* タイトル：ロゴ画像 */
     .hero-title {
-      font-family: 'Noto Serif JP', serif;
-      font-size: clamp(2.8rem, 7vw, 5.5rem);
-      font-weight: 700;
-      color: #ffffff;
-      line-height: 1.25;
+      display: block;
       margin-bottom: 16px;
-      letter-spacing: 0.12em;
-      display: inline-block;
-      background: #2563EB;
-      padding: 16px 32px;
-      border-left: 5px solid #c9a84c;
-      box-shadow: 0 8px 32px rgba(37,99,235,0.25);
     }
-
-    .hero-title span { color: #e8d08a; }
+    .hero-title img {
+      width: 100%;
+      max-width: 240px;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      filter: drop-shadow(0 4px 16px rgba(0,0,0,0.18));
+    }
 
     /* サブタイトル */
     .hero-subtitle {
@@ -711,7 +707,7 @@
     <div class="hero-content">
       <div class="hero-badge">Osaka Hirakata — Since Est.</div>
       <h1 class="hero-title">
-        かしはら<br><span>酒店</span>
+        <img src="かしはら酒店ロゴ.jpg" alt="かしはら酒店">
       </h1>
       <p class="hero-subtitle">Kashihara Sake Shop</p>
       <div class="hero-info">
