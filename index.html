@@ -323,46 +323,63 @@
 
     /* ===== コンセプトセクション ===== */
     .concept {
-      background-color: var(--color-bg);
+      background-color: var(--color-bg-dark);
     }
 
     .concept-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 30px;
+      gap: 28px;
       margin-top: 0;
     }
 
     .concept-card {
       text-align: center;
-      padding: 40px 25px;
+      padding: 40px 24px 36px;
       background: var(--color-white);
-      border-top: 3px solid #2563EB;
-      border-radius: 0 0 6px 6px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      border: 1px solid #e8dcc0;
+      border-radius: 4px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
       transition: transform 0.3s, box-shadow 0.3s;
     }
 
     .concept-card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.11);
     }
 
     .concept-icon {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
+      width: 70px;
+      height: 70px;
+      margin: 0 auto 22px;
+      background: var(--color-bg);
+      border: 2px solid var(--color-accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.9rem;
     }
 
     .concept-card h3 {
       font-family: 'Noto Serif JP', serif;
-      font-size: 1.1rem;
-      color: var(--color-primary);
-      margin-bottom: 12px;
+      font-size: 1.08rem;
+      color: var(--color-primary-deep);
+      margin-bottom: 0;
       letter-spacing: 0.1em;
     }
 
+    .concept-card h3::after {
+      content: '';
+      display: block;
+      width: 36px;
+      height: 2px;
+      background: var(--color-accent);
+      margin: 12px auto 16px;
+    }
+
     .concept-card p {
-      font-size: 0.88rem;
+      font-size: 0.87rem;
       color: var(--color-text-light);
       line-height: 1.9;
     }
@@ -778,17 +795,17 @@
       <p class="section-title-en">Our Concept</p>
       <div class="concept-grid">
         <div class="concept-card">
-          <div class="concept-icon">🍶</div>
+          <div class="concept-icon"><span>🍶</span></div>
           <h3>豊富な品揃え</h3>
           <p>ビール・日本酒・焼酎・ワイン・ノンアルコールまで、多彩なラインナップを取り揃えています。お客様のご要望にお応えします。</p>
         </div>
         <div class="concept-card">
-          <div class="concept-icon">🚴</div>
+          <div class="concept-icon"><span>🚴</span></div>
           <h3>配達サービス</h3>
           <p>地域へのお届けも承ります。大量購入やご自宅への配達など、お気軽にご相談ください。</p>
         </div>
         <div class="concept-card">
-          <div class="concept-icon">🏠</div>
+          <div class="concept-icon"><span>🏠</span></div>
           <h3>地域のよろず相談</h3>
           <p>お酒のことだけでなく、スマホやデジタル活用など地域の皆さまのお困りごとの相談にも対応しています。</p>
         </div>
