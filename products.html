@@ -46,10 +46,10 @@
     /* カード */
     .product-card { background:var(--color-white);overflow:hidden;box-shadow:0 3px 15px rgba(0,0,0,.07);transition:transform 0.3s,box-shadow 0.3s;display:flex;flex-direction:column; }
     .product-card:hover { transform:translateY(-6px);box-shadow:0 12px 35px rgba(0,0,0,.12); }
-    .product-img-wrap { width:100%;aspect-ratio:1;overflow:hidden;background:var(--color-bg-dark);display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative; }
+    .product-img-wrap { width:100%;aspect-ratio:4/5;overflow:hidden;background:var(--color-bg-dark);display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative; }
     .product-img-wrap::after { content:'詳細を見る';position:absolute;inset:0;background:rgba(26,10,0,0.6);color:var(--color-accent);font-family:'Noto Serif JP',serif;font-size:0.9rem;letter-spacing:0.1em;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity 0.3s; }
     .product-img-wrap:hover::after { opacity:1; }
-    .product-img-wrap img { width:100%;height:100%;object-fit:contain;padding:8px;transition:transform 0.4s; }
+    .product-img-wrap img { width:100%;height:100%;object-fit:contain;padding:12px;transition:transform 0.4s; }
     .product-card:hover .product-img-wrap img { transform:scale(1.04); }
     .wine-img { aspect-ratio:3/4 !important; cursor:default !important; }
     .wine-img::after { display:none !important; }
