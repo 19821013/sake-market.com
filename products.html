@@ -427,8 +427,8 @@
             <p class="product-desc-short">日本を代表するドライビール。キレのある辛口で料理を引き立てます。</p>
             <table class="beer-price-table">
               <tr><th></th><th>1本</th><th>1ケース<br>(20本)</th></tr>
-              <tr><td class="label">大瓶<br>633ml</td><td>¥425</td><td>¥8,700</td></tr>
-              <tr><td class="label">中瓶<br>500ml</td><td>¥360</td><td>¥7,400</td></tr>
+              <tr><td class="label">大瓶<br>633ml</td><td>¥405</td><td>¥8,300</td></tr>
+              <tr><td class="label">中瓶<br>500ml</td><td>¥340</td><td>¥7,000</td></tr>
             </table>
             <div class="card-select-label">サイズ</div>
             <div class="card-unit-row card-size-row">
@@ -466,8 +466,8 @@
             <p class="product-desc-short">100年以上の歴史を誇る、コクと旨味の伝統的なラガービール。</p>
             <table class="beer-price-table">
               <tr><th></th><th>1本</th><th>1ケース<br>(20本)</th></tr>
-              <tr><td class="label">大瓶<br>633ml</td><td>¥425</td><td>¥8,700</td></tr>
-              <tr><td class="label">中瓶<br>500ml</td><td>¥360</td><td>¥7,400</td></tr>
+              <tr><td class="label">大瓶<br>633ml</td><td>¥405</td><td>¥8,300</td></tr>
+              <tr><td class="label">中瓶<br>500ml</td><td>¥340</td><td>¥7,000</td></tr>
             </table>
             <div class="card-select-label">サイズ</div>
             <div class="card-unit-row card-size-row">
@@ -505,8 +505,8 @@
             <p class="product-desc-short">生ビールのおいしさを追求した、すっきりした飲みごたえが特徴。</p>
             <table class="beer-price-table">
               <tr><th></th><th>1本</th><th>1ケース<br>(20本)</th></tr>
-              <tr><td class="label">大瓶<br>633ml</td><td>¥425</td><td>¥8,700</td></tr>
-              <tr><td class="label">中瓶<br>500ml</td><td>¥360</td><td>¥7,400</td></tr>
+              <tr><td class="label">大瓶<br>633ml</td><td>¥405</td><td>¥8,300</td></tr>
+              <tr><td class="label">中瓶<br>500ml</td><td>¥340</td><td>¥7,000</td></tr>
             </table>
             <div class="card-select-label">サイズ</div>
             <div class="card-unit-row card-size-row">
@@ -1135,7 +1135,7 @@
               </div>
               <span class="qty-unit-label-text" id="beerQtyUnit">本</span>
             </div>
-            <span class="qty-amount" id="beerQtyAmount">¥425</span>
+            <span class="qty-amount" id="beerQtyAmount">¥405</span>
           </div>
         </div>
 
@@ -1307,10 +1307,10 @@ const PRODUCTS = {
     name: 'アサヒスーパードライ 大瓶',
     formalName: 'アサヒスーパードライ',
     tag: 'ビール',
-    price: 425,         // 大瓶1本
-    casePrice: 8700,    // 大瓶1ケース
-    mediumPrice: 360,   // 中瓶1本
-    mediumCasePrice: 7400, // 中瓶1ケース
+    price: 405,         // 大瓶1本
+    casePrice: 8300,    // 大瓶1ケース
+    mediumPrice: 340,   // 中瓶1本
+    mediumCasePrice: 7000, // 中瓶1ケース
     hasSize: true,      // 大瓶/中瓶あり
     img: 'アサヒスーパードライ大瓶ビール画像.png',
     isAlcohol: true,
@@ -1323,10 +1323,10 @@ const PRODUCTS = {
     name: 'キリンラガービール 大瓶',
     formalName: 'キリンラガービール',
     tag: 'ビール',
-    price: 425,
-    casePrice: 8700,
-    mediumPrice: 360,
-    mediumCasePrice: 7400,
+    price: 405,
+    casePrice: 8300,
+    mediumPrice: 340,
+    mediumCasePrice: 7000,
     hasSize: true,
     img: 'キリンラガー大瓶ビール画像.png',
     isAlcohol: true,
@@ -1339,10 +1339,10 @@ const PRODUCTS = {
     name: 'サッポロ黒ラベル 大瓶',
     formalName: 'サッポロ黒ラベル',
     tag: 'ビール',
-    price: 425,
-    casePrice: 8700,
-    mediumPrice: 360,
-    mediumCasePrice: 7400,
+    price: 405,
+    casePrice: 8300,
+    mediumPrice: 340,
+    mediumCasePrice: 7000,
     hasSize: true,
     img: 'サッポロ黒ラベル大瓶ビール画像.png',
     isAlcohol: true,
@@ -1705,7 +1705,7 @@ function openDetail(key) {
   document.getElementById('detailTag').textContent = p.tag;
   document.getElementById('detailName').textContent = p.formalName;
   document.getElementById('detailPrice').innerHTML = p.isBeer
-    ? `<span style="font-size:0.85rem;line-height:1.7;">大瓶633ml ¥425/本・¥8,700/ケース<br>中瓶500ml ¥360/本・¥7,400/ケース<br><small style="color:var(--color-text-light);">（各ケース20本・税込）</small></span>`
+    ? `<span style="font-size:0.85rem;line-height:1.7;">大瓶633ml ¥405/本・¥8,300/ケース<br>中瓶500ml ¥340/本・¥7,000/ケース<br><small style="color:var(--color-text-light);">（各ケース20本・税込）</small></span>`
     : (p.price ? `¥${p.price.toLocaleString()} / 本（税込）` : '価格はお問い合わせください');
   document.getElementById('detailDesc').innerHTML = p.desc.replace(/\n/g, '<br>');
 
@@ -1809,9 +1809,9 @@ function closeOrderOnOverlay(e) {
 function getBeerUnitPrice(p, unit, size) {
   size = size || '大瓶';
   if (size === '中瓶') {
-    return (unit === 'ケース') ? (p.mediumCasePrice || 7400) : (p.mediumPrice || 360);
+    return (unit === 'ケース') ? (p.mediumCasePrice || 7000) : (p.mediumPrice || 340);
   }
-  return (unit === 'ケース') ? (p.casePrice || 8700) : (p.price || 425);
+  return (unit === 'ケース') ? (p.casePrice || 8300) : (p.price || 405);
 }
 
 function getOrderTotal() {
