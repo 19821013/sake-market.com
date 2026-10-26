@@ -655,6 +655,32 @@
       <h2 class="category-title">清酒</h2>
       <div class="products-grid">
 
+        <!-- のど黒 -->
+        <div class="product-card" id="card-nodoguro">
+          <div class="product-img-wrap" onclick="openDetail('nodoguro')">
+            <img src="環日本海のど黒.jpg" alt="環日本海 純米吟醸 のど黒 720ml">
+          </div>
+          <div class="product-body">
+            <span class="product-tag" style="background:#1a6336;color:#fff;">新入荷</span>
+            <h3 class="product-name">環日本海 純米吟醸<br>のど黒 720ml</h3>
+            <p class="product-desc-short">島根・浜田 日本海酒造。キリッと辛口で魚料理によく合う純米吟醸。化粧箱入り。</p>
+            <div class="product-price">¥1,765 <small>/本（税込）</small></div>
+            <div class="card-qty-row">
+              <button type="button" class="qty-btn" onclick="changeCardQty('nodoguro',-1)">−</button>
+              <span class="qty-num" id="card-qty-nodoguro">1</span>
+              <button type="button" class="qty-btn" onclick="changeCardQty('nodoguro',1)">＋</button>
+              <span style="font-size:0.78rem;color:var(--color-text-light);">本</span>
+            </div>
+            <div class="card-subtotal-row">
+              <span class="card-subtotal" id="card-sub-nodoguro">¥1,765</span>
+            </div>
+            <div class="card-actions">
+              <button class="btn-cart" onclick="addToCart('nodoguro')">🛒 カートへ</button>
+              <button class="btn-order-now" onclick="openOrderWithQty('nodoguro')">⚡ すぐ注文</button>
+            </div>
+          </div>
+        </div>
+
         <div class="product-card" id="card-ichonamiki">
           <div class="product-img-wrap" onclick="openDetail('ichonamiki')">
             <img src="いちょうなみき商品写真.png" alt="いちょうなみき 吟醸酒 720ml">
@@ -1422,6 +1448,18 @@ const PRODUCTS = {
     isBeer: false,
     desc: 'やわらかな甘さと酸味が、果実を思わせる爽やかな吟醸香とともに口の中でふわりと調和します。きれいで繊細な味わいに、キレのよい後口が続く一杯。淡麗でありながら旨みもしっかり感じられる、飲み飽きしない味わいです。ぜひ冷やしてお楽しみください。大阪府内限定流通の大阪酒販協同組合オリジナル清酒で、醸造は1856年創業・広島県呉市の老舗蔵元・株式会社三宅本店が手がけています。',
     special: '🌸 大阪府内限定・大阪酒販協同組合オリジナル\n精米歩合60%・使用米：八反錦＆新千本・アルコール分15.5度\n大阪の街路樹「いちょう並木」にちなんだ、大阪ならではの一本です。'
+  },
+  nodoguro: {
+    key: 'nodoguro',
+    name: '環日本海 純米吟醸 のど黒 720ml',
+    formalName: '環日本海 純米吟醸 のど黒 720ml（化粧箱入り）',
+    tag: '純米吟醸',
+    price: 1765,
+    img: '環日本海のど黒.jpg',
+    isAlcohol: true,
+    isBeer: false,
+    desc: 'キリッとした辛口で旨味とのバランスがよい純米吟醸。蔵元は浜田名物のノドグロ料理との相性をうたっています。黒地に赤いノドグロが描かれた化粧箱入りなので、歳暮や贈り物にも向いています。10〜15℃に冷やして、ノドグロをはじめ魚料理全般とどうぞ。',
+    special: '🐟 島根県浜田市・日本海酒造（1888年創業）\n精米歩合60%・アルコール分14%\n720ml 化粧箱入り｜おすすめ温度：10〜15℃'
   }
 };
 
