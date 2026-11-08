@@ -534,6 +534,32 @@
           </div>
         </div>
 
+        <!-- フルーツビア研究所 -->
+        <div class="product-card" id="card-fruitsbia">
+          <div class="product-img-wrap" onclick="openDetail('fruitsbia')">
+            <img src="フルーツビア研究所_ルレクチェ.webp" alt="フルーツビア研究所 ル・レクチェ × 小麦のエール 350ml缶">
+          </div>
+          <div class="product-body">
+            <span class="product-tag" style="background:#e07b39;color:#fff;">新入荷</span>
+            <h3 class="product-name">フルーツビア研究所<br>ル・レクチェ×小麦のエール</h3>
+            <p class="product-desc-short">新潟・エチゴビール。洋梨ル・レクチェの果汁入りウィートエール。350ml缶 アルコール5%。店頭・自販機でも販売中。</p>
+            <div class="product-price">¥360 <small>/缶（税込）</small></div>
+            <div class="card-qty-row">
+              <button type="button" class="qty-btn" onclick="changeCardQty('fruitsbia',-1)">−</button>
+              <span class="qty-num" id="card-qty-fruitsbia">1</span>
+              <button type="button" class="qty-btn" onclick="changeCardQty('fruitsbia',1)">＋</button>
+              <span style="font-size:0.78rem;color:var(--color-text-light);">缶</span>
+            </div>
+            <div class="card-subtotal-row">
+              <span class="card-subtotal" id="card-sub-fruitsbia">¥360</span>
+            </div>
+            <div class="card-actions">
+              <button class="btn-cart" onclick="addToCart('fruitsbia')">🛒 カートへ</button>
+              <button class="btn-order-now" onclick="openOrderWithQty('fruitsbia')">⚡ すぐ注文</button>
+            </div>
+          </div>
+        </div>
+
       </div>
 
       <!-- ビールPRセクション -->
@@ -1375,6 +1401,18 @@ const PRODUCTS = {
     isBeer: true,
     desc: '生ビールのおいしさを徹底的に追求したサッポロ黒ラベル。すっきりとしたのどごしと、心地よい苦みのバランスが絶妙です。「生」のうまさをそのままお届けします。',
     special: null
+  },
+  fruitsbia: {
+    key: 'fruitsbia',
+    name: 'フルーツビア研究所 ル・レクチェ×小麦のエール 350ml缶',
+    formalName: 'フルーツビア研究所 ル・レクチェ×小麦のエール 350ml缶',
+    tag: '発泡酒',
+    price: 360,
+    img: 'フルーツビア研究所_ルレクチェ.webp',
+    isAlcohol: true,
+    isBeer: false,
+    desc: '新潟のエチゴビールが2026年10月に発売した「フルーツビア研究所」シリーズ第一弾。新潟県産の洋梨「ル・レクチェ」の果汁を使ったウィートエール（小麦のエール）です。洋梨の上品な香りとホップが調和し、甘さ控えめでまろやか。香料不使用でフルーツ本来の味わいを活かしています。ビールが少し苦手な方やクラフトビール初心者にも手に取りやすい一本。食事のお供にも、スイーツとともにも。店頭・自動販売機のほかホームページからもご注文いただけます。',
+    special: '🍐 新潟・エチゴビール株式会社\n350ml缶・アルコール分5%\n原材料：麦芽、ホップ、西洋なし果汁（ル・レクチェ）、小麦\n酒税法上の分類：発泡酒｜店頭・自販機・ネット注文対応'
   },
   yuzu: {
     key: 'yuzu',
