@@ -901,6 +901,16 @@
       <h2 class="section-title">商品一覧</h2>
       <p class="section-title-en">Products</p>
       <div class="products-grid">
+        <!-- 灯油（2027年3月31日まで。4月1日以降は自動非表示） -->
+        <a href="products.html#kerosene" class="product-card" id="top-card-kerosene">
+          <div class="product-img-wrap">
+            <img src="灯油容器.png" alt="灯油 18L">
+          </div>
+          <div class="product-info">
+            <span class="product-tag" style="background:#c0392b;color:#fff;">灯油</span>
+            <h3>灯油 18L（配達）</h3>
+          </div>
+        </a>
         <a href="products.html#card-asahi" class="product-card">
           <div class="product-img-wrap">
             <img src="アサヒスーパードライ大瓶ビール画像.png" alt="アサヒスーパードライ 大瓶">
@@ -1126,6 +1136,13 @@
     function toggleNav() {
       document.getElementById('main-nav').classList.toggle('open');
     }
+    // 2027年3月31日を過ぎたら（4月1日以降）TOPの灯油カードを自動非表示
+    (function() {
+      if (new Date() > new Date('2027-03-31T23:59:59+09:00')) {
+        var card = document.getElementById('top-card-kerosene');
+        if (card) card.style.display = 'none';
+      }
+    })();
   </script>
 
 </body>
