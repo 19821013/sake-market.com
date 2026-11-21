@@ -391,7 +391,8 @@
 <!-- タブ -->
 <div class="category-tabs">
   <div class="tabs-inner">
-    <button class="tab-btn active" onclick="scrollToCategory('beer',this)">🍺 ビール</button>
+    <button id="kerosene-tab-btn" class="tab-btn active" onclick="scrollToCategory('kerosene',this)">🛢️ 灯油 <span style="font-size:0.62rem;background:#c0392b;color:#fff;padding:1px 6px;border-radius:2px;font-weight:700;margin-left:2px;">配達</span></button>
+    <button id="beer-tab-btn" class="tab-btn" onclick="scrollToCategory('beer',this)">🍺 ビール</button>
     <button class="tab-btn" onclick="scrollToCategory('liqueur',this)">🥃 リキュール・ウイスキー</button>
     <button class="tab-btn" onclick="scrollToCategory('shochu',this)">🍶 焼酎</button>
     <button class="tab-btn" onclick="scrollToCategory('seishu',this)">🌸 清酒</button>
@@ -404,6 +405,43 @@
 <!-- 商品セクション -->
 <section class="products-section">
   <div class="section-inner">
+
+    <!-- 灯油（シーズン販売：2027年3月31日まで。4月1日以降は自動非表示） -->
+    <div class="category-section" id="kerosene">
+      <h2 class="category-title">灯油の配達</h2>
+      <p style="font-size:0.88rem;color:var(--color-text-light);margin-bottom:24px;line-height:1.9;">
+        重いポリタンクを運ぶのはもう大変……。<strong style="color:var(--color-primary);">枚方市内は店主がご自宅まで灯油をお届けします。</strong><br>
+        お酒・飲み物とあわせてのご注文もどうぞ。
+      </p>
+      <div class="products-grid">
+
+        <div class="product-card" id="card-kerosene">
+          <div class="product-img-wrap" onclick="openDetail('kerosene')">
+            <img src="灯油容器.png" alt="灯油 18L ポリタンク">
+          </div>
+          <div class="product-body">
+            <span class="product-tag" style="background:#c0392b;color:#fff;">灯油</span>
+            <h3 class="product-name">灯油 18L</h3>
+            <p class="product-desc-short">枚方市内はご自宅までお届け。重いポリタンクの持ち運びは不要です。</p>
+            <div class="product-price">¥2,700 <small>/18L（税込）</small></div>
+            <div class="card-qty-row">
+              <button type="button" class="qty-btn" onclick="changeCardQty('kerosene',-1)">−</button>
+              <span class="qty-num" id="card-qty-kerosene">1</span>
+              <button type="button" class="qty-btn" onclick="changeCardQty('kerosene',1)">＋</button>
+              <span style="font-size:0.78rem;color:var(--color-text-light);">缶</span>
+            </div>
+            <div class="card-subtotal-row">
+              <span class="card-subtotal" id="card-sub-kerosene">¥2,700</span>
+            </div>
+            <div class="card-actions">
+              <button class="btn-cart" onclick="addToCart('kerosene')">🛒 カートへ</button>
+              <button class="btn-order-now" onclick="openOrderWithQty('kerosene')">⚡ すぐ注文</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div><!-- /kerosene -->
 
     <!-- ビール -->
     <div class="category-section" id="beer">
@@ -1193,7 +1231,7 @@
 
         <!-- 数量（ビール以外） -->
         <div class="modal-form-group" id="normalQtyGroup" style="display:none">
-          <label class="modal-label">数量（本） <span class="req">必須</span></label>
+          <label class="modal-label">数量（<span id="normalQtyLabelUnit">本</span>） <span class="req">必須</span></label>
           <div class="modal-qty-row" style="justify-content:space-between;">
             <div style="display:flex;align-items:center;gap:12px;">
               <div class="qty-spinner-wrap">
@@ -1201,7 +1239,7 @@
                 <input type="number" id="normalQty" class="modal-input qty-spin-input" value="1" min="1" oninput="onOrderQtyChange()">
                 <button type="button" class="qty-spin-btn" onclick="changeModalQty('normalQty', 1)">▲</button>
               </div>
-              <span class="qty-unit-label-text">本</span>
+              <span class="qty-unit-label-text" id="normalQtyUnitText">本</span>
             </div>
             <span class="qty-amount" id="normalQtyAmount"></span>
           </div>
@@ -1438,6 +1476,19 @@ const PRODUCTS = {
     desc: '兵庫県明石市の江井ヶ嶋酒造が製造する地ウイスキーです。100年以上前からウイスキー製造に関わり、瀬戸内海に面した立地により、暖かく乾燥した気候と潮の香りやソルティーさが特徴的な熟成を実現。\n\nシェリー樽による熟成にこだわり、華やかな香りとほんのりビターな味わいが日本人になじみやすいウイスキーです。明石市の地域特性を活かした歴史あるウイスキーの製造方法を守り続けています。',
     special: null
   },
+  kerosene: {
+    key: 'kerosene',
+    name: '灯油 18L',
+    formalName: '灯油 18L（ポリタンク1缶分）',
+    tag: '灯油',
+    price: 2700,
+    unit: '缶',
+    img: '灯油容器.png',
+    isAlcohol: false,
+    isBeer: false,
+    desc: '18L（ポリタンク1缶分）の灯油を、枚方市内のご自宅まで店主がお届けします。\n\n「重いポリタンクを運ぶのがつらい」「ガソリンスタンドまで行くのが大変」という方に。お酒・飲み物とあわせてのご注文も承ります。',
+    special: '🚚 枚方市内のご自宅までお届け\nお届け先は枚方市内に限らせていただきます。ポリタンクをお持ちの場合はご注文時の備考欄にお書きください。\nお電話（072-848-0289）でもご注文いただけます。'
+  },
   amazake: {
     key: 'amazake',
     name: '国菊 甘酒（あまざけ）900ml',
@@ -1552,7 +1603,7 @@ function changeCardQty(key, delta) {
 function addToCart(key) {
   const qty  = cardQty[key] || 1;
   const p    = PRODUCTS[key];
-  const unit = p.isBeer ? getCardUnit(key) : '本';
+  const unit = p.isBeer ? getCardUnit(key) : (p.unit || '本');
   const size = p.isBeer ? getCardSize(key) : null;
   // 同一商品でもサイズ・単位が違えば別エントリ
   const cartKey = p.isBeer ? `${key}__${size}__${unit}` : key;
@@ -1629,7 +1680,7 @@ function renderCart() {
     const lineTotal = unitPrice ? unitPrice * qty : null;
     if (lineTotal) subtotal += lineTotal;
     else hasUnknown = true;
-    const unitLabel = (p.isBeer && unit === 'ケース') ? 'ケース' : '本';
+    const unitLabel = (p.isBeer && unit === 'ケース') ? 'ケース' : (p.unit || '本');
     const unitPriceText = unitPrice
       ? `¥${unitPrice.toLocaleString()}/${unitLabel}`
       : '価格はお問い合わせください';
@@ -1743,7 +1794,9 @@ function openOrderWithQty(key) {
     updateQtyLabel();
   } else {
     document.getElementById('orderProductPrice').textContent =
-      p.price ? `¥${p.price.toLocaleString()} / 本（税込）` : '価格はお問い合わせください';
+      p.price ? `¥${p.price.toLocaleString()} / ${p.unit || '本'}（税込）` : '価格はお問い合わせください';
+    document.getElementById('normalQtyLabelUnit').textContent = p.unit || '本';
+    document.getElementById('normalQtyUnitText').textContent = p.unit || '本';
     document.getElementById('normalQty').value = qty;
     document.getElementById('normalQty').required = true;
     document.getElementById('beerQty').required = false;
@@ -1827,7 +1880,9 @@ function openOrder(key) {
   document.getElementById('orderProductName').textContent = p.formalName;
   if (!p.isBeer) {
     document.getElementById('orderProductPrice').textContent =
-      p.price ? `¥${p.price.toLocaleString()} / 本（税込）` : '価格はお問い合わせください';
+      p.price ? `¥${p.price.toLocaleString()} / ${p.unit || '本'}（税込）` : '価格はお問い合わせください';
+    document.getElementById('normalQtyLabelUnit').textContent = p.unit || '本';
+    document.getElementById('normalQtyUnitText').textContent = p.unit || '本';
   }
 
   // 酒類警告・生年月日
@@ -2160,7 +2215,7 @@ async function submitOrder(e) {
     const keys = Object.keys(cart).filter(k => cart[k].qty > 0);
     productName = keys.map(k => {
       const pp = PRODUCTS[cart[k].productKey || k];
-      const u = (pp.isBeer && cart[k].unit === 'ケース') ? 'ケース' : '本';
+      const u = (pp.isBeer && cart[k].unit === 'ケース') ? 'ケース' : (pp.unit || '本');
       const sz = (pp.isBeer && cart[k].size) ? `【${cart[k].size}】` : '';
       return `${sz}${pp.formalName} ×${cart[k].qty}${u}`;
     }).join('\n');
@@ -2173,7 +2228,7 @@ async function submitOrder(e) {
       qtyText = `${document.getElementById('beerQty').value} ${unit}`;
     } else {
       productName = p.formalName;
-      qtyText = `${document.getElementById('normalQty').value} 本`;
+      qtyText = `${document.getElementById('normalQty').value} ${p.unit || '本'}`;
     }
   }
 
@@ -2451,6 +2506,18 @@ async function submitWineOrder(e) {
   }
   return false;
 }
+// 2027年3月31日を過ぎたら（4月1日以降）灯油セクションとタブを自動非表示
+(function() {
+  if (new Date() > new Date('2027-03-31T23:59:59+09:00')) {
+    var sec = document.getElementById('kerosene');
+    if (sec) sec.style.display = 'none';
+    var tab = document.getElementById('kerosene-tab-btn');
+    if (tab) { tab.style.display = 'none'; tab.classList.remove('active'); }
+    var beerTab = document.getElementById('beer-tab-btn');
+    if (beerTab) beerTab.classList.add('active');
+    if (typeof PRODUCTS !== 'undefined') delete PRODUCTS.kerosene;
+  }
+})();
 // 2026年9月30日を過ぎたらワインセクションとタブを自動非表示
 (function() {
   if (new Date() > new Date('2026-09-30T23:59:59+09:00')) {
