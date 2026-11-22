@@ -719,6 +719,32 @@
       <h2 class="category-title">清酒</h2>
       <div class="products-grid">
 
+        <!-- 片野桜 -->
+        <div class="product-card" id="card-katanosakura">
+          <div class="product-img-wrap" onclick="openDetail('katanosakura')">
+            <img src="片野桜上撰1800ml.jpg" alt="片野桜 上撰 1.8L">
+          </div>
+          <div class="product-body">
+            <span class="product-tag">清酒</span>
+            <h3 class="product-name">片野桜 上撰<br>1.8L（一升瓶）</h3>
+            <p class="product-desc-short">大阪・交野の蔵元「山野酒造」。やわらかな甘口で毎日の晩酌にちょうどいい一本。燗にするとほっこり体が温まります。</p>
+            <div class="product-price">¥2,420 <small>/本（税込）</small></div>
+            <div class="card-qty-row">
+              <button type="button" class="qty-btn" onclick="changeCardQty('katanosakura',-1)">−</button>
+              <span class="qty-num" id="card-qty-katanosakura">1</span>
+              <button type="button" class="qty-btn" onclick="changeCardQty('katanosakura',1)">＋</button>
+              <span style="font-size:0.78rem;color:var(--color-text-light);">本</span>
+            </div>
+            <div class="card-subtotal-row">
+              <span class="card-subtotal" id="card-sub-katanosakura">¥2,420</span>
+            </div>
+            <div class="card-actions">
+              <button class="btn-cart" onclick="addToCart('katanosakura')">🛒 カートへ</button>
+              <button class="btn-order-now" onclick="openOrderWithQty('katanosakura')">⚡ すぐ注文</button>
+            </div>
+          </div>
+        </div>
+
         <!-- のど黒 -->
         <div class="product-card" id="card-nodoguro">
           <div class="product-img-wrap" onclick="openDetail('nodoguro')">
@@ -1537,6 +1563,18 @@ const PRODUCTS = {
     isBeer: false,
     desc: 'やわらかな甘さと酸味が、果実を思わせる爽やかな吟醸香とともに口の中でふわりと調和します。きれいで繊細な味わいに、キレのよい後口が続く一杯。淡麗でありながら旨みもしっかり感じられる、飲み飽きしない味わいです。ぜひ冷やしてお楽しみください。大阪府内限定流通の大阪酒販協同組合オリジナル清酒で、醸造は1856年創業・広島県呉市の老舗蔵元・株式会社三宅本店が手がけています。',
     special: '🌸 大阪府内限定・大阪酒販協同組合オリジナル\n精米歩合60%・使用米：八反錦＆新千本・アルコール分15.5度\n大阪の街路樹「いちょう並木」にちなんだ、大阪ならではの一本です。'
+  },
+  katanosakura: {
+    key: 'katanosakura',
+    name: '片野桜 上撰 1.8L',
+    formalName: '片野桜 上撰 1.8L（一升瓶）',
+    tag: '清酒',
+    price: 2420,
+    img: '片野桜上撰1800ml.jpg',
+    isAlcohol: true,
+    isBeer: false,
+    desc: '大阪・交野（かたの）の蔵元「山野酒造」が造る、地元に根ざした日本酒。やわらかな甘口で、毎日の晩酌にちょうどいい一本。寒い季節は燗でどうぞ。ほっこり体が温まります。',
+    special: '🌸 大阪・交野市 山野酒造\n1.8L（一升瓶）\nやわらかな甘口・燗向き'
   },
   nodoguro: {
     key: 'nodoguro',
